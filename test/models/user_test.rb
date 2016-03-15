@@ -27,6 +27,15 @@ class UserTest < ActiveSupport::TestCase
     assert_not duplicate_username.save, "User saved despite duplicate username!"
   end
 
+  test "Should not save if username is shorter than 6 characters" do
+    short_username = User.new({
+      username: "I",
+      email: "email@example.com",
+      password: "password"
+    })
+    assert_not short_username.save, "User saved with too short a password!"
+  end
+
   test "Should not save without email" do
     without_email = User.new({
       username: "my_name",
