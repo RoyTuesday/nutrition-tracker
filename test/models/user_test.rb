@@ -71,6 +71,16 @@ class UserTest < ActiveSupport::TestCase
     assert_not missing_at.save, "User saved despite email missing \"@\" symbol!"
   end
 
+  # E.G. ".com," ".co.uk," ".gov," et cetera
+  test "Should not save without a second-level domain" do
+    missing_com = User.new({
+      username: "my_name",
+      email: "example@email",
+      password: "password"
+    })
+    assert_not missing_com.save, "User saved despite email missing second-level domain!"
+  end
+
   test "Should not save without password" do
     without_password = User.new({
       username: "my_name",
