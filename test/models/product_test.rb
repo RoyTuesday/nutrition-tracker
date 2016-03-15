@@ -10,4 +10,9 @@ class ProductTest < ActiveSupport::TestCase
     without_name = Product.new({category: "category", serving_size: 1, serving_unit: "g", ndb_no: 123456})
     assert_not without_name.save, "Product saved without name!"
   end
+
+  test "Should not save without category" do
+    without_category = Product.new({name: "name", serving_size: 1, serving_unit: "g", ndb_no: 123456})
+    assert_not without_category.save, "Product saved without category!"
+  end
 end
