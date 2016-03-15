@@ -25,4 +25,9 @@ class ProductTest < ActiveSupport::TestCase
     without_serving_unit = Product.new({name: "name", category: "category", serving_size: 1, ndb_no: 123456})
     assert_not without_serving_unit.save, "Product saved without serving unit"
   end
+
+  test "Should not save without ndb number" do
+    without_ndb_no = Product.new({name: "name", category: "category", serving_size: 1, serving_unit: "g"})
+    assert_not without_ndb_no.save, "Product saved without ndb number!"
+  end
 end
