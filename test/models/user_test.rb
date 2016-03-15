@@ -53,6 +53,15 @@ class UserTest < ActiveSupport::TestCase
     assert_not without_email.save, "User saved without an email!"
   end
 
+  test "Should not save if email is already in database" do
+    duplicate_email = User.new({
+      username: "my_name",
+      email: users(:charlotte).email,
+      password: "password"
+    })
+    assert_not duplicate_email.save, "User saved despite email already in database!"
+  end
+
   test "Should not save without password" do
     without_password = User.new({
       username: "my_name",
