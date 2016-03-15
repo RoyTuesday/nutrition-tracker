@@ -25,4 +25,12 @@ class UserTest < ActiveSupport::TestCase
     })
     assert_not without_email.save, "User saved without an email!"
   end
+
+  test "Should not save without password" do
+    without_password = User.new({
+      username: "my_name",
+      email: "email@example.com"
+    })
+    assert_not without_password.save, "User saved without a password!"
+  end
 end
