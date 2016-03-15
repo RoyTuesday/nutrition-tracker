@@ -33,7 +33,16 @@ class UserTest < ActiveSupport::TestCase
       email: "email@example.com",
       password: "password"
     })
-    assert_not short_username.save, "User saved with too short a password!"
+    assert_not short_username.save, "User saved with too short a username!"
+  end
+
+  test "Should not save if username is longer than 32 characters" do
+    long_username = User.new({
+      username: "This is just too long a username I think",
+      email: "email@example.com",
+      password: "password"
+    })
+    assert_not long_username.save, "User saved with too long a username!"
   end
 
   test "Should not save without email" do
