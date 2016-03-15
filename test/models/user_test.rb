@@ -62,6 +62,15 @@ class UserTest < ActiveSupport::TestCase
     assert_not duplicate_email.save, "User saved despite email already in database!"
   end
 
+  test "Should not save if email missing \"@\" symbol" do
+    missing_at = User.new({
+      username: "my_name",
+      email: "bademail.com",
+      password: "password"
+    })
+    assert_not missing_at.save, "User saved despite email missing \"@\" symbol!"
+  end
+
   test "Should not save without password" do
     without_password = User.new({
       username: "my_name",
