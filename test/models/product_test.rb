@@ -30,4 +30,9 @@ class ProductTest < ActiveSupport::TestCase
     without_ndb_no = Product.new({name: "name", category: "category", serving_size: 1, serving_unit: "g"})
     assert_not without_ndb_no.save, "Product saved without ndb number!"
   end
+
+  test "Should not save if ndb number already in database" do
+    duplicate_ndb_no = Product.new({name: "name", category: "category", serving_size: 1, serving_unit: "g", ndb_no: products(:beets)})
+    assert_not duplicate_ndb_no.save, "Product saved desite ndb number already in database!"
+  end
 end
