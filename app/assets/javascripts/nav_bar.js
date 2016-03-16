@@ -34,9 +34,9 @@ $(document).ready(function() {
     }).done(function(response) {
       console.log("sessions/create success!", response);
       if(response.errors) {
-        $("#login-errors").empty();
+        $("#form-errors").empty();
         response.errors.forEach(function(message) {
-          $("#login-errors").append(message);
+          $("#form-errors").append(message);
         })
       }
       else if(response.userNav) {
