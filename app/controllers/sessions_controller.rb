@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     if @user and @user.authenticate params[:password]
       session[:user_id] = @user.id
       if request.xhr?
-        render json: {userNav: render_to_string("_nav", layout: false, user: @user)}
+        render json: {userNav: render_to_string("_user_nav", layout: false, user: @user)}
       else
         redirect_to :root
       end
@@ -22,6 +22,15 @@ class SessionsController < ApplicationController
       else
         render partial: "form", layout: false, locals: {user: @user}
       end
+    end
+  end
+
+  def destroy
+    session.clear
+    if request.xhr?
+      render json: {userNav: render_to_string("_login_nav", layout: false)}
+    else
+      redirect_to :root
     end
   end
 end
