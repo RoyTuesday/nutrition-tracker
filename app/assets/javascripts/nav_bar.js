@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $("nav").on("click", "#login-link", function(event) {
+  $("nav").on("click", "#login-link, #register-link", function(event) {
     event.preventDefault();
     $.get(event.currentTarget.href).done(function(response) {
       $("#login-container").html(response);
@@ -19,8 +19,8 @@ $(document).ready(function() {
       $("nav").html(response.userNav);
     }).fail(function(response) {
       console.log("sessions#destroy failure?", response);
-    })
-  })
+    });
+  });
 
   $("#login-container").on("submit", "form", function(event) {
     event.preventDefault();
