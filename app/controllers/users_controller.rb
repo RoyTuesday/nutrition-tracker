@@ -21,6 +21,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = User.includes(:users_products, :products).find_by(id: session[:user_id])
+    @users_products = @user.users_products
+  end
+
   private
 
   def user_params
