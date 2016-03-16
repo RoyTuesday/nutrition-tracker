@@ -14,6 +14,14 @@ class UsersProduct < ActiveRecord::Base
     end
   end
 
+  def name
+    product.name
+  end
+
+  def category
+    product.category
+  end
+
   belongs_to :user
   belongs_to :product
 end
