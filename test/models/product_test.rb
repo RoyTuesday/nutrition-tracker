@@ -32,6 +32,17 @@ class ProductTest < ActiveSupport::TestCase
     assert_not zero_serving_size.save, "Product saved with zero serving size!"
   end
 
+  test "Should not save if serving size is less than zero" do
+    negative_serving_size = Product.new({
+      name: "name",
+      category: "category",
+      serving_size: -1,
+      serving_unit: 'g',
+      ndb_no: 123456
+    })
+    assert_not negative_serving_size.save, "Product saved with serving size less than zero!"
+  end
+
   test "Should not save without serving unit" do
     without_serving_unit = Product.new({name: "name", category: "category", serving_size: 1, ndb_no: 123456})
     assert_not without_serving_unit.save, "Product saved without serving unit"
