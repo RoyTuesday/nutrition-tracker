@@ -20,3 +20,10 @@ nutrients = csv_to_array_of_hashes './db/nutrients.csv'
 nutrients.each {|nutrient| Nutrient.create! nutrient}
 
 granola_params = JSON.parse(File.read './db/granola.json')
+granola = Product.create({
+  name: granola_params["name"],
+  category: granola_params["category"],
+  serving_size: granola_params["serving_size"],
+  serving_unit: granola_params["serving_unit"],
+  ndb_no: granola_params["ndb_no"],
+})
