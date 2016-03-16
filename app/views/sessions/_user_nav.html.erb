@@ -1,1 +1,4 @@
-<p><%= @user.username %></p>
+<p>
+  <%= @user.username %>
+  <a href="/sessions/<%= @user.id %>" id="logout-link">Log out</a>
+</p>
