@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'csv'
+
+def csv_to_array_of_hashes path
+  new_array = Array.new
+  CSV.foreach(path, headers: true, header_converters: :symbol, converters: :all) do |row|
+    new_array << Hash[row.headers.zip(row.fields)]
+  end
+  new_array
+end
