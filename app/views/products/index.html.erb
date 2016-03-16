@@ -4,7 +4,7 @@
   <ul>
     <% @products.each do |product| %>
       <li>
-        <%= product.name %>
+        <%= render partial: 'product', locals: {product: product} %>
       </li>
     <% end %>
   </ul>
