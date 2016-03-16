@@ -1,4 +1,2 @@
-<p>
-  <%= @user.username %>
-  <a href="/sessions/<%= @user.id %>" id="logout-link">Log out</a>
-</p>
+<%= link_to @user.username, @user %> | 
+<a href="/sessions/<%= @user.id %>" id="logout-link">Log out</a>
