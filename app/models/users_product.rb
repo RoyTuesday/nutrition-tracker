@@ -1,5 +1,5 @@
 class UsersProduct < ActiveRecord::Base
-  validates :servings, presence: true, numericality: {only_integer: true}
+  validates :servings, presence: true, numericality: {greater_than: 0}
   validates :user_id, presence: true, numericality: {only_integer: true}
   validates :product_id, presence: true, numericality: {only_integer: true}
   validates :date_eaten, presence: true
