@@ -27,3 +27,11 @@ granola = Product.create({
   serving_unit: granola_params["serving_unit"],
   ndb_no: granola_params["ndb_no"],
 })
+
+granola_params["nutrients"].each do |nutrient|
+  ProductsNutrient.create({
+    product: granola,
+    nutrient: Nutrient.find_by(name: nutrient["name"]),
+    quantity: nutrient["quantity"]
+  })
+end
