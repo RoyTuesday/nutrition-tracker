@@ -18,3 +18,5 @@ end
 nutrients = csv_to_array_of_hashes './db/nutrients.csv'
 
 nutrients.each {|nutrient| Nutrient.create! nutrient}
+
+granola_params = JSON.parse(File.read './db/granola.json')
