@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $("#login-link").on("click", function(event) {
+  $("nav").on("click", "#login-link", function(event) {
     event.preventDefault();
     $.get(event.currentTarget.href).done(function(response) {
       $("#login-container").html(response);
@@ -7,6 +7,20 @@ $(document).ready(function() {
       console.log("sessions/new failure?", response);
     });
   });
+
+  $("nav").on("click", "#logout-link", function(event) {
+    event.preventDefault();
+    var link = event.currentTarget;
+    $.ajax({
+      dataType: "json",
+      method: "DELETE",
+      url: link.href
+    }).done(function(response) {
+      $("nav").html(response.userNav);
+    }).fail(function(response) {
+      console.log("sessions#destroy failure?", response);
+    })
+  })
 
   $("#login-container").on("submit", "form", function(event) {
     event.preventDefault();
