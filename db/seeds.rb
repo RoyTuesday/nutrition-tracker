@@ -14,3 +14,7 @@ def csv_to_array_of_hashes path
   end
   new_array
 end
+
+nutrients = csv_to_array_of_hashes './db/nutrients.csv'
+
+nutrients.each {|nutrient| Nutrient.create! nutrient}
