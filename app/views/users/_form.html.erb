@@ -12,3 +12,13 @@
     <%= f.submit "Register" %>
   </fieldset>
 <% end %>
+
+<ul id="form-errors">
+  <% if @errors %>
+    <% @errors.each do |message| %>
+      <li>
+        <%= message %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
