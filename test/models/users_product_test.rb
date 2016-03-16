@@ -51,4 +51,14 @@ class UsersProductTest <ActiveSupport::TestCase
     })
     assert_not without_date_eaten.save, "User's product saved without date_eaten!"
   end
+
+  test "Should not save without price" do
+    without_price = UsersProduct.new({
+      servings: 1,
+      user: users(:charles),
+      product: products(:beets),
+      date_eaten: "3/16/2016"
+    })
+    assert_not without_price.save, "User's product saved without price!"
+  end
 end
