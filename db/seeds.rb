@@ -41,3 +41,18 @@ user = User.create({
   email: "email@example.com",
   password: "password"
 })
+
+UsersProduct.create({
+  servings: 2,
+  user: user,
+  product: granola,
+  date_eaten: "3/15/2016",
+  price: "$2.00"
+})
+UsersProduct.create({
+  servings: 3,
+  user: user,
+  product: granola,
+  date_eaten: "3/16/2016",
+  price: "$3.00"
+})
