@@ -33,6 +33,17 @@ class UsersProductTest <ActiveSupport::TestCase
     assert_not zero_servings.save, "User's product saved with 0 servings!"
   end
 
+  test "Should not save if servings is less than 0" do
+    zero_servings = UsersProduct.new({
+      servings: -4,
+      user: users(:charles),
+      product: products(:beets),
+      date_eaten: "3/16/2016",
+      price: "$1.00"
+    })
+    assert_not zero_servings.save, "User's product saved with a negative number of servings!"
+  end
+
   test "Should not save without user" do
     without_user = UsersProduct.new({
       servings: 1,
