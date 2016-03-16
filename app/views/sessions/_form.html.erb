@@ -11,12 +11,12 @@
   </fieldset>
 <% end %>
 
-<% if @errors %>
-  <ul>
+<ul id="login-errors">
+  <% if @errors %>
     <% @errors.each do |message| %>
       <li>
         <%= message %>
       </li>
     <% end %>
-  </ul>
-<% end %>
+  <% end %>
+</ul>
