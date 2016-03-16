@@ -9,20 +9,23 @@
 <body>
 
   <nav>
-    <% if current_user %>
-      <p>
+    <p>
+      <%= link_to "Home", :root %> | 
+      <span id="session-links">
+      <% if current_user %>
         <%= render partial: '/sessions/user_nav' %>
-      </p>
-    <% else %>
-      <p>
+      <% else %>
         <%= render partial: '/sessions/login_nav' %>
-      </p>
-    <% end %>
+      <% end %>
+      <span>
+    </p>
   </nav>
   <div id="login-container"></div>
   <h1>Welcome to Nutrition Tracker</h1>
   
-  <%= yield %>
+  <main>
+    <%= yield %>
+  </main>
 
 </body>
 </html>
