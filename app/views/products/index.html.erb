@@ -1,0 +1,13 @@
+<h2>Products in Database</h2>
+
+<% if @products %>
+  <ul>
+    <% @products.each do |product| %>
+      <li>
+        <%= product.name %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No products yet stored!</p>
+<% end %>
