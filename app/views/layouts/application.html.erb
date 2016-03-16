@@ -9,7 +9,11 @@
 <body>
 
   <nav>
-    <a id="login-link" href="/sessions/new">Login</a>
+    <% if current_user %>
+      <p><%= @user.username %></p>
+    <% else %>
+      <a id="login-link" href="/sessions/new">Login</a>
+    <% end %>
   </nav>
   <div id="login-container"></div>
   <h1>Welcome to Nutrition Tracker</h1>
