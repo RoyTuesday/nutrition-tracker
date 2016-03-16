@@ -25,4 +25,12 @@ class ProductsNutrientTest < ActiveSupport::TestCase
     })
     assert_not without_nutrient.save, "Product's nutrient saved without a nutrient!"
   end
+
+  test "Should not save without quantity" do
+    without_quantity = ProductsNutrient.new({
+      product: products(:beets),
+      nutrient: nutrients(:water),
+    })
+    assert_not without_quantity.save, "Product's nutrient saved without a quantity!"
+  end
 end
