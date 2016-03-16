@@ -25,4 +25,12 @@ class NutrientTest < ActiveSupport::TestCase
     })
     assert_not without_category.save, "Nutrient saved without a category!"
   end
+
+  test "Should not save without a unit_of_measure" do
+    without_unit = Nutrient.new({
+      name: "name",
+      category: "category"
+    })
+    assert_not without_unit.save, "Nutrient saved without a unit_of_measure!"
+  end
 end
