@@ -18,6 +18,15 @@ class NutrientTest < ActiveSupport::TestCase
     assert_not without_name.save, "Nutrient saved without a name!"
   end
 
+  test "Should not save if name is already in database" do
+    duplicate_name = Nutrient.new({
+      name: nutrients(:water).name,
+      category: "category",
+      unit_of_measure: "unit"
+    })
+    assert_not duplicate_name.save, "Nutrient saved with name already in database!"
+  end
+
   test "Should not save without a category" do
     without_category = Nutrient.new({
       name: "name",
