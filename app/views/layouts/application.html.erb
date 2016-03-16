@@ -10,9 +10,13 @@
 
   <nav>
     <% if current_user %>
-      <p><%= @user.username %></p>
+      <p>
+        <%= render partial: '/sessions/user_nav' %>
+      </p>
     <% else %>
-      <a id="login-link" href="/sessions/new">Login</a>
+      <p>
+        <%= render partial: '/sessions/login_nav' %>
+      </p>
     <% end %>
   </nav>
   <div id="login-container"></div>
