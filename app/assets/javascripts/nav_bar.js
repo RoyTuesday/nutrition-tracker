@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $("nav").on("click", "#login-link, #register-link", function(event) {
+  $("#session-links").on("click", "#login-link, #register-link", function(event) {
     event.preventDefault();
     $.get(event.currentTarget.href).done(function(response) {
       $("#login-container").html(response);
@@ -8,7 +8,7 @@ $(document).ready(function() {
     });
   });
 
-  $("nav").on("click", "#logout-link", function(event) {
+  $("#session-links").on("click", "#logout-link", function(event) {
     event.preventDefault();
     var link = event.currentTarget;
     $.ajax({
@@ -16,7 +16,8 @@ $(document).ready(function() {
       method: "DELETE",
       url: link.href
     }).done(function(response) {
-      $("nav").html(response.userNav);
+      $("#session-links").html(response.userNav);
+      $("main").html(response.main);
     }).fail(function(response) {
       console.log("sessions#destroy failure?", response);
     });
@@ -41,7 +42,7 @@ $(document).ready(function() {
       }
       else if(response.userNav) {
         $("#login-container").empty();
-        $("nav").html(response.userNav);
+        $("#session-links").html(response.userNav);
       }
     }).fail(function(response) {
       console.log("sessions/create failure?", response);
