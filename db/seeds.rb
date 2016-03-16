@@ -35,3 +35,9 @@ granola_params["nutrients"].each do |nutrient|
     quantity: nutrient["quantity"]
   })
 end
+
+user = User.create({
+  username: "user01",
+  email: "email@example.com",
+  password: "password"
+})
