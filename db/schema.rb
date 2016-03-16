@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20160315191706) do
   create_table "products", force: :cascade do |t|
     t.text     "name",         null: false
     t.text     "category"
-    t.integer  "serving_size", null: false
+    t.float    "serving_size", null: false
     t.string   "serving_unit", null: false
     t.integer  "ndb_no",       null: false
     t.datetime "created_at",   null: false
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20160315191706) do
   create_table "products_nutrients", force: :cascade do |t|
     t.integer  "product_id",  null: false
     t.integer  "nutrient_id", null: false
-    t.integer  "quantity",    null: false
+    t.float    "quantity",    null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20160315191706) do
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
 
   create_table "users_products", force: :cascade do |t|
-    t.integer  "servings",   null: false
+    t.float    "servings",   null: false
     t.integer  "user_id",    null: false
     t.integer  "product_id", null: false
     t.date     "date_eaten", null: false
