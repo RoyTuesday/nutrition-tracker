@@ -12,7 +12,14 @@ class ProductsController < ApplicationController
         q: params[:search_terms],
         api_key: API_KEY
       })
-      render json: {status: 200, response: response.parse}
+      unless response.code >= 400
+        food_items = response.parse["list"]["item"]
+        render json: {status: 200, html: render_to_string(
+          "_usda_search_results",
+          layout: false,
+          locals: {food_items: food_items}
+        )}
+      end
     end
   end
 end
