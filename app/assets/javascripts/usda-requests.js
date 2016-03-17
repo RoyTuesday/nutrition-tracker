@@ -9,6 +9,7 @@ $(document).ready(function() {
       url: form.action
     }).done(function(response) {
       console.log("NDB search success!", response);
+      $("#ndb-search-results").html(response.html);
     }).fail(function(response) {
       console.log("NDB search success!", response);
     });
