@@ -1,5 +1,7 @@
 <% food_items.each do |food_item| %>
   <li>
-    <%= food_item["name"] %>
+    <a class="food-item" data-ndb-number="<%= food_item["ndbno"] %>" data-remote="true" href="products/new">
+      <%= food_item["name"] %>
+    </a>
   </li>
 <% end %>
