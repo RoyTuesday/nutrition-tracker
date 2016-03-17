@@ -8,21 +8,6 @@ $(document).ready(function() {
     });
   });
 
-  $("#session-links").on("click", "#logout-link", function(event) {
-    event.preventDefault();
-    var link = event.currentTarget;
-    $.ajax({
-      dataType: "json",
-      method: "DELETE",
-      url: link.href
-    }).done(function(response) {
-      $("#session-links").html(response.userNav);
-      $("main").html(response.main);
-    }).fail(function(response) {
-      console.log("sessions#destroy failure?", response);
-    });
-  });
-
   $("#login-container").on("submit", "form", function(event) {
     event.preventDefault();
     console.log(event.currentTarget);
