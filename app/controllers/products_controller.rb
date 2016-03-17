@@ -6,6 +6,15 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
+  def new
+    @product = Product.find_by(ndb_no: params[:ndb_no])
+    if @product
+      render json: {found: true, product: @product}
+    else
+      render json: {found: false}
+    end
+  end
+
   def ndb_search
     if request.xhr?
       response = HTTP.get("#{SEARCH_URI}/?format=json", params: {
