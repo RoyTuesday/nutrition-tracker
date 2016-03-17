@@ -10,9 +10,18 @@ class ProductsController < ApplicationController
   def new
     @product = Product.find_by(ndb_no: params[:ndb_no])
     if @product
-      render json: {found: true, product: @product}
+      render json: {found: true, html: @product[:name]}
     else
-      render json: {found: false}
+      render json: {found: false, html: render_to_string(
+        "_form",
+        layout: false,
+        locals: {
+          product: Product.new,
+          name: params[:name],
+          category: params[:category],
+          ndb_no: params[:ndb_no]
+        }
+      )}
     end
   end
 
