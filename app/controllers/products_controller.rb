@@ -8,7 +8,10 @@ class ProductsController < ApplicationController
 
   def ndb_search
     if request.xhr?
-      response = HTTP.get("#{SEARCH_URI}/?format=json&q=butter&api_key=#{API_KEY}")
+      response = HTTP.get("#{SEARCH_URI}/?format=json", params: {
+        q: params[:search_terms],
+        api_key: API_KEY
+      })
       render json: {status: 200, response: response.parse}
     end
   end
