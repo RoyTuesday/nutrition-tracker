@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   SEARCH_URI = "http://api.nal.usda.gov/ndb/search"
+  REPORT_URI = "http://api.nal.usda.gov/ndb/reports"
   API_KEY = ENV["USDA_FOOD_API_KEY"]
 
   def index
