@@ -15,6 +15,9 @@ class ProductsController < ApplicationController
     end
   end
 
+  def create
+  end
+
   def ndb_search
     if request.xhr?
       response = HTTP.get("#{SEARCH_URI}/?format=json", params: {
