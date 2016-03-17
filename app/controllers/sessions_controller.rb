@@ -27,13 +27,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session.clear
-    if request.xhr?
-      render json: {
-        userNav: render_to_string("_login_nav", layout: false),
-        main: render_to_string("products/index", layout: false)
-      }
-    else
-      redirect_to :root
-    end
+    redirect_to :root
   end
 end
