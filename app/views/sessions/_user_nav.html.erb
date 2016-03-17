@@ -1,2 +1,2 @@
 <%= link_to @user.username, @user %> | 
-<a href="/sessions/<%= @user.id %>" id="logout-link">Log out</a>
+<%= link_to "Log out", session_path(@user), method: :delete %>
