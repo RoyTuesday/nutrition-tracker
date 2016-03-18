@@ -1,6 +1,10 @@
-<h2>
-  Name: <%= product.name %>
-</h2>
+<h3>
+  <% if current_user %>
+    <%= link_to product.name, new_product_users_product_path(product), class: "product" %>
+  <% else %>
+    Name: <%= product.name %>
+  <% end %>
+</h3>
 <h3>
   Category: <%= product.category %>
 </h3>
