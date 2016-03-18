@@ -5,7 +5,7 @@ class UsersProduct < ActiveRecord::Base
   validates :date_eaten, presence: true
   validates :price, presence: true
 
-  def initialize args
+  def initialize args = {}
     super
     if args[:date_eaten].class == String
       date_params = args[:date_eaten].split('/')
