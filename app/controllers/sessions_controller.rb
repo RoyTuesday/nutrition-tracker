@@ -11,7 +11,10 @@ class SessionsController < ApplicationController
     if @user and @user.authenticate params[:password]
       session[:user_id] = @user.id
       if request.xhr?
-        render json: {userNav: render_to_string("_user_nav", layout: false, user: @user)}
+        render json: {
+          userNav: render_to_string("_user_nav", layout: false, user: @user),
+          usdaNdbSearch: render_to_string("products/_usda_ndb_search", layout: false)
+        }
       else
         redirect_to :root
       end
