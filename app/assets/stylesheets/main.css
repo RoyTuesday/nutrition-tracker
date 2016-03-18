@@ -11,3 +11,8 @@ a:visited {
 a:visited:hover {
   color: #6C6;
 }
+
+main {
+  margin: 1em auto;
+  width: 90%;
+}
