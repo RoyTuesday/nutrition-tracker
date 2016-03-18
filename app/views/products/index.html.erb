@@ -14,10 +14,12 @@
   </p>
 <% end %>
 
-<% if current_user %>
-  <%= render partial: "usda_ndb_search" %>
-<% else %>
-  <p>
-    Please log in to add products to the database
-  </p>
-<% end %>
+<div id="usda-ndb-search-container">
+  <% if current_user %>
+    <%= render partial: "usda_ndb_search" %>
+  <% else %>
+    <p>
+      Please log in to add products to the database
+    </p>
+  <% end %>
+</div>
