@@ -9,7 +9,15 @@
     <% end %>
   </ul>
 <% else %>
-  <p>No products yet stored!</p>
+  <p>
+    No products yet stored!
+  </p>
 <% end %>
 
-<%= render partial: "usda_ndb_search" %>
+<% if current_user %>
+  <%= render partial: "usda_ndb_search" %>
+<% else %>
+  <p>
+    Please log in to add products to the database
+  </p>
+<% end %>
