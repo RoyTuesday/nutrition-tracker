@@ -22,16 +22,24 @@ $(document).ready(function() {
 
   $("#products-list").on("submit", "form.new_users_product", function(event) {
     event.preventDefault();
-    var form = this;
     $.ajax({
-      data: $(form).serialize(),
+      data: $(this).serialize(),
       dataType: "json",
-      method: form.method,
-      url: form.action
+      method: this.method,
+      url: this.action
     }).done(function(response) {
-      $(form).hide();
-    }).fail(function(response) {
+      var form = $("#product-" + response.productId + " form");
       console.log("Users product create success!", response);
+      if(response.success) {
+        form.hide();
+      }
+      else {
+        var formErrors = $("#product-" + response.productId + "-users-product-errors")
+        formErrors.html(response.errors);
+      }
+    }).fail(function(response) {
+      console.log("Users product create failure?", response);
+      $('body').html(response["responseText"]);
     });
   });
 });
