@@ -16,4 +16,8 @@ class UsersProductsController < ApplicationController
       end
     end
   end
+
+  def create
+    product = Product.find_by(id: params[:product_id])
+  end
 end
