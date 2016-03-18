@@ -1,7 +1,7 @@
 <h2>Products in Database</h2>
 
 <% if @products %>
-  <ul>
+  <ul id="products-list">
     <% @products.each do |product| %>
       <li>
         <%= render partial: 'product', locals: {product: product} %>
