@@ -11,7 +11,10 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       if request.xhr?
-        render json: {userNav: render_to_string("sessions/_user_nav", layout: false, user: @user)}
+        render json: {
+          userNav: render_to_string("sessions/_user_nav", layout: false, user: @user),
+          usdaNdbSearch: render_to_string("products/_usda_ndb_search", layout: false)
+        }
       end
     else
       @errors = @user.errors.full_messages
