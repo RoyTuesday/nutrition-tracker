@@ -1,11 +1,28 @@
 <h2><%= @user.username %></h2>
 
 <ul>
-  <% if @users_products %>
-    <% @users_products.each do |product| %>
-      <li>
-        <%= product.name %>, <%= product.category %>, servings: <%= product.servings %>
-      </li>
+  <% if @user.users_products %>
+    <% @user.users_products.each do |users_product| %>
+      <% product = users_product.product %>
+      <h3>
+        Name: <%= product.name %>
+      </h3>
+      <p>
+        Category: <%= product.category %>
+      </p>
+      <p>
+        Servings: <%= users_product.servings %> of <%= product.serving_size %><%= product.serving_unit %>
+      </p>
+      <p>
+        Date eaten: <%= users_product.date_eaten %>
+      </p>
+      <p>
+        Price: <%= users_product.price %>
+      </p>
     <% end %>
+  <% else %>
+    <p>
+      Check out the home page to add some food records
+    </p>
   <% end %>
 </ul>
