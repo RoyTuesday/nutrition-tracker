@@ -19,5 +19,21 @@ class UsersProductsController < ApplicationController
 
   def create
     product = Product.find_by(id: params[:product_id])
+    users_product = UsersProduct.new(users_product_params)
+    users_product.product = product
+    users_product.user = User.find_by(id: session[:user_id])
+    if request.xhr?
+      if users_product.save
+        render json: {success: true, users_product: users_product}
+      else
+        render json: {success: false}
+      end
+    end
+  end
+
+  private
+
+  def users_product_params
+    params.require(:users_product).permit(:servings, :date_eaten, :price)
   end
 end
