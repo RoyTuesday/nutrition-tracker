@@ -23,3 +23,7 @@ nav {
 ul {
   list-style: none;
 }
+
+.product-details {
+  display: none;
+}
