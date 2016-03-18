@@ -28,6 +28,7 @@ $(document).ready(function() {
       else if(response.userNav) {
         $("#login-container").empty();
         $("#session-links").html(response.userNav);
+        $("#usda-ndb-search-container").html(response.usdaNdbSearch);
       }
     }).fail(function(response) {
       console.log("sessions/create failure?", response);
