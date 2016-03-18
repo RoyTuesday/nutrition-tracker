@@ -4,6 +4,7 @@ $(document).ready(function() {
 
     var productId = event.currentTarget.dataset["id"];
     var productForm = $("#product-" + productId + " form");
+    $("#product-details-" + productId).toggle();
 
     if(productForm.length > 0) {
       productForm.toggle();
