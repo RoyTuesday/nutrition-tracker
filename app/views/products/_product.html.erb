@@ -6,10 +6,12 @@
       Name: <%= product.name %>
     <% end %>
   </h3>
-  <h3>
-    Category: <%= product.category %>
-  </h3>
-  <p>
-    Serving size: <%= product.serving_size %><%= product.serving_unit %>
-  </p>
+  <div class="product-details" id="product-details-<%= product.id %>">
+    <p>
+      Category: <%= product.category %>
+    </p>
+    <p>
+      Serving size: <%= product.serving_size %><%= product.serving_unit %>
+    </p>
+  </div>
 </div>
