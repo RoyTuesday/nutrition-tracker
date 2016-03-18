@@ -7,7 +7,7 @@ class UsersProduct < ActiveRecord::Base
 
   def initialize args = {}
     super
-    if args[:date_eaten].class == String
+    if /\d{1,}\/\d{1,}\/\d{4}/.match args[:date_eaten]
       date_params = args[:date_eaten].split('/')
       date_params.map!(&:to_i)
       self.date_eaten = Date.new date_params[2], date_params[0], date_params[1]
