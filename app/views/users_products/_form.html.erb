@@ -1,0 +1,14 @@
+<%= form_for [product, users_product] do |f| %>
+  <fieldset>
+    <%= f.label :servings %>
+    <%= f.number_field :servings, step: "any" %>
+
+    <%= f.label :date_eaten %>
+    <%= f.date_field :date_eaten %>
+
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+
+    <%= f.submit "Add food record" %>
+  </fieldset>
+<% end %>
