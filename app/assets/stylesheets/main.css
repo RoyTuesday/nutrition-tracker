@@ -14,5 +14,9 @@ a:visited:hover {
 
 main {
   margin: 1em auto;
+  width: 85%;
+}
+nav {
+  margin: 0 auto;
   width: 90%;
 }
