@@ -85,3 +85,5 @@ ul {
   display: none;
   padding: 0 1em;
 }
+
+.mb-none { margin-bottom: 0; }
