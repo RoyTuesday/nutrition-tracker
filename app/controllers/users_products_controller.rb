@@ -3,16 +3,17 @@ class UsersProductsController < ApplicationController
     product = Product.find_by(id: params[:product_id])
     users_product = UsersProduct.new
     if request.xhr?
-      if product
+      if product and User.find_by(id: session[:user_id])
         render json: {
           form: render_to_string("_form", layout: false, locals: {
             product: product,
             users_product: users_product
           }),
+          loggedIn: true,
           product: product
         }
       else
-        render json: {product: product}, status: 500
+        render json: {loggedIn: false, product: product}
       end
     end
   end

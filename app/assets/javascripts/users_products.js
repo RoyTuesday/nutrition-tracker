@@ -14,7 +14,9 @@ $(document).ready(function() {
         dataType: "json",
         url: this.href
       }).done(function(response) {
-        $("#product-" + response.product.id).append(response.form);
+        if(response.loggedIn) {
+          $("#product-" + response.product.id).append(response.form);
+        }
       }).fail(function(response) {
         console.log("Users product form failure?", response);
       });
