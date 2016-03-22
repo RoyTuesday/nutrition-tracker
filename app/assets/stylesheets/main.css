@@ -22,6 +22,7 @@ body {
   background-color: #161;
   color: #333;
   font-weight: bold;
+  padding: 1em 0;
 }
 form.new_users_product {
   margin-top: 1em;
