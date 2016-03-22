@@ -20,9 +20,9 @@ $(document).ready(function() {
     }).done(function(response) {
       console.log("sessions/create success!", response);
       if(response.errors) {
-        $("#form-errors").empty();
+        $("#login-container ul.form-errors").empty();
         response.errors.forEach(function(message) {
-          $("#form-errors").append(message);
+          $("#login-container ul.form-errors").append(message);
         })
       }
       else if(response.userNav) {
