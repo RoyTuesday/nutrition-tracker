@@ -1,17 +1,20 @@
 $(document).ready(function() {
   $("#session-links").on("click", "#login-link, #register-link", function(event) {
     event.preventDefault();
-    $.get(event.currentTarget.href).done(function(response) {
-      $("#login-container").html(response);
-    }).fail(function(response) {
-      console.log("sessions/new failure?", response);
-    });
+    if(event.target.id == "login-link") {
+      $("#register-container").hide();
+      $("#login-container").toggle();
+    }
+    else if(event.target.id == "register-link") {
+      $("#login-container").hide();
+      $("#register-container").toggle();
+    }
   });
 
-  $("#login-container").on("submit", "form", function(event) {
+  $("nav").on("submit", "form", function(event) {
     event.preventDefault();
-    console.log(event.currentTarget);
     var form = event.currentTarget;
+    var formName = form.parentNode.id == "login-container" ? "login" : "register";
     $.ajax({
       data: $(form).serialize(),
       dataType: "json",
@@ -19,14 +22,12 @@ $(document).ready(function() {
       url: form.action
     }).done(function(response) {
       console.log("sessions/create success!", response);
-      if(response.errors) {
-        $("#login-container ul.form-errors").empty();
-        response.errors.forEach(function(message) {
-          $("#login-container ul.form-errors").append(message);
-        })
+      if(response.formWithErrors) {
+        $("#" + formName + "-container").html(response.formWithErrors);
       }
       else if(response.userNav) {
         $("#login-container").empty();
+        $("#register-container").empty();
         $("#session-links").html(response.userNav);
         $("#usda-ndb-search-container").html(response.usdaNdbSearch);
       }
