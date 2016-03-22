@@ -1,6 +1,6 @@
 <h2><%= @user.username %></h2>
 
-<ul>
+<ul id="users-products-list" >
   <% if @user.users_products %>
     <% @user.users_products.each do |users_product| %>
       <% product = users_product.product %>
