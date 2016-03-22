@@ -87,3 +87,7 @@ ul {
 }
 
 .mb-none { margin-bottom: 0; }
+
+#login-container, #register-container {
+  display: none;
+}
