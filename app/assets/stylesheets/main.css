@@ -13,11 +13,17 @@ a:visited:hover {
 }
 
 main {
+  background-color: greenyellow;
   margin: 1em auto;
+  padding: 0.25em 1em;
   width: 85%;
 }
 nav {
+  background-color: greenyellow;
   margin: 0 auto;
+  padding: 0.25em 1em;
+  position: sticky;
+  top: 0;
   width: 90%;
 }
 ul {
