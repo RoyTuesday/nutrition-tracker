@@ -26,6 +26,9 @@ fieldset {
   border: 3px inset black;
   border-radius: 4px;
 }
+input[type="submit"] {
+  color: #282;
+}
 main {
   background: linear-gradient(to top left, #8F2, #AF4);
   background-color: greenyellow;
