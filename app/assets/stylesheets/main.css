@@ -1,25 +1,39 @@
 a {
   color: #282;
+  text-shadow: 2px 2px #6D1;
   text-decoration: none;
 }
 a:hover {
   color: #6C6;
+  text-shadow: none;
 }
 a:visited {
   color: #282;
 }
 a:visited:hover {
   color: #6C6;
+  text-shadow: none;
 }
 
+body {
+  background-color: #161;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-shadow: 2px 2px #6D1;
+}
 main {
+  background: linear-gradient(to top left, #8F2, #AF4);
   background-color: greenyellow;
+  border-radius: 10px;
   margin: 1em auto;
   padding: 0.25em 1em;
   width: 85%;
 }
 nav {
+  background: linear-gradient(to top left, #8F2, #CF6);
   background-color: greenyellow;
+  border-radius: 10px;
+  box-shadow: 6px 4px 2px #030;
   margin: 0 auto;
   padding: 0.25em 1em;
   position: sticky;
