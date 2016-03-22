@@ -1,7 +1,7 @@
 <h3>
-  <%= link_to product.name, '#', class: "users-product", data: {id: product.id} %>
+  <%= link_to product.name, '#', class: "users-product", data: {id: users_product.id} %>
 </h3>
-<div id="users-product-details-<%= users_product.id %>">
+<div class="users-product-details" id="users-product-details-<%= users_product.id %>">
   <p>
     Category: <%= product.category %>
   </p>

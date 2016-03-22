@@ -23,6 +23,13 @@ $(document).ready(function() {
     }
   });
 
+  $("#users-products-list").on("click", "a.users-product", function(event) {
+    event.preventDefault();
+
+    var usersProductId = event.currentTarget.dataset["id"];
+    $("#users-product-details-" + usersProductId).toggle();
+  })
+
   $("#products-list").on("submit", "form.new_users_product", function(event) {
     event.preventDefault();
     $.ajax({

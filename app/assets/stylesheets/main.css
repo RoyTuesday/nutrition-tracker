@@ -26,6 +26,6 @@ ul {
   padding: 0.5em;
 }
 
-.product-details {
+.product-details, .users-product-details {
   display: none;
 }
