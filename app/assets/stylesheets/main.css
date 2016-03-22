@@ -4,14 +4,14 @@ a {
   text-decoration: none;
 }
 a:hover {
-  color: #6C6;
+  color: #363;
   text-shadow: none;
 }
 a:visited {
   color: #141;
 }
 a:visited:hover {
-  color: #6C6;
+  color: #363;
   text-shadow: none;
 }
 nav a {
