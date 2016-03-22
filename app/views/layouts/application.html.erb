@@ -19,12 +19,14 @@
       <% end %>
       <span>
     </p>
-    <div id="login-container">
-      <%= render partial: '/sessions/form' %>
-    </div>
-    <div id="register-container">
-      <%= render partial: '/users/form', locals: {user: User.new} %>
-    </div>
+    <% unless current_user %>
+      <div id="login-container">
+        <%= render partial: '/sessions/form' %>
+      </div>
+      <div id="register-container">
+        <%= render partial: '/users/form', locals: {user: User.new} %>
+      </div>
+    <% end %>
     <h1>Welcome to Nutrition Tracker</h1>
   </nav>
   
