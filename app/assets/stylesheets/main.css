@@ -23,13 +23,12 @@ body {
   color: #333;
   font-weight: bold;
 }
-h1, h2, h3, h4, h5, h6 {
-  text-shadow: 2px 2px #6D1;
+form.new_users_product {
+  margin-top: 1em;
 }
 fieldset {
   background: linear-gradient(to bottom, #DA2, #FE2);
   border: 2px solid #333;
-  border-radius: 4px;
   color: #333;
   display: flex;
   flex-direction: row;
@@ -37,13 +36,18 @@ fieldset {
 form {
   display: inline-flex;
 }
+h1, h2, h3, h4, h5, h6 {
+  text-shadow: 2px 2px #6D1;
+}
 input {
-  background-color: #EEE;
   font-weight: initial;
+  padding: 0.125em;
 }
 input[type="submit"] {
   background: linear-gradient(to bottom, #EEE, #CCC);
+  border-radius: 4px;
   margin-top: 0.5em;
+  padding: 0.125em 0.25em;
 }
 main {
   background: linear-gradient(to top left, #8F2, #AF4);
@@ -76,5 +80,8 @@ ul {
 }
 
 .product-details, .users-product-details {
+  background-color: #DD8;
+  border: 2px solid #333;
   display: none;
+  padding: 0 1em;
 }
