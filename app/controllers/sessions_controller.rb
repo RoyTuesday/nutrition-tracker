@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
     else
       @errors = ["Email, password, or both are incorrect"]
       if request.xhr?
-        render json: {errors: @errors}
+        render json: {formWithErrors: render_to_string("sessions/_form", layout: false, errors: @errors)}
       else
         render partial: "form", layout: false, locals: {user: @user}
       end

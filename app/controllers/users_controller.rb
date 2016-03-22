@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     else
       @errors = @user.errors.full_messages
       if request.xhr?
-        render json: {errors: @errors}
+        render json: {formWithErrors: render_to_string("users/_form", layout: false, locals: {user: @user, errors: @errors})}
       end
     end
   end
