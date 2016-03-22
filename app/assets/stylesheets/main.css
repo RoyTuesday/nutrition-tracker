@@ -1,5 +1,5 @@
 a {
-  color: #282;
+  color: #141;
   text-shadow: 2px 2px #6D1;
   text-decoration: none;
 }
@@ -8,26 +8,42 @@ a:hover {
   text-shadow: none;
 }
 a:visited {
-  color: #282;
+  color: #141;
 }
 a:visited:hover {
   color: #6C6;
   text-shadow: none;
 }
+nav a {
+  font-weight: initial;
+}
 
 body {
   background-color: #161;
+  color: #333;
+  font-weight: bold;
 }
 h1, h2, h3, h4, h5, h6 {
   text-shadow: 2px 2px #6D1;
 }
 fieldset {
-  color: #333;
-  border: 3px inset black;
+  background: linear-gradient(to bottom, #DA2, #FE2);
+  border: 2px solid #333;
   border-radius: 4px;
+  color: #333;
+  display: flex;
+  flex-direction: row;
+}
+form {
+  display: inline-flex;
+}
+input {
+  background-color: #EEE;
+  font-weight: initial;
 }
 input[type="submit"] {
-  color: #282;
+  background: linear-gradient(to bottom, #EEE, #CCC);
+  margin-top: 0.5em;
 }
 main {
   background: linear-gradient(to top left, #8F2, #AF4);
@@ -46,7 +62,7 @@ nav {
   padding: 0.25em 1em;
   position: sticky;
   top: 0;
-  width: 90%;
+  width: 85%;
 }
 ul {
   list-style: none;
