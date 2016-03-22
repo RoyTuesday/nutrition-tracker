@@ -1,13 +1,13 @@
 <%= form_for [product, users_product] do |f| %>
   <fieldset>
     <%= f.label :servings %>
-    <%= f.number_field :servings, step: "any" %>
+    <%= f.number_field :servings, min: 0, placeholder: 1, step: "any" %>
 
     <%= f.label :date_eaten %>
-    <%= f.date_field :date_eaten %>
+    <%= f.date_field :date_eaten, placeholder: "mm/dd/yyyy" %>
 
     <%= f.label :price %>
-    <%= f.text_field :price %>
+    <%= f.text_field :price, placeholder: "$1.00" %>
 
     <%= f.submit "Add food record" %>
   </fieldset>
