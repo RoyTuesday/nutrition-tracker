@@ -1,11 +1,11 @@
-<form action="products/ndb_search" id="usda-ndb-search" method="POST">
+<%= form_tag "products/ndb_search", id: "usda-ndb-search" do %>
   <fieldset>
     <label for="search-terms">Search for:</label>
     <input id="search-terms" name="search_terms" placeholder="food" type="text"/>
 
     <%= submit_tag "Search" %>
   </fieldset>
-</form>
+<% end %>
 
 <ul id="ndb-search-results">
 </ul>
