@@ -28,13 +28,14 @@ form.new_users_product {
   margin-top: 1em;
 }
 fieldset {
-  background: linear-gradient(to bottom, #DA2, #FE2);
-  border: 2px solid #333;
-  color: #333;
+  border: none;
   display: flex;
   flex-direction: row;
 }
 form {
+  background: linear-gradient(to bottom, #DA2, #FE2);
+  border: 2px solid #333;
+  color: #333;
   display: inline-flex;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -91,4 +92,9 @@ ul {
 
 #login-container, #register-container {
   display: none;
+}
+
+#ndb-search-errors {
+  color: #633;
+  font-weight: initial;
 }
