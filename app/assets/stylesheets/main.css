@@ -32,6 +32,20 @@ fieldset {
   display: flex;
   flex-direction: row;
 }
+footer {
+  background: linear-gradient(to top left, #8F2, #AF4);
+  background-color: greenyellow;
+  border-radius: 10px;
+  bottom: 2px;
+  margin: 1em auto;
+  padding: 1em;
+  position: sticky;
+  text-align: center;
+  width: 80%;
+}
+footer .fa {
+  font-size: 1.5em;
+}
 form {
   background: linear-gradient(to bottom, #DA2, #FE2);
   border: 2px solid #333;
