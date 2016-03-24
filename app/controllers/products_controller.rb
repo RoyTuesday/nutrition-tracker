@@ -49,10 +49,10 @@ class ProductsController < ApplicationController
             quantity: nutrient["value"]
           })
         end
-        @products = Product.all
-        render json: {html: render_to_string(
-          "index",
+        render json: {product: render_to_string(
+          "_product",
           layout: false,
+          locals: {product: product}
         )}
       else
         render json: {response: product.errors.full_messages}, status: 500

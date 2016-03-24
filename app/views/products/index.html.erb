@@ -1,20 +1,25 @@
-<h2 class="mb-none">
-  Products in Database
-</h2>
+<div id="usda-new-product-container">
+</div>
 
-<% if @products %>
-  <ul id="products-list">
-    <% @products.each do |product| %>
-      <li>
-        <%= render partial: 'product', locals: {product: product} %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>
-    No products yet stored!
-  </p>
-<% end %>
+<div id="products-container">
+  <h2 class="mb-none">
+    Products in Database
+  </h2>
+
+  <% if @products %>
+    <ul id="products-list">
+      <% @products.each do |product| %>
+        <li>
+          <%= render partial: 'product', locals: {product: product} %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>
+      No products yet stored!
+    </p>
+  <% end %>
+</div>
 
 <div id="usda-ndb-search-container">
   <% if current_user %>

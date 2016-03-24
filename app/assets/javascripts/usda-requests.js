@@ -29,13 +29,15 @@ $(document).ready(function() {
       method: "GET",
       url: link.href
     }).done(function(response) {
-      $('main').html(response.html);
+      $("#usda-new-product-container").html(response.html);
+      $("#products-container").hide();
+      $("#usda-ndb-search-container").hide();
     }).fail(function(response) {
       console.log("Search result link failure?", response);
     });
   });
 
-  $("main").on("submit", "#new_product", function(event) {
+  $("#usda-new-product-container").on("submit", "#new_product", function(event) {
     event.preventDefault();
     var form = this;
     $.ajax({
@@ -44,7 +46,10 @@ $(document).ready(function() {
       method: form.method,
       url: form.action
     }).done(function(response) {
-      $("main").html(response.html)
+      $("#usda-new-product-container").empty();
+      $("#products-container").show();
+      $("#products-list").append(response.product);
+      $("#usda-ndb-search-container").show();
     }).fail(function(response) {
       console.log("New product failure?", response);
     });
