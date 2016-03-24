@@ -9,9 +9,17 @@ $(document).ready(function() {
       url: form.action
     }).done(function(response) {
       console.log("NDB search success!", response);
-      $("#ndb-search-results").html(response.html);
+      if(response.errors){
+        $("#ndb-search-errors").empty();
+        response.errors.forEach(function(error) {
+          $("#ndb-search-errors").append(error);
+        });
+      }
+      else {
+        $("#ndb-search-results").html(response.html);
+      }
     }).fail(function(response) {
-      console.log("NDB search success!", response);
+      console.log("NDB search failure?", response);
     });
   });
 

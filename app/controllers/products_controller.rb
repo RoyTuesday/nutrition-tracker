@@ -66,7 +66,14 @@ class ProductsController < ApplicationController
         q: params[:search_terms],
         api_key: API_KEY
       })
-      unless response.code >= 400
+      # If the USDA NDB search doesn't find any items, it returns a 400
+      # status with nested objects that contain the error messages
+      if response.code >= 400
+        errors = JSON.parse(response.to_s)["errors"]["error"].map do |error|
+          error["message"].gsub(".", ". ")
+        end
+        render json:{status: response.code, errors: errors}
+      else
         food_items = response.parse["list"]["item"]
         render json: {status: 200, html: render_to_string(
           "_usda_search_results",
