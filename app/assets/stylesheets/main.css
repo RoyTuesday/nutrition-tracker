@@ -85,7 +85,20 @@ ul {
   background-color: #DD8;
   border: 2px solid #333;
   display: none;
-  padding: 0 1em;
+  padding: 1em;
+}
+.product-details p, .users-product-details p {
+  margin: auto;
+}
+.product-details {
+  columns: 2 auto;
+  -webkit-columns: 2 auto;
+  -moz-columns: 2 auto;
+}
+.users-product-details {
+  columns: 4 auto;
+  -webkit-columns: 4 auto;
+  -moz-columns: 4 auto;
 }
 
 .mb-none { margin-bottom: 0; }
