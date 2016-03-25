@@ -75,10 +75,18 @@ class ProductsController < ApplicationController
         render json:{status: response.code, errors: errors}
       else
         food_items = response.parse["list"]["item"]
+        rails_database_ndb_numbers = Product.all.map(&:ndb_no)
+        
+        food_items.reject! do |item|
+          rails_database_ndb_numbers.include? item["ndbno"].to_i
+        end
+
         render json: {status: 200, html: render_to_string(
           "_usda_search_results",
           layout: false,
-          locals: {food_items: food_items}
+          locals: {
+            food_items: food_items
+          }
         )}
       end
     end
