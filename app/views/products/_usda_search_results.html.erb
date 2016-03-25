@@ -1,12 +1,22 @@
-<% food_items.each do |food_item| %>
-  <li>
-    <a class="food-item"
-      data-category="<%= food_item["group"] %>"
-      data-name="<%= food_item["name"] %>"
-      data-ndb-no="<%= food_item["ndbno"] %>"
-      data-remote="true"
-      href="products/new">
-      <%= food_item["name"] %>
-    </a>
-  </li>
+<% if food_items.length > 0 %>
+  <% food_items.each do |food_item| %>
+    <li id="food-item-<%= food_item["ndbno"] %>">
+      <a class="food-item"
+        data-category="<%= food_item["group"] %>"
+        data-name="<%= food_item["name"] %>"
+        data-ndb-no="<%= food_item["ndbno"] %>"
+        data-remote="true"
+        href="products/new">
+        <%= food_item["name"] %>
+      </a>
+    </li>
+  <% end %>
+<% else %>
+  <p>
+    Sorry, all items matching your search are already available above.
+    <br/>
+    Try broadening your search, or combine words together
+    <br/>
+    (E.G. try "applesauce" instead of "apple sauce")
+  </p>
 <% end %>
