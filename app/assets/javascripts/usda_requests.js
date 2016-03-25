@@ -57,6 +57,7 @@ $(document).ready(function() {
       $("#usda-new-product-container").empty();
       $("#products-container").show();
       $("#products-list").append(response.product);
+      $("#food-item-" + response.productNdbNo).remove();
       $("#usda-ndb-search-container").show();
     }).fail(function(response) {
       console.log("New product failure?", response);
