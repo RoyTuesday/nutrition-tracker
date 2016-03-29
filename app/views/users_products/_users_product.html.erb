@@ -1,17 +1,21 @@
 <h3>
   <%= link_to product.name, '#', class: "users-product", data: {id: users_product.id} %>
 </h3>
-<div class="users-product-details" id="users-product-details-<%= users_product.id %>">
-  <p>
-    Category: <%= product.category %>
-  </p>
-  <p>
-    Serving size: <%= product.serving_size %><%= product.serving_unit %>
-  </p>
-  <p>
-    Date eaten: <%= users_product.date_eaten %>
-  </p>
-  <p>
-    Price: <%= users_product.price %>
-  </p>
+<div class="users-product-container" id="users-product-container-<%= users_product.id %>">
+  <div class="users-product-details">
+    <p>
+      Category: <%= product.category %>
+    </p>
+    <p>
+      Serving size: <%= product.serving_size %><%= product.serving_unit %>
+    </p>
+    <p>
+      Date eaten: <%= users_product.date_eaten %>
+    </p>
+    <p>
+      Price: <%= users_product.price %>
+    </p>
+  </div>
+  <%= link_to "Edit", edit_product_users_product_path(product_id: product, id: users_product), class: "users-product-edit-toggle", data: {users_product_id: users_product.id } %>
+  <div class="users-product-<%= users_product.id %>-edit"></div>
 </div>
