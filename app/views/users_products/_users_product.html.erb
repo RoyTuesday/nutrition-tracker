@@ -17,5 +17,5 @@
     </p>
   </div>
   <%= link_to "Edit", edit_product_users_product_path(product_id: product, id: users_product), class: "users-product-edit-toggle", data: {users_product_id: users_product.id } %>
-  <div class="users-product-<%= users_product.id %>-edit"></div>
+  <div class="users-product-edit" id="users-product-<%= users_product.id %>-edit"></div>
 </div>
