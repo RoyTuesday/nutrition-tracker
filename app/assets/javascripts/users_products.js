@@ -27,8 +27,26 @@ $(document).ready(function() {
     event.preventDefault();
 
     var usersProductId = event.currentTarget.dataset["id"];
-    $("#users-product-details-" + usersProductId).toggle();
+    $("#users-product-container-" + usersProductId).toggle();
   })
+
+  $("a.users-product-edit-toggle").on("click", function(event) {
+    event.preventDefault();
+    var editContainer = $("div.users-product-" + event.target.dataset.usersProductId + "-edit");
+    if(editContainer.html().length > 0) {
+      editContainer.toggle();
+    }
+    else {
+      $.ajax({
+        dataType: "json",
+        url: event.target.href
+      }).done(function(response) {
+        editContainer.html(response.form);
+      }).fail(function(response) {
+        console.log("UsersProduct edit failure?", response);
+      });
+    }
+  });
 
   $("#products-list").on("submit", "form.new_users_product", function(event) {
     event.preventDefault();
