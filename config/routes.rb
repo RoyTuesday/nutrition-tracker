@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :show]
 
   resources :products, only: [:new, :create] do
-    resources :users_products, only: [:new, :create]
+    resources :users_products, only: [:new, :create, :edit, :update]
   end
 
   post 'products/ndb_search' => 'products#ndb_search'
