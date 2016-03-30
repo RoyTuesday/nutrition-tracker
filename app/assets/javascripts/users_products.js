@@ -27,12 +27,12 @@ $(document).ready(function() {
     event.preventDefault();
 
     var usersProductId = event.currentTarget.dataset["id"];
-    $("#users-product-container-" + usersProductId).toggle();
-  })
+    $("div#users-product-details-" + usersProductId).toggle();
+  });
 
   $("a.users-product-edit-toggle").on("click", function(event) {
     event.preventDefault();
-    var editContainer = $("div.users-product-" + event.target.dataset.usersProductId + "-edit");
+    var editContainer = $("div#users-product-" + event.target.dataset.usersProductId + "-edit");
     if(editContainer.html().length > 0) {
       editContainer.toggle();
     }
@@ -46,6 +46,26 @@ $(document).ready(function() {
         console.log("UsersProduct edit failure?", response);
       });
     }
+  });
+  $("div.users-product-edit").on("submit", "form", function(event) {
+    event.preventDefault();
+    $.ajax({
+      data: $(this).serialize(),
+      dataType: "json",
+      method: "PUT",
+      url: event.target.action
+    }).done(function(response) {
+      if(response.errorsHtml) {
+        $("form#edit_users_product_" + response.usersProductId + " div.users-product-errors-container").html(response.errorsHtml);
+      }
+      else {
+        $("form#edit_users_product_" + response.usersProductId).hide();
+        $("li#users-product-" + response.usersProductId + "-container").html(response.html);
+        $("div#users-product-details-" + usersProductId).show();
+      }
+    }).fail(function(response) {
+      console.log("Edit failure?", response);
+    });
   });
 
   $("#products-list").on("submit", "form.new_users_product", function(event) {
