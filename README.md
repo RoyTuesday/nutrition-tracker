@@ -19,7 +19,7 @@ The JSON API from <a href="http://openfoodfacts.org" target="_blank">openfoodfac
 
 ## Technologies
 
-This application uses Rails 4 as the backend, jQuery, HTML5, and CSS 3 for the front end, and AJAX to handle server requests.
+This application uses Ruby on Rails 4 as the backend, jQuery, HTML5, and CSS 3 for the front end, and AJAX to handle server requests.
 
 The Rails database stores product and nutrient records to reduce the number of requests made to the USDA's NDB
 
@@ -35,7 +35,11 @@ Unchecked boxes are not yet implemented
 
 :white_check_mark: Register a new user (create new user record)
 
-:white_check_mark: Create new record of food eaten by user
+:white_check_mark: A user can create new record of a food eaten: when, how much, and what it cost
+
+:white_check_mark: A user can edit any food eaten record they created
+
+:white_check_mark: A user can delete any food eaten record they created
 
 :white_medium_small_square: Filter records of food eaten
 
