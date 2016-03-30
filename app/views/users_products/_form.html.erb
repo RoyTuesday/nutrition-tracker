@@ -4,7 +4,7 @@
     <%= f.number_field :servings, value: users_product[:servings], min: 0, placeholder: 1, step: "any" %>
 
     <%= f.label :date_eaten %>
-    <%= f.date_field :date_eaten, value: users_product[:date_eaten], placeholder: "mm/dd/yyyy" %>
+    <%= f.date_field :date_eaten, value: users_product[:date_eaten] ||= Date.today, placeholder: "yyyy-mm-dd" %>
 
     <%= f.label :price %>
     <%= f.text_field :price, value: users_product[:price], placeholder: "$1.00" %>
