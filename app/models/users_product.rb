@@ -8,9 +8,7 @@ class UsersProduct < ActiveRecord::Base
   def initialize args = {}
     super
     if /\d{1,}\/\d{1,}\/\d{4}/.match args[:date_eaten]
-      date_params = args[:date_eaten].split('/')
-      date_params.map!(&:to_i)
-      self.date_eaten = Date.new date_params[2], date_params[0], date_params[1]
+      self.date_eaten = format_date args[:date_eaten]
     end
   end
 
@@ -24,4 +22,11 @@ class UsersProduct < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :product
+
+  private
+
+  def format_date date
+    date_params = date.split('/').map!(&:to_i)
+    Date.new date_params[2], date_params[0], date_params[1]
+  end
 end
