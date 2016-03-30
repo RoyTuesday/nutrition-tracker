@@ -12,16 +12,12 @@ class UsersProduct < ActiveRecord::Base
     end
   end
 
-  def name
-    product.name
-  end
-
-  def category
-    product.category
-  end
-
   belongs_to :user
   belongs_to :product
+
+  delegate :name, to: :product
+  delegate :category, to: :product
+  delegate :serving_size, to: :product
 
   private
 
