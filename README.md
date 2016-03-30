@@ -17,6 +17,10 @@ The JSON API from <a href="http://openfoodfacts.org" target="_blank">openfoodfac
 
 <a href="http://www.product-open-data.com/navigate/">Product Open Data</a> (POD) provided a more comprehensive listing of food products, but did not yet have an available API. Using POD would have required downloading a 200+ MB database, and I decided against that.
 
+## Try it out!
+
+The latest stable version of the <a href="https://quiet-falls-55777.herokuapp.com" target="_blank">Nutrition Tracker</a> is deployed on Heroku. Try it <a href="https://quiet-falls-55777.herokuapp.com" target="_blank">here!</a>
+
 ## Technologies
 
 This application uses Ruby on Rails 4 as the backend, jQuery, HTML5, and CSS 3 for the front end, and AJAX to handle server requests.
