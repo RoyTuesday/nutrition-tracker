@@ -30,6 +30,29 @@ $(document).ready(function() {
     $("div#users-product-details-" + usersProductId).toggle();
   });
 
+  $("#products-list").on("submit", "form.new_users_product", function(event) {
+    event.preventDefault();
+    $.ajax({
+      data: $(this).serialize(),
+      dataType: "json",
+      method: this.method,
+      url: this.action
+    }).done(function(response) {
+      var form = $("#product-" + response.productId + " form");
+      console.log("Users product create success!", response);
+      if(response.success) {
+        form.hide();
+      }
+      else {
+        var formErrors = $("#product-" + response.productId + "-users-product-errors")
+        formErrors.html(response.errors);
+      }
+    }).fail(function(response) {
+      console.log("Users product create failure?", response);
+      $('body').html(response["responseText"]);
+    });
+  });
+
   $("a.users-product-edit-toggle").on("click", function(event) {
     event.preventDefault();
     var editContainer = $("div#users-product-" + event.target.dataset.usersProductId + "-edit");
@@ -68,26 +91,16 @@ $(document).ready(function() {
     });
   });
 
-  $("#products-list").on("submit", "form.new_users_product", function(event) {
+  $("a.users-product-delete").on("click", function(event) {
     event.preventDefault();
     $.ajax({
-      data: $(this).serialize(),
       dataType: "json",
-      method: this.method,
-      url: this.action
+      method: "DELETE",
+      url: event.target.href
     }).done(function(response) {
-      var form = $("#product-" + response.productId + " form");
-      console.log("Users product create success!", response);
-      if(response.success) {
-        form.hide();
-      }
-      else {
-        var formErrors = $("#product-" + response.productId + "-users-product-errors")
-        formErrors.html(response.errors);
-      }
+      $("li#users-product-" + response.usersProductId + "-container").remove();
     }).fail(function(response) {
-      console.log("Users product create failure?", response);
-      $('body').html(response["responseText"]);
+      console.log("Users_product delete failure?", response);
     });
   });
 });
