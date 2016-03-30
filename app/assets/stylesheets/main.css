@@ -101,7 +101,7 @@ ul {
   border: 2px solid #333;
   padding: 1em;
 }
-.product-details, .users-product-container {
+.product-details, .users-product-details-container {
   display: none;
 }
 .product-details p, .users-product-details p {
