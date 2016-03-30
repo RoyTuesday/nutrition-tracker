@@ -6,7 +6,7 @@ class UsersProductTest <ActiveSupport::TestCase
       servings: 1,
       user: users(:charles),
       product: products(:beets),
-      date_eaten: "3/16/2016",
+      date_eaten: "2016-03-30",
       price: "$1.00"
     })
     assert users_product.save, "User's product didn't save despite valid fields!"
@@ -16,7 +16,7 @@ class UsersProductTest <ActiveSupport::TestCase
     without_servings = UsersProduct.new({
       user: users(:charlotte),
       product: products(:beets),
-      date_eaten: "3/16/2016",
+      date_eaten: "2016-03-30",
       price: "$1.00"
     })
     assert_not without_servings.save, "User's product saved without servings!"
@@ -27,7 +27,7 @@ class UsersProductTest <ActiveSupport::TestCase
       servings: 0,
       user: users(:charles),
       product: products(:beets),
-      date_eaten: "3/16/2016",
+      date_eaten: "2016-03-30",
       price: "$1.00"
     })
     assert_not zero_servings.save, "User's product saved with 0 servings!"
@@ -38,7 +38,7 @@ class UsersProductTest <ActiveSupport::TestCase
       servings: -4,
       user: users(:charles),
       product: products(:beets),
-      date_eaten: "3/16/2016",
+      date_eaten: "2016-03-30",
       price: "$1.00"
     })
     assert_not zero_servings.save, "User's product saved with a negative number of servings!"
@@ -49,7 +49,7 @@ class UsersProductTest <ActiveSupport::TestCase
       servings: "string",
       user: users(:charlotte),
       product: products(:beets),
-      date_eaten: "3/16/2016",
+      date_eaten: "2016-03-30",
       price: "$1.00"
     })
     assert_not zero_servings.save, "User's product saved with a string as servings!"
@@ -59,7 +59,7 @@ class UsersProductTest <ActiveSupport::TestCase
     without_user = UsersProduct.new({
       servings: 1,
       product: products(:beets),
-      date_eaten: "3/16/2016",
+      date_eaten: "2016-03-30",
       price: "$1.00"
     })
     assert_not without_user.save, "User's product saved without a user!"
@@ -69,7 +69,7 @@ class UsersProductTest <ActiveSupport::TestCase
     without_product = UsersProduct.new({
       servings: 1,
       user: users(:charles),
-      date_eaten: "3/16/2016",
+      date_eaten: "2016-03-30",
       price: "$1.00"
     })
     assert_not without_product.save, "User's product saved without a product!"
@@ -90,7 +90,7 @@ class UsersProductTest <ActiveSupport::TestCase
       servings: 1,
       user: users(:charles),
       product: products(:beets),
-      date_eaten: "3/16/2016"
+      date_eaten: "2016-03-30"
     })
     assert_not without_price.save, "User's product saved without price!"
   end
