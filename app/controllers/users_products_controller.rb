@@ -85,6 +85,17 @@ class UsersProductsController < ApplicationController
     end
   end
 
+  def destroy
+    users_product = UsersProduct.find_by(id: params[:id])
+    if request.xhr?
+      if users_product.destroy
+        render json: {result: "success!", usersProductId: users_product.id}
+      else
+        render json: {result: "failure"}
+      end
+    end
+  end
+
   private
 
   def users_product_params
