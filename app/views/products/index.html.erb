@@ -10,13 +10,9 @@
   </div>
 
   <% if @products %>
-    <ul id="products-list">
-      <% @products.each do |product| %>
-        <li>
-          <%= render partial: 'product', locals: {product: product} %>
-        </li>
-      <% end %>
-    </ul>
+    <div id="products-list">
+      <%= react_component('ProductList', products: @products) %>
+    </div>
   <% else %>
     <p>
       No products yet stored!

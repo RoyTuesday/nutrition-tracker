@@ -15,7 +15,7 @@ $(document).ready(function() {
         url: this.href
       }).done(function(response) {
         if(response.loggedIn) {
-          $("#product-" + response.product.id).append(response.form);
+          $("#product-" + response.product.id + "-form-container").html(response.form);
         }
       }).fail(function(response) {
         console.log("Users product form failure?", response);
@@ -38,10 +38,9 @@ $(document).ready(function() {
       method: this.method,
       url: this.action
     }).done(function(response) {
-      var form = $("#product-" + response.productId + " form");
-      console.log("Users product create success!", response);
       if(response.success) {
-        form.hide();
+        $("div#product-details-" + response.productId).hide();
+        $("#product-" + response.productId + " form").hide();
       }
       else {
         var formErrors = $("#product-" + response.productId + "-users-product-errors")
@@ -49,7 +48,6 @@ $(document).ready(function() {
       }
     }).fail(function(response) {
       console.log("Users product create failure?", response);
-      $('body').html(response["responseText"]);
     });
   });
 
