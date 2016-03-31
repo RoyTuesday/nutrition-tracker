@@ -33,6 +33,9 @@ gem 'bcrypt', '~> 3.1.7'
 # Use http.rb to make requests to the usda nutrient database from the server
 gem 'http'
 
+# Use to require ReactJS
+gem 'react-rails', '~> 1.6.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
