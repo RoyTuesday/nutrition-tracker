@@ -5,6 +5,9 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
+    if request.xhr?
+      render json: {:products => @products}
+    end
   end
 
   def new
