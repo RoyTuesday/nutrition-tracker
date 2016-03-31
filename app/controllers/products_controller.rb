@@ -105,13 +105,7 @@ class ProductsController < ApplicationController
           rails_database_ndb_numbers.include? item["ndbno"].to_i
         end
 
-        render json: {status: 200, html: render_to_string(
-          "_usda_search_results",
-          layout: false,
-          locals: {
-            food_items: food_items
-          }
-        )}
+        render json: food_items
       end
     end
   end
