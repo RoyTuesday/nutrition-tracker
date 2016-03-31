@@ -1,28 +1,4 @@
 $(document).ready(function() {
-  $("#usda-ndb-search").on("submit", function(event) {
-    event.preventDefault();
-    var form = this;
-    $.ajax({
-      data: $(form).serialize(),
-      dataType: 'json',
-      method: form.method,
-      url: form.action
-    }).done(function(response) {
-      console.log("NDB search success!", response);
-      if(response.errors){
-        $("#ndb-search-errors").empty();
-        response.errors.forEach(function(error) {
-          $("#ndb-search-errors").append(error);
-        });
-      }
-      else {
-        $("#ndb-search-results").html(response.html);
-      }
-    }).fail(function(response) {
-      console.log("NDB search failure?", response);
-    });
-  });
-
   $("#ndb-search-results").on("click", "a.food-item", function(event) {
     event.preventDefault();
     var productData = {

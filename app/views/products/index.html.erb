@@ -22,7 +22,7 @@
 
 <div id="usda-ndb-search-container">
   <% if current_user %>
-    <%= render partial: "usda_ndb_search" %>
+    <%= react_component('UsdaSearchForm', authenticity_token: form_authenticity_token, url: "/products/ndb_search") %>
   <% else %>
     <p>
       Please log in to add products to the database
