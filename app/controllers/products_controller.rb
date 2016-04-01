@@ -68,19 +68,16 @@ class ProductsController < ApplicationController
 
   def search
     if params[:search_terms].empty?
-      errors = ["<li>Please enter one or more search terms</li>"]
+      errors = ["Please enter one or more search terms"]
     else
-      products = Product.where("name ilike ?", "%#{params[:search_terms]}%")
-      html_products = products.map do |product|
-        render_to_string(
-          "_product",
-          layout: false,
-          locals: {product: product}
-        )
+      search_terms = params[:search_terms].map do |term|
+        ("%" + term + "%")
       end
+      products = Product.where("name ilike ?", *search_terms)
     end
+
     if request.xhr?
-      render json: {htmlProducts: html_products, errors: errors}
+      render json: {products: products, errors: errors}
     end
   end
 
@@ -105,7 +102,7 @@ class ProductsController < ApplicationController
           rails_database_ndb_numbers.include? item["ndbno"].to_i
         end
 
-        render json: food_items
+        render json: {food_items: food_items}
       end
     end
   end
