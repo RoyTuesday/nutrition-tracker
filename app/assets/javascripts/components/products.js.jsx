@@ -113,3 +113,37 @@ var ProductList = React.createClass({
     );
   }
 });
+var ProductsIndex = React.createClass({
+  getInitialState: function() {
+    return {products: this.props.products};
+  },
+
+  updateProducts: function(products) {
+    this.setState({products: products});
+  },
+
+  render: function() {
+    var usdaSearchForm = (
+      <p>
+        Please log in to add products to the database
+      </p>
+    );
+
+    if(this.props.isLoggedIn) {
+      usdaSearchForm = (
+        <UsdaSearchForm authenticityToken={this.props.authenticityToken} newProductUrl={this.props.urls.newProduct} url={this.props.urls.ndbSearch} />
+      );
+    }
+
+    return (
+      <div>
+        <h2 className="mb-none">
+          Products in Database
+        </h2>
+        <ProductSearch updateProducts={this.updateProducts} url={this.props.productsSearchUrl} />
+        <ProductList authenticityToken={this.props.authenticityToken} isLoggedIn={this.props.isLoggedIn} products={this.state.products} />
+        {usdaSearchForm}
+      </div>
+    );
+  }
+});
