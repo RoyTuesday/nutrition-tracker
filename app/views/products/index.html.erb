@@ -1,31 +1,4 @@
 <div id="usda-new-product-container">
 </div>
 
-<div id="products-container">
-  <h2 class="mb-none">
-    Products in Database
-  </h2>
-  <div>
-    <%= render partial: 'search' %>
-  </div>
-
-  <% if @products %>
-    <div id="products-list">
-      <%= react_component('ProductList', products: @products) %>
-    </div>
-  <% else %>
-    <p>
-      No products yet stored!
-    </p>
-  <% end %>
-</div>
-
-<div id="usda-ndb-search-container">
-  <% if current_user %>
-    <%= react_component('UsdaSearchForm', authenticity_token: form_authenticity_token, url: "/products/ndb_search") %>
-  <% else %>
-    <p>
-      Please log in to add products to the database
-    </p>
-  <% end %>
-</div>
+<%= react_component 'ProductsIndex', authenticityToken: form_authenticity_token, isLoggedIn: current_user != nil, products: @products, productsSearchUrl: "/products/search", urls: {ndbSearch: "/products/ndb_search", newProduct: "/products"} %>
