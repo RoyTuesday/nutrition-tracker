@@ -25,8 +25,7 @@ var Product = React.createClass({
       details = (
         <div>
           <div className="product-details" id={"product-details-" + this.props.product.id}>
-            <p>var ProductSearch = React.createClass({
-
+            <p>
               Category: {this.props.product.category}
             </p>
             <p>
