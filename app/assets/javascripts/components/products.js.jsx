@@ -139,7 +139,7 @@ var ProductsIndex = React.createClass({
         <h2 className="mb-none">
           Products in Database
         </h2>
-        <ProductSearch updateProducts={this.updateProducts} url={this.props.productsSearchUrl} />
+        <ProductSearch updateProducts={this.updateProducts} url={this.props.urls.productsSearch} />
         <ProductList authenticityToken={this.props.authenticityToken} isLoggedIn={this.props.isLoggedIn} products={this.state.products} />
         {usdaSearchForm}
       </div>
