@@ -1,4 +1,1 @@
-<div id="usda-new-product-container">
-</div>
-
-<%= react_component 'ProductsIndex', authenticityToken: form_authenticity_token, isLoggedIn: current_user != nil, products: @products, productsSearchUrl: "/products/search", urls: {ndbSearch: "/products/ndb_search", newProduct: "/products"} %>
+<%= react_component 'Index', authenticityToken: form_authenticity_token, isLoggedIn: current_user != nil, products: @products, urls: {ndbSearch: "/products/ndb_search", newProduct: "/products", productsSearch: "/products/search"} %>
