@@ -50,6 +50,44 @@ var Product = React.createClass({
     );
   }
 });
+var ProductSearch = React.createClass({
+  getInitialState: function() {
+    return {search_terms: new Array}
+  },
+
+  handleQueryChange: function(event) {
+    this.setState({search_terms: event.target.value.split(" ")});
+  },
+
+  handleSubmit: function(event) {
+    event.preventDefault();
+    $.ajax({
+      data: {search_terms: this.state.search_terms},
+      dataType: "json",
+      method: "POST",
+      url: this.props.url,
+      success: function(data) {
+        this.props.updateProducts(data.products);
+      }.bind(this),
+      fail: function(xhr, status, err) {
+        console.log("Products search failure?", this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+
+  render: function() {
+    return (
+      <form acceptCharset="UTF-8" id="products-search" onSubmit={this.handleSubmit}>
+        <fieldset>
+          <label htmlFor="search_terms">Search terms:</label>
+          <input id="product-search-terms" name="search_terms" onChange={this.handleQueryChange} placeholder="food" type="text"/>
+
+          <input type="submit" value="Search"/>
+        </fieldset>
+      </form>
+    );
+  }
+});
 var ProductList = React.createClass({
   render: function() {
     var productNodes = (
