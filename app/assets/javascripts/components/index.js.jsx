@@ -22,12 +22,20 @@ var Index = React.createClass({
   },
 
   render: function() {
+    var page;
+    switch(this.state.currentPage) {
+      case "products": page = <ProductsIndex authenticityToken={this.props.authenticityToken} isLoggedIn={this.state.isLoggedIn} products={this.props.products} urls={this.props.urls} />;
+      break;
+      default: page = <ProductsIndex authenticityToken={this.props.authenticityToken} isLoggedIn={this.state.isLoggedIn} products={this.props.products} urls={this.props.urls} />;
+      break;
+    }
+
     return (
       <div>
         <NavBar authenticityToken={this.props.authenticityToken} currentUser={this.state.currentUser} isLoggedIn={this.state.isLoggedIn} loginUser={this.loginUser} logoutUser={this.logoutUser} urls={this.props.urls} />
 
         <main>
-          <ProductsIndex authenticityToken={this.props.authenticityToken} isLoggedIn={this.state.isLoggedIn} products={this.props.products} urls={this.props.urls} />
+          {page}
         </main>
       </div>
     );
