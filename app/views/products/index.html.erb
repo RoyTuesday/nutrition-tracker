@@ -1,1 +1,1 @@
-<%= react_component 'Index', authenticityToken: form_authenticity_token, isLoggedIn: current_user != nil, products: @products, urls: {ndbSearch: "/products/ndb_search", newProduct: "/products", productsSearch: "/products/search"} %>
+<%= react_component 'Index', authenticityToken: form_authenticity_token, currentUser: current_user, products: @products, urls: {login: "/sessions", ndbSearch: "/products/ndb_search", newProduct: "/products", productsSearch: "/products/search", register: "/users"} %>
