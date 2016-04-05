@@ -49,7 +49,7 @@ var LoginRegisterForm = React.createClass({
     }
 
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <input name="authenticity_token" type="hidden" value={this.props.authenticityToken}/>
         <fieldset>
           {usernameField}
