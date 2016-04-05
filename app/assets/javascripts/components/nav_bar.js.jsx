@@ -153,7 +153,7 @@ var NavBar = React.createClass({
     return (
       <nav>
         <p>
-          <a href="/">
+          <a href="/" onClick={this.handleHomeClick}>
             Home
           </a> | {sessionLinks}
         </p>
