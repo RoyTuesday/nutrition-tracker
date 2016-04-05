@@ -1,4 +1,12 @@
 var LoginRegisterForm = React.createClass({
+  getInitialState: function() {
+    return {
+      username: null,
+      email: null,
+      password: null
+    }
+  },
+
   render: function() {
     var usernameField;
     if(this.props.isRegisterForm) {
