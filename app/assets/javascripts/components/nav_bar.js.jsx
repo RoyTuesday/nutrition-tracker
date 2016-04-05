@@ -19,6 +19,7 @@ var LoginRegisterForm = React.createClass({
     this.setState({password: event.target.value});
   },
 
+
   handleSubmit: function(event) {
     event.preventDefault();
     var formUrl = this.state.isRegisterForm ? this.props.urls.register : this.props.urls.login;
@@ -91,6 +92,21 @@ var NavBar = React.createClass({
     });
   },
 
+  handleLogoutClick: function(event) {
+    event.preventDefault();
+    $.ajax({
+      contentType: "html",
+      type: "DELETE",
+      url: "/sessions/" + this.props.currentUser.id,
+      success: function(data) {
+        this.props.logoutUser();
+      }.bind(this),
+      fail: function(xhr, status, err) {
+        console.log(status, err);
+      }.bind(this)
+    });
+  },
+
   handleLoginSuccess: function(user) {
     this.setState({isLoginFormShown: false});
     this.props.loginUser(user);
@@ -112,7 +128,7 @@ var NavBar = React.createClass({
         <span>
           <a href="#">
             {this.props.currentUser.username}
-          </a> | <a href="#">
+          </a> | <a href="#" onClick={this.handleLogoutClick}>
             Log out
           </a>
         </span>
