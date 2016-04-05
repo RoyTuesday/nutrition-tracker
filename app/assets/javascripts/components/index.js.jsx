@@ -17,7 +17,8 @@ var Index = React.createClass({
   logoutUser: function() {
     this.setState({
       currentUser: null,
-      isLoggedIn: false
+      isLoggedIn: false,
+      currentPage: "products"
     });
   },
 
