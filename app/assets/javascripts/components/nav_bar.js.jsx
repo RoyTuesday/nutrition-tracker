@@ -25,7 +25,7 @@ var LoginRegisterForm = React.createClass({
       usernameField = (
         <span>
           <label htmlFor="username">Username</label>
-          <input id="username" placeholder="my_name" type="text" value={this.state.username}/>
+          <input id="username" onChange={this.handleUsernameChange} placeholder="my_name" type="text" value={this.state.username}/>
         </span>
       );
     }
@@ -37,10 +37,10 @@ var LoginRegisterForm = React.createClass({
           {usernameField}
 
           <label htmlFor="email">Email</label>
-          <input id="email" placeholder="email@example.com" type="email" value={this.state.email}/>
+          <input id="email" onChange={this.handleEmailChange} placeholder="email@example.com" type="email" value={this.state.email}/>
 
           <label htmlFor="password">Password</label>
-          <input id="password" placeholder="password123" type="password" value={this.state.password}/>
+          <input id="password" onChange={this.handlePasswordChange} placeholder="password123" type="password" value={this.state.password}/>
 
           <input type="submit" value="Log in"/>
         </fieldset>
