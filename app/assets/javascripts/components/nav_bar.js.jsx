@@ -3,8 +3,10 @@ var LoginRegisterForm = React.createClass({
     var usernameField;
     if(this.props.isRegisterForm) {
       usernameField = (
-        <label htmlFor="username">Username</label>
-        <input id="username" placeholder="my_name" type="text" value={this.state.username}/>
+        <span>
+          <label htmlFor="username">Username</label>
+          <input id="username" placeholder="my_name" type="text" value={this.state.username}/>
+        </span>
       );
     }
 
@@ -33,6 +35,14 @@ var NavBar = React.createClass({
       isLoginFormShown: false,
       isRegisterForm: true
     }
+  },
+
+  handleLoginClick: function(event) {
+    event.preventDefault();
+    this.setState({
+      isLoginFormShown: !this.state.isLoginFormShown,
+      isRegisterForm: false
+    });
   },
 
   render: function() {
