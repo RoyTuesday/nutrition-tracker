@@ -7,6 +7,10 @@ var Index = React.createClass({
     }
   },
 
+  changeToPage: function(pageName) {
+    this.setState({currentPage: pageName});
+  },
+
   loginUser: function(user) {
     this.setState({
       currentUser: user,
