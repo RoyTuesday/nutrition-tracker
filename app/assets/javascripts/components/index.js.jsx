@@ -2,7 +2,8 @@ var Index = React.createClass({
   getInitialState: function() {
     return {
       currentUser: this.props.currentUser,
-      isLoggedIn: !!this.props.currentUser
+      isLoggedIn: !!this.props.currentUser,
+      currentPage: "products"
     }
   },
 
