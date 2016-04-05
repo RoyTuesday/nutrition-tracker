@@ -29,7 +29,7 @@ var LoginRegisterForm = React.createClass({
       method: "POST",
       url: formUrl,
       success: function(data) {
-        console.log("Session form success!", data);
+        this.props.handleLoginSuccess(data.user);
       }.bind(this),
       fail: function(xhr, status, err) {
         console.log("Session form failure?", status, err);
