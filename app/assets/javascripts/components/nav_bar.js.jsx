@@ -91,6 +91,11 @@ var NavBar = React.createClass({
     });
   },
 
+  handleLoginSuccess: function(user) {
+    this.setState({isLoginFormShown: false});
+    this.props.loginUser(user);
+  },
+
   render: function() {
     var sessionForm = "";
     var sessionLinks = (
