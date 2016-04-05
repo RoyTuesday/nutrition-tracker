@@ -39,7 +39,7 @@ var Index = React.createClass({
 
     return (
       <div>
-        <NavBar authenticityToken={this.props.authenticityToken} currentUser={this.state.currentUser} isLoggedIn={this.state.isLoggedIn} loginUser={this.loginUser} logoutUser={this.logoutUser} urls={this.props.urls} />
+        <NavBar authenticityToken={this.props.authenticityToken} changeToPage={this.changeToPage} currentUser={this.state.currentUser} isLoggedIn={this.state.isLoggedIn} loginUser={this.loginUser} logoutUser={this.logoutUser} urls={this.props.urls} />
 
         <main>
           {page}
