@@ -7,6 +7,18 @@ var LoginRegisterForm = React.createClass({
     }
   },
 
+  handleUsernameChange: function(event) {
+    this.setState({username: event.target.value});
+  },
+
+  handleEmailChange: function(event) {
+    this.setState({email: event.target.value});
+  },
+
+  handlePasswordChange: function(event) {
+    this.setState({password: event.target.value});
+  },
+
   render: function() {
     var usernameField;
     if(this.props.isRegisterForm) {
