@@ -28,7 +28,15 @@ var LoginRegisterForm = React.createClass({
 });
 
 var NavBar = React.createClass({
+  getInitialState: function() {
+    return {
+      isLoginFormShown: false,
+      isRegisterForm: true
+    }
+  },
+
   render: function() {
+    var sessionForm = "";
     var sessionLinks = (
       <span>
         <a href="#">
@@ -47,6 +55,11 @@ var NavBar = React.createClass({
             Log out
           </a>
         </span>
+      );
+    }
+    else if(this.state.isLoginFormShown) {
+      sessionForm = (
+        <LoginRegisterForm authenticityToken={this.props.authenticityToken} isRegisterForm={this.state.isRegisterForm} />
       );
     }
 
