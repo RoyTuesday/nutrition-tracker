@@ -65,9 +65,9 @@ var NavBar = React.createClass({
     var sessionForm = "";
     var sessionLinks = (
       <span>
-        <a href="#">
+        <a href="#" onClick={this.handleLoginClick}>
           Login
-        </a> | <a href="#">
+        </a> | <a href="#" onClick={this.handleRegisterClick}>
           Register
         </a>
       </span>
