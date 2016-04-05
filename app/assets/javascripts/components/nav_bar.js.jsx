@@ -30,21 +30,23 @@ var LoginRegisterForm = React.createClass({
 var NavBar = React.createClass({
   render: function() {
     var sessionLinks = (
-      <a href="#">
-        Login
-      </a> | 
-      <a href="#">
-        Register
-      </a>
+      <span>
+        <a href="#">
+          Login
+        </a> | <a href="#">
+          Register
+        </a>
+      </span>
     );
     if(this.props.isLoggedIn) {
       sessionLinks = (
-        <a href="#">
-          {this.props.currentUser.username}
-        </a> | 
-        <a href="#">
-          Log out
-        </a>
+        <span>
+          <a href="#">
+            {this.props.currentUser.username}
+          </a> | <a href="#">
+            Log out
+          </a>
+        </span>
       );
     }
 
@@ -53,9 +55,11 @@ var NavBar = React.createClass({
         <p>
           <a href="/">
             Home
-          </a> | 
-          {sessionLinks}
+          </a> | {sessionLinks}
         </p>
+        <h1>
+          Welcome to Nutrition Tracker
+        </h1>
       </nav>
     );
   }
