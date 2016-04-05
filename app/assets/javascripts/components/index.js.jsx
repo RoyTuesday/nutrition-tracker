@@ -27,6 +27,8 @@ var Index = React.createClass({
     switch(this.state.currentPage) {
       case "products": page = <ProductsIndex authenticityToken={this.props.authenticityToken} isLoggedIn={this.state.isLoggedIn} products={this.props.products} urls={this.props.urls} />;
       break;
+      case "user": page = <UserShow currentUser={this.state.currentUser} />;
+      break;
       default: page = <ProductsIndex authenticityToken={this.props.authenticityToken} isLoggedIn={this.state.isLoggedIn} products={this.props.products} urls={this.props.urls} />;
       break;
     }
