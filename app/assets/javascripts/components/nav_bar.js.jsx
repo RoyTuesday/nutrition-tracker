@@ -76,6 +76,11 @@ var NavBar = React.createClass({
     }
   },
 
+  handleHomeClick: function(event) {
+    event.preventDefault();
+    this.props.changeToPage();
+  },
+
   handleLoginClick: function(event) {
     event.preventDefault();
     this.setState({
