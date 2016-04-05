@@ -19,6 +19,24 @@ var LoginRegisterForm = React.createClass({
     this.setState({password: event.target.value});
   },
 
+  handleSubmit: function(event) {
+    event.preventDefault();
+    var formUrl = this.state.isRegisterForm ? this.props.urls.register : this.props.urls.login;
+
+    $.ajax({
+      data: this.state,
+      dataType: "json",
+      method: "POST",
+      url: formUrl,
+      success: function(data) {
+        console.log("Session form success!", data);
+      }.bind(this),
+      fail: function(xhr, status, err) {
+        console.log("Session form failure?", status, err);
+      }.bind(this)
+    });
+  },
+
   render: function() {
     var usernameField;
     if(this.props.isRegisterForm) {
