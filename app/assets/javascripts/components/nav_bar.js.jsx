@@ -131,7 +131,7 @@ var NavBar = React.createClass({
     if(this.props.isLoggedIn) {
       sessionLinks = (
         <span>
-          <a href="#">
+          <a href="#" onClick={this.handleUserClick}>
             {this.props.currentUser.username}
           </a> | <a href="#" onClick={this.handleLogoutClick}>
             Log out
