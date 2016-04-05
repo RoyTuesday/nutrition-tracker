@@ -27,6 +27,10 @@ class SessionsController < ApplicationController
 
   def destroy
     session.clear
-    redirect_to :root
+    if request.xhr?
+      render html: "Success!"
+    else
+      redirect :root
+    end
   end
 end
