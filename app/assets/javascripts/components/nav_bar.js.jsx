@@ -92,6 +92,11 @@ var NavBar = React.createClass({
     });
   },
 
+  handleUserClick: function(event) {
+    event.preventDefault();
+    this.props.changeToPage("user");
+  },
+
   handleLogoutClick: function(event) {
     event.preventDefault();
     $.ajax({
