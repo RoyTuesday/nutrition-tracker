@@ -99,6 +99,7 @@ var NavBar = React.createClass({
         <h1>
           Welcome to Nutrition Tracker
         </h1>
+        {sessionForm}
       </nav>
     );
   }
