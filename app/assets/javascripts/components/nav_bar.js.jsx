@@ -85,7 +85,7 @@ var NavBar = React.createClass({
     }
     else if(this.state.isLoginFormShown) {
       sessionForm = (
-        <LoginRegisterForm authenticityToken={this.props.authenticityToken} isRegisterForm={this.state.isRegisterForm} />
+        <LoginRegisterForm authenticityToken={this.props.authenticityToken} isRegisterForm={this.state.isRegisterForm} urls={this.props.urls} />
       );
     }
 
