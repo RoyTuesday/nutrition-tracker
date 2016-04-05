@@ -8,7 +8,7 @@ var Index = React.createClass({
 
   loginUser: function(user) {
     this.setState({
-      currenUser: user,
+      currentUser: user,
       isLoggedIn: true
     });
   },
