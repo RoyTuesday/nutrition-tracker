@@ -6,6 +6,13 @@ var Index = React.createClass({
     }
   },
 
+  loginUser: function(user) {
+    this.setState({
+      currenUser: user,
+      isLoggedIn: true
+    });
+  },
+
   render: function() {
     return (
       <div>
