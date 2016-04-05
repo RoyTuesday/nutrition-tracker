@@ -11,28 +11,6 @@
 </head>
 <body>
 
-  <nav>
-    <p>
-      <%= link_to "Home", :root %> | 
-      <span id="session-links">
-      <% if current_user %>
-        <%= render partial: '/sessions/user_nav' %>
-      <% else %>
-        <%= render partial: '/sessions/login_nav' %>
-      <% end %>
-      <span>
-    </p>
-    <% unless current_user %>
-      <div id="login-container">
-        <%= render partial: '/sessions/form' %>
-      </div>
-      <div id="register-container">
-        <%= render partial: '/users/form', locals: {user: User.new} %>
-      </div>
-    <% end %>
-    <h1>Welcome to Nutrition Tracker</h1>
-  </nav>
-  
   <%= yield %>
 
   <footer>
