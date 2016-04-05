@@ -45,6 +45,14 @@ var NavBar = React.createClass({
     });
   },
 
+  handleRegisterClick: function(event) {
+    event.preventDefault();
+    this.setState({
+      isLoginFormShown: !this.state.isLoginFormShown,
+      isRegisterForm: true
+    });
+  },
+
   render: function() {
     var sessionForm = "";
     var sessionLinks = (
