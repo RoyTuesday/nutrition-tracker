@@ -1,4 +1,4 @@
-var Index = React.createClass({
+var NutritionTracker = React.createClass({
   getInitialState: function() {
     return {
       currentUser: this.props.currentUser,
@@ -10,7 +10,7 @@ var Index = React.createClass({
 
   addProduct: function(product) {
     this.setState({
-      products: this.state.products.concat(product);
+      products: this.state.products.concat(product)
     });
   },
 
