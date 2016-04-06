@@ -66,14 +66,17 @@ var ProductSearch = React.createClass({
       });
       return isAMatch;
     });
+    this.props.updateProducts(products);
   },
 
   handleQueryChange: function(event) {
     this.setState({searchInput: event.target.value});
 
     var terms = event.target.value.split(" ").map(function(term) {
-      return new RegExp(term);
+      return new RegExp(term, "i");
     });
+
+    this.filterProducts(terms);
   },
 
   render: function() {
@@ -139,7 +142,7 @@ var ProductsIndex = React.createClass({
         <h2 className="mb-none">
           Products in Database
         </h2>
-        <ProductSearch products={this.state.products} updateProducts={this.updateProducts} url={this.props.urls.productsSearch} />
+        <ProductSearch products={this.props.products} updateProducts={this.updateProducts} url={this.props.urls.productsSearch} />
         <ProductList authenticityToken={this.props.authenticityToken} isLoggedIn={this.props.isLoggedIn} products={this.state.products} />
         {usdaSearchForm}
       </div>
