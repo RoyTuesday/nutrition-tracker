@@ -19,7 +19,7 @@ var LoginRegisterForm = React.createClass({
   handlePasswordChange: function(event) {
     this.setState({password: event.target.value});
   },
-
+  
   handleSubmit: function(event) {
     event.preventDefault();
     var formUrl = this.props.isRegisterForm ? this.props.urls.register : this.props.urls.login;
@@ -44,7 +44,7 @@ var LoginRegisterForm = React.createClass({
   },
 
   render: function() {
-    var usernameField;
+    var usernameField, errorList;
     var submitName = "Log in";
     if(this.props.isRegisterForm) {
       usernameField = (
@@ -54,6 +54,15 @@ var LoginRegisterForm = React.createClass({
         </span>
       );
       submitName = "Register";
+    }
+    if(this.state.errors.length > 0) {
+      errorList = this.state.errors.map(function(message) {
+        return (
+          <li>
+            {message}
+          </li>
+        );
+      });
     }
 
     return (
@@ -70,6 +79,9 @@ var LoginRegisterForm = React.createClass({
 
           <input type="submit" value={submitName}/>
         </fieldset>
+        <ul className="form-errors">
+          {errorList}
+        </ul>
       </form>
     );
   }
