@@ -67,15 +67,15 @@ var LoginRegisterForm = React.createClass({
 
     return (
       <form onSubmit={this.handleSubmit}>
-        <input name="authenticity_token" type="hidden" value={this.props.authenticityToken}/>
+        <input name="authenticity_token" required type="hidden" value={this.props.authenticityToken}/>
         <fieldset>
           {usernameField}
 
           <label htmlFor="email">Email</label>
-          <input id="email" onChange={this.handleEmailChange} placeholder="email@example.com" type="email" value={this.state.email}/>
+          <input id="email" onChange={this.handleEmailChange} placeholder="email@example.com" required type="email" value={this.state.email}/>
 
           <label htmlFor="password">Password</label>
-          <input id="password" onChange={this.handlePasswordChange} placeholder="password123" type="password" value={this.state.password}/>
+          <input id="password" onChange={this.handlePasswordChange} placeholder="password123" required type="password" value={this.state.password}/>
 
           <input type="submit" value={submitName}/>
         </fieldset>
