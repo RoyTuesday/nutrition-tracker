@@ -19,7 +19,7 @@ var LoginRegisterForm = React.createClass({
   handlePasswordChange: function(event) {
     this.setState({password: event.target.value});
   },
-  
+
   handleSubmit: function(event) {
     event.preventDefault();
     var formUrl = this.props.isRegisterForm ? this.props.urls.register : this.props.urls.login;
@@ -56,9 +56,9 @@ var LoginRegisterForm = React.createClass({
       submitName = "Register";
     }
     if(this.state.errors.length > 0) {
-      errorList = this.state.errors.map(function(message) {
+      errorList = this.state.errors.map(function(message, index) {
         return (
-          <li>
+          <li key={"error-" + index}>
             {message}
           </li>
         );
