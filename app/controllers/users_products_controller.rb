@@ -12,16 +12,9 @@ class UsersProductsController < ApplicationController
     users_product = UsersProduct.new
     if request.xhr?
       if product and User.find_by(id: session[:user_id])
-        render json: {
-          form: render_to_string("_form", layout: false, locals: {
-            product: product,
-            users_product: users_product
-          }),
-          loggedIn: true,
-          product: product
-        }
+        render json: {result: "users_product new success!"}
       else
-        render json: {loggedIn: false, product: product}
+        render json: {result: "users_product new failure?"}
       end
     end
   end
