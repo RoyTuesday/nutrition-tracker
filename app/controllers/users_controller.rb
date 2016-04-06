@@ -11,10 +11,10 @@ class UsersController < ApplicationController
     if request.xhr?
       if user.save
         session[:user_id] = user.id
-        render json: {user: user}
+        render json: {result: "success!"}
       else
         errors = user.errors.full_messages
-        render json: {formWithErrors: render_to_string("users/_form", layout: false, locals: {user: user, errors: errors})}
+        render json: {errors: errors}
       end
     end
   end
