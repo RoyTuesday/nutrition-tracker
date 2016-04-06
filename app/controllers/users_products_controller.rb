@@ -57,12 +57,7 @@ class UsersProductsController < ApplicationController
     users_product = UsersProduct.find_by(id: params[:id])
     if request.xhr?
       if product and users_product
-        render json: {
-          form: render_to_string("_form", layout: false, locals: {
-            product: product,
-            users_product: users_product
-          })
-        }
+        render json: {result: "users_product edit success!"}
       else
         render json: {
           errors: ["Record(s) not found!", product, users_product]
