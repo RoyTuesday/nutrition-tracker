@@ -48,6 +48,24 @@ var UsersProduct = React.createClass({
   }
 });
 
+var UsersProductList = React.createClass({
+  render: function() {
+    var usersProductNodes = this.usersProducts.map(function(usersProduct) {
+      return (
+        <li>
+          <UsersProduct usersProduct={usersProduct} />
+        </li>
+      );
+    });
+
+    return (
+      <ul>
+        {usersProductNodes}
+      </ul>
+    );
+  }
+});
+
 var UsersProductForm = React.createClass({
   getInitialState: function() {
     return {
