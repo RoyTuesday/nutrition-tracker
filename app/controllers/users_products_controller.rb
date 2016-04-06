@@ -72,23 +72,12 @@ class UsersProductsController < ApplicationController
   end
 
   def update
-    users_product = UsersProduct.find_by(id: params[:id])
+    users_product = UsersProduct.includes(:product).find_by(id: params[:id])
     if request.xhr?
       if users_product.update_attributes(users_product_params)
-        render json: {
-          html: render_to_string("_users_product", layout: false, locals: {
-            product: users_product.product,
-            users_product: users_product
-          }),
-          usersProductId: users_product.id
-        }
+        render json: users_product.as_json(include: [:product])
       else
-        render json: {errorsHtml: render_to_string("_errors", layout: false, locals: {
-            errors: users_product.errors.full_messages,
-            usersProductId: users_product.id
-          }),
-          usersProductId: users_product.id
-        }
+        render json: {errors: users_product.errors.full_messages}
       end
     end
   end
