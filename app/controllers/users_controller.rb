@@ -7,16 +7,14 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
-      session[:user_id] = @user.id
-      if request.xhr?
-        render json: {user: @user}
-      end
-    else
-      @errors = @user.errors.full_messages
-      if request.xhr?
-        render json: {formWithErrors: render_to_string("users/_form", layout: false, locals: {user: @user, errors: @errors})}
+    user = User.new(user_params)
+    if request.xhr?
+      if user.save
+        session[:user_id] = user.id
+        render json: {user: user}
+      else
+        errors = user.errors.full_messages
+        render json: {formWithErrors: render_to_string("users/_form", layout: false, locals: {user: user, errors: errors})}
       end
     end
   end
