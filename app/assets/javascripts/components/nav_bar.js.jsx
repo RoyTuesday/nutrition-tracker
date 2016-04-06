@@ -19,7 +19,6 @@ var LoginRegisterForm = React.createClass({
     this.setState({password: event.target.value});
   },
 
-
   handleSubmit: function(event) {
     event.preventDefault();
     var formUrl = this.state.isRegisterForm ? this.props.urls.register : this.props.urls.login;
@@ -83,8 +82,16 @@ var NavBar = React.createClass({
 
   handleLoginClick: function(event) {
     event.preventDefault();
+
+    if(this.state.isRegisterForm) {
+      loginFormState = true;
+    }
+    else {
+      loginFormState = !this.state.isLoginFormShown;
+    }
+
     this.setState({
-      isLoginFormShown: !this.state.isLoginFormShown,
+      isLoginFormShown: loginFormState,
       isRegisterForm: false
     });
   },
