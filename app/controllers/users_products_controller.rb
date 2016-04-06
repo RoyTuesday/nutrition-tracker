@@ -35,14 +35,13 @@ class UsersProductsController < ApplicationController
   end
 
   def edit
-    product = Product.find_by(id: params[:product_id])
     users_product = UsersProduct.find_by(id: params[:id])
     if request.xhr?
-      if product and users_product
+      if users_product
         render json: {result: "users_product edit success!"}
       else
         render json: {
-          errors: ["Record(s) not found!", product, users_product]
+          errors: ["Record not found!", users_product]
         }
       end
     end
