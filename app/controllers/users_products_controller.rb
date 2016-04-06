@@ -1,4 +1,12 @@
 class UsersProductsController < ApplicationController
+  def index
+    user = User.find_by(id: session[:user_id])
+    users_products = UsersProduct.includes(:product).where(user: user)
+    if request.xhr?
+      render json: users_products.as_json(include: [:product])
+    end
+  end
+
   def new
     product = Product.find_by(id: params[:product_id])
     users_product = UsersProduct.new
