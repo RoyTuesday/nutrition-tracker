@@ -77,7 +77,7 @@ var UsdaProduct = React.createClass({
     var productForm;
     if(this.state.isFormShown) {
       productForm = (
-        <NewProductForm authenticityToken={this.props.authenticityToken} foodItem={this.props.foodItem} hideForm={this.hideForm} itemIndex={this.props.itemIndex} removeFoodItem={this.props.removeFoodItem} url={this.props.newProductUrl} />
+        <NewProductForm addProduct={this.props.addProduct} authenticityToken={this.props.authenticityToken} foodItem={this.props.foodItem} hideForm={this.hideForm} itemIndex={this.props.itemIndex} removeFoodItem={this.props.removeFoodItem} url={this.props.newProductUrl} />
       );
     }
 
@@ -96,7 +96,7 @@ var UsdaProductList = React.createClass({
     var productNodes = this.props.foodItems.map(function(foodItem, index) {
       return (
         <li key={"usda-product-" + index}>
-          <UsdaProduct authenticityToken={this.props.authenticityToken} foodItem={foodItem} itemIndex={index} newProductUrl={this.props.newProductUrl} removeFoodItem={this.props.removeFoodItem} />
+          <UsdaProduct addProduct={this.props.addProduct} authenticityToken={this.props.authenticityToken} foodItem={foodItem} itemIndex={index} newProductUrl={this.props.newProductUrl} removeFoodItem={this.props.removeFoodItem} />
         </li>
       );
     }.bind(this));
@@ -156,7 +156,7 @@ var UsdaSearchForm = React.createClass({
             <input type="submit" value="Search"/>
           </fieldset>
         </form>
-        <UsdaProductList authenticityToken={this.props.authenticityToken} foodItems={this.state.foodItems} newProductUrl={this.props.newProductUrl} removeFoodItem={this.removeFoodItem} />
+        <UsdaProductList addProduct={this.props.addProduct} authenticityToken={this.props.authenticityToken} foodItems={this.state.foodItems} newProductUrl={this.props.newProductUrl} removeFoodItem={this.removeFoodItem} />
       </div>
     );
   }

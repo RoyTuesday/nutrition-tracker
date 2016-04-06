@@ -133,7 +133,7 @@ var ProductsIndex = React.createClass({
 
     if(this.props.isLoggedIn) {
       usdaSearchForm = (
-        <UsdaSearchForm authenticityToken={this.props.authenticityToken} newProductUrl={this.props.urls.newProduct} url={this.props.urls.ndbSearch} />
+        <UsdaSearchForm addProduct={this.props.addProduct} authenticityToken={this.props.authenticityToken} newProductUrl={this.props.urls.newProduct} url={this.props.urls.ndbSearch} />
       );
     }
 
