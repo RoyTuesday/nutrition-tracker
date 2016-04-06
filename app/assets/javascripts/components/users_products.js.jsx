@@ -8,6 +8,17 @@ var UsersProduct = React.createClass({
 
   handleDeleteClick: function(event) {
     event.preventDefault();
+    $.ajax({
+      dataType: "json",
+      method: "DELETE",
+      url: "/users_products/" + this.props.usersProduct.id,
+      success: function(data) {
+        this.props.removeUsersProduct(this.props.usersProduct.id);
+      }.bind(this),
+      fail: function(xhr, status, err) {
+        console.log("Users products delete failure?", status, err);
+      }
+    })
   },
 
   handleEditClick: function(event) {
@@ -52,7 +63,7 @@ var UsersProduct = React.createClass({
           <a href="#" onClick={this.handleNameClick}>{this.props.usersProduct.product.name}</a>
         </h3>
         {details}
-        <a href="#" onClick={this.handleEditClick}>Edit</a> | <a href="#">Delete</a>
+        <a href="#" onClick={this.handleEditClick}>Edit</a> | <a href="#" onClick={this.handleDeleteClick}>Delete</a>
         <div className="users-product-errors-container">
           {editForm}
         </div>
@@ -66,7 +77,7 @@ var UsersProductList = React.createClass({
     var usersProductNodes = this.props.usersProducts.map(function(usersProduct, index) {
       return (
         <li key={"users-products-" + index}>
-          <UsersProduct authenticityToken={this.props.authenticityToken} usersProduct={usersProduct} />
+          <UsersProduct authenticityToken={this.props.authenticityToken} removeUsersProduct={this.props.removeUsersProduct} usersProduct={usersProduct} />
         </li>
       );
     }.bind(this));
