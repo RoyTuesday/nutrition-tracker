@@ -138,6 +138,9 @@ var UsersProductForm = React.createClass({
       success: function(data) {
         console.log("New users product success!", data);
         this.props.hideDetails();
+        if(this.props.updateUsersProduct) {
+          this.props.updateUsersProduct(data);
+        }
       }.bind(this),
       error: function(xhr, status, err) {
         console.log("New users product failure?", this.props.url, status, err.toString());
