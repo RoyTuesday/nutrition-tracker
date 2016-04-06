@@ -36,9 +36,9 @@ var UsersProduct = React.createClass({
         </div>
       );
     }
-    if(this.isEditFormShown) {
+    if(this.state.isEditFormShown) {
       editForm = (
-        <UsersProductForm authenticityToken={this.props.authenticityToken} method="PUT" />
+        <UsersProductForm authenticityToken={this.props.authenticityToken} method="PUT" usersProduct={this.props.usersProduct} />
       );
     }
 
@@ -48,7 +48,7 @@ var UsersProduct = React.createClass({
           <a href="#" onClick={this.handleNameClick}>{this.props.usersProduct.product.name}</a>
         </h3>
         {details}
-        <a href="#">Edit</a> | <a href="#">Delete</a>
+        <a href="#" onClick={this.handleEditClick}>Edit</a> | <a href="#">Delete</a>
         {editForm}
       </div>
     );
