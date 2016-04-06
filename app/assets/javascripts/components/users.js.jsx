@@ -17,13 +17,23 @@ var UserShow = React.createClass({
     return {usersProducts: new Array}
   },
 
+  removeUsersProduct: function(id) {
+    var usersProducts = this.state.usersProducts.filter(function(currentUsersProduct) {
+      return currentUsersProduct.id !== id
+    });
+
+    this.setState({
+      usersProducts: usersProducts
+    });
+  },
+
   render: function() {
     return(
       <div>
         <h2>
           Welcome, {this.props.currentUser.username}!
         </h2>
-        <UsersProductList authenticityToken={this.props.authenticityToken} usersProducts={this.state.usersProducts} />
+        <UsersProductList authenticityToken={this.props.authenticityToken} removeUsersProduct={this.removeUsersProduct} usersProducts={this.state.usersProducts} />
       </div>
     );
   }
