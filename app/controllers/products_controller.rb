@@ -66,21 +66,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  def search
-    if params[:search_terms].empty?
-      errors = ["Please enter one or more search terms"]
-    else
-      search_terms = params[:search_terms].map do |term|
-        ("%" + term + "%")
-      end
-      products = Product.where("name ilike ?", *search_terms)
-    end
-
-    if request.xhr?
-      render json: {products: products, errors: errors}
-    end
-  end
-
   def ndb_search
     if request.xhr?
       response = HTTP.get("#{SEARCH_URI}/?format=json", params: {
