@@ -3,7 +3,8 @@ var LoginRegisterForm = React.createClass({
     return {
       username: null,
       email: null,
-      password: null
+      password: null,
+      errors: new Array
     }
   },
 
