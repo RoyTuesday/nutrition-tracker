@@ -33,9 +33,7 @@ var UsersProduct = React.createClass({
     }
     if(this.isEditFormShown) {
       editForm = (
-        <div>
-          Edit form coming soon.
-        </div>
+        <UsersProductForm authenticityToken={this.props.authenticityToken} method="PUT" />
       );
     }
 
@@ -57,10 +55,10 @@ var UsersProductList = React.createClass({
     var usersProductNodes = this.props.usersProducts.map(function(usersProduct, index) {
       return (
         <li key={"users-products-" + index}>
-          <UsersProduct usersProduct={usersProduct} />
+          <UsersProduct authenticityToken={this.props.authenticityToken} usersProduct={usersProduct} />
         </li>
       );
-    });
+    }.bind(this));
 
     return (
       <ul>
