@@ -8,14 +8,14 @@ var UsersProduct = React.createClass({
 
   render: function() {
     var details, editForm;
-    if(this.areDetailsShown) {
+    if(this.state.areDetailsShown) {
       details = (
         <div class="users-product-details">
           <p>
-            Category: {this.props.usersProduct.category}
+            Category: {this.props.usersProduct.product.category}
           </p>
           <p>
-            Serving size: {this.props.usersProduct.serving_size + this.props.usersProduct.serving_unit}
+            Serving size: {this.props.usersProduct.product.serving_size + this.props.usersProduct.product.serving_unit}
           </p>
           <p>
             Date eaten: {this.props.usersProduct.date_eaten}
@@ -37,7 +37,7 @@ var UsersProduct = React.createClass({
     return(
       <div>
         <h3>
-          <a href="#">{this.props.usersProduct.name}</a>
+          <a href="#">{this.props.usersProduct.product.name}</a>
         </h3>
         {details}
         <a href="#">Edit</a>
@@ -50,7 +50,7 @@ var UsersProduct = React.createClass({
 
 var UsersProductList = React.createClass({
   render: function() {
-    var usersProductNodes = this.usersProducts.map(function(usersProduct) {
+    var usersProductNodes = this.props.usersProducts.map(function(usersProduct) {
       return (
         <li>
           <UsersProduct usersProduct={usersProduct} />
