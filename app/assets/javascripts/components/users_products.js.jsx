@@ -49,7 +49,9 @@ var UsersProduct = React.createClass({
         </h3>
         {details}
         <a href="#" onClick={this.handleEditClick}>Edit</a> | <a href="#">Delete</a>
-        {editForm}
+        <div className="users-product-errors-container">
+          {editForm}
+        </div>
       </div>
     );
   }
