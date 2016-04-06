@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :users_products, only: [:new, :create, :edit, :update]
   end
   
-  resources :users_products, only: [:index, :destroy]
+  resources :users_products, only: [:index, :edit, :update, :destroy]
 
   post 'products/ndb_search' => 'products#ndb_search'
   post 'products/search' => 'products#search'
