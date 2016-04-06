@@ -7,8 +7,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(email: params[:email])
-    if @user and @user.authenticate params[:password]
+    @user = User.find_by(email: params[:user][:email])
+    if @user and @user.authenticate params[:user][:password]
       session[:user_id] = @user.id
       if request.xhr?
         render json: {user: @user}
