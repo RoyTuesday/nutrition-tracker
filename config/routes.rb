@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :products, only: [:new, :create] do
     resources :users_products, only: [:new, :create, :edit, :update, :destroy]
   end
+  
+  resources :users_products, only: [:index]
 
   post 'products/ndb_search' => 'products#ndb_search'
   post 'products/search' => 'products#search'
