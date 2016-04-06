@@ -21,7 +21,7 @@ var LoginRegisterForm = React.createClass({
 
   handleSubmit: function(event) {
     event.preventDefault();
-    var formUrl = this.state.isRegisterForm ? this.props.urls.register : this.props.urls.login;
+    var formUrl = this.props.isRegisterForm ? this.props.urls.register : this.props.urls.login;
 
     $.ajax({
       data: this.state,
