@@ -83,6 +83,7 @@ var NavBar = React.createClass({
   handleLoginClick: function(event) {
     event.preventDefault();
 
+    var loginFormState;
     if(this.state.isRegisterForm) {
       loginFormState = true;
     }
@@ -98,8 +99,17 @@ var NavBar = React.createClass({
 
   handleRegisterClick: function(event) {
     event.preventDefault();
+
+    var loginFormState;
+    if(this.state.isRegisterForm) {
+      loginFormState = !this.state.isLoginFormShown;
+    }
+    else {
+      loginFormState = true;
+    }
+
     this.setState({
-      isLoginFormShown: !this.state.isLoginFormShown,
+      isLoginFormShown: loginFormState,
       isRegisterForm: true
     });
   },
