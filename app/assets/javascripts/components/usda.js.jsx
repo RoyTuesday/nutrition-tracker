@@ -32,8 +32,9 @@ var NewProductForm = React.createClass({
       method: "POST",
       url: this.props.url,
       success: function(data) {
-        console.log("New product success!", this.props.itemIndex);
+        console.log("New product success!", data);
         this.props.removeFoodItem(this.props.itemIndex);
+        this.props.addProduct(data.product);
       }.bind(this),
       error: function(xhr, status, err) {
         console.log("New product failure?", this.props.url, status, err.toString());

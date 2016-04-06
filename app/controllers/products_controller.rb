@@ -52,14 +52,7 @@ class ProductsController < ApplicationController
             quantity: nutrient["value"]
           })
         end
-        render json: {
-          product: render_to_string(
-            "_product",
-            layout: false,
-            locals: {product: product}
-            ),
-          productNdbNo: product.ndb_no
-        }
+        render json: {product: product}
       else
         render json: {response: product.errors.full_messages}, status: 500
       end

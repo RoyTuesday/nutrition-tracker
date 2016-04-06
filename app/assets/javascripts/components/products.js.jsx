@@ -120,6 +120,12 @@ var ProductsIndex = React.createClass({
     return {products: this.props.products};
   },
 
+  addProduct: function(product) {
+    this.setState({
+      products: this.state.products.concat(product)
+    });
+  },
+
   updateProducts: function(products) {
     this.setState({products: products});
   },
@@ -133,7 +139,7 @@ var ProductsIndex = React.createClass({
 
     if(this.props.isLoggedIn) {
       usdaSearchForm = (
-        <UsdaSearchForm addProduct={this.props.addProduct} authenticityToken={this.props.authenticityToken} newProductUrl={this.props.urls.newProduct} url={this.props.urls.ndbSearch} />
+        <UsdaSearchForm addProduct={this.addProduct} authenticityToken={this.props.authenticityToken} newProductUrl={this.props.urls.newProduct} url={this.props.urls.ndbSearch} />
       );
     }
 

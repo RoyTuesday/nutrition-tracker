@@ -8,12 +8,6 @@ var NutritionTracker = React.createClass({
     }
   },
 
-  addProduct: function(product) {
-    this.setState({
-      products: this.state.products.concat(product)
-    });
-  },
-
   changeToPage: function(pageName) {
     this.setState({currentPage: pageName});
   },
@@ -36,11 +30,11 @@ var NutritionTracker = React.createClass({
   render: function() {
     var page;
     switch(this.state.currentPage) {
-      case "products": page = <ProductsIndex addProduct={this.addProduct} authenticityToken={this.props.authenticityToken} isLoggedIn={this.state.isLoggedIn} products={this.state.products} urls={this.props.urls} />;
+      case "products": page = <ProductsIndex authenticityToken={this.props.authenticityToken} isLoggedIn={this.state.isLoggedIn} products={this.state.products} urls={this.props.urls} />;
       break;
       case "user": page = <UserShow authenticityToken={this.props.authenticityToken} currentUser={this.state.currentUser} />;
       break;
-      default: page = <ProductsIndex addProduct={this.addProduct} authenticityToken={this.props.authenticityToken} isLoggedIn={this.state.isLoggedIn} products={this.state.products} urls={this.props.urls} />;
+      default: page = <ProductsIndex authenticityToken={this.props.authenticityToken} isLoggedIn={this.state.isLoggedIn} products={this.state.products} urls={this.props.urls} />;
       break;
     }
 
