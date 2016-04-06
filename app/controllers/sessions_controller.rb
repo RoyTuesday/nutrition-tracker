@@ -8,19 +8,13 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(email: params[:user][:email])
-    if @user and @user.authenticate params[:user][:password]
-      session[:user_id] = @user.id
-      if request.xhr?
+    if request.xhr?
+      if @user and @user.authenticate params[:user][:password]
+        session[:user_id] = @user.id
         render json: {user: @user}
       else
-        redirect_to :root
-      end
-    else
-      @errors = ["Email, password, or both are incorrect"]
-      if request.xhr?
+        @errors = ["Email, password, or both are incorrect"]
         render json: {formWithErrors: render_to_string("sessions/_form", layout: false, errors: @errors)}
-      else
-        render partial: "form", layout: false, locals: {user: @user}
       end
     end
   end
