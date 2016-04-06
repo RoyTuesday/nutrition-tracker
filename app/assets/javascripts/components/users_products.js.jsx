@@ -101,7 +101,7 @@ var UsersProductForm = React.createClass({
     $.ajax({
       data: form,
       dataType: "json",
-      method: "POST",
+      method: this.props.method,
       url: this.props.url,
       success: function(data) {
         console.log("New users product success!", data);
