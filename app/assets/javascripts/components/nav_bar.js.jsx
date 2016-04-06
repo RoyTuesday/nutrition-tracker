@@ -25,7 +25,7 @@ var LoginRegisterForm = React.createClass({
     var formUrl = this.props.isRegisterForm ? this.props.urls.register : this.props.urls.login;
 
     $.ajax({
-      data: this.state,
+      data: {user: this.state},
       dataType: "json",
       method: "POST",
       url: formUrl,
@@ -33,7 +33,7 @@ var LoginRegisterForm = React.createClass({
         this.props.handleLoginSuccess(data.user);
       }.bind(this),
       fail: function(xhr, status, err) {
-        console.log("Session form failure?", status, err);
+        console.log("LoginRegisterForm failure?", status, err);
       }.bind(this)
     });
   },
