@@ -3,7 +3,8 @@ var Index = React.createClass({
     return {
       currentUser: this.props.currentUser,
       isLoggedIn: !!this.props.currentUser,
-      currentPage: "products"
+      currentPage: "products",
+      products: this.props.products
     }
   },
 
