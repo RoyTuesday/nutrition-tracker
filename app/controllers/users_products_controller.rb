@@ -33,21 +33,10 @@ class UsersProductsController < ApplicationController
     users_product.user = User.find_by(id: session[:user_id])
     if request.xhr?
       if users_product.save
-        render json: {
-          success: true,
-          productId: product.id
-        }
+        render json: {result: "users_product create success!"}
       else
         errors = users_product.errors.full_messages
-        render json: {
-          success: false,
-          productId: product.id,
-          errors: render_to_string(
-            "_errors",
-            layout: false,
-            locals: {errors: errors}
-          )
-        }
+        render json: {errors: errors}
       end
     end
   end
