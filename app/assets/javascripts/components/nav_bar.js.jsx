@@ -31,7 +31,7 @@ var LoginRegisterForm = React.createClass({
       url: formUrl,
       success: function(data) {
         if(data.errors) {
-          console.log("Errors!", data.errors);
+          this.setState({errors: data.errors});
         }
         else {
           this.props.handleLoginSuccess(data.user);
