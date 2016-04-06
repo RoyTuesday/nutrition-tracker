@@ -51,11 +51,20 @@ var Product = React.createClass({
 });
 var ProductSearch = React.createClass({
   getInitialState: function() {
-    return {search_terms: new Array}
+    return {
+      searchInput: null,
+      search_terms: new Array
+    }
   },
 
   handleQueryChange: function(event) {
-    this.setState({search_terms: event.target.value.split(" ")});
+    this.setState({
+      searchInput: event.target.value,
+      search_terms: event.target.value.split(" "),
+    });
+    var terms = event.target.value.split(" ").map(function(term) {
+      return new RegExp(term);
+    });
   },
 
   handleSubmit: function(event) {
@@ -79,7 +88,7 @@ var ProductSearch = React.createClass({
       <form acceptCharset="UTF-8" id="products-search" onSubmit={this.handleSubmit}>
         <fieldset>
           <label htmlFor="search_terms">Search terms:</label>
-          <input id="product-search-terms" name="search_terms" onChange={this.handleQueryChange} placeholder="food" type="text"/>
+          <input id="product-search-terms" name="search_terms" onChange={this.handleQueryChange} placeholder="food" type="text" value={this.state.searchInput}/>
 
           <input type="submit" value="Search"/>
         </fieldset>
@@ -139,7 +148,7 @@ var ProductsIndex = React.createClass({
         <h2 className="mb-none">
           Products in Database
         </h2>
-        <ProductSearch updateProducts={this.updateProducts} url={this.props.urls.productsSearch} />
+        <ProductSearch products={this.state.products} updateProducts={this.updateProducts} url={this.props.urls.productsSearch} />
         <ProductList authenticityToken={this.props.authenticityToken} isLoggedIn={this.props.isLoggedIn} products={this.state.products} />
         {usdaSearchForm}
       </div>
