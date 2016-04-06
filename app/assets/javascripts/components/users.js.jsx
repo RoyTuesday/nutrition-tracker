@@ -23,7 +23,7 @@ var UserShow = React.createClass({
         <h2>
           Welcome, {this.props.currentUser.username}!
         </h2>
-        <UsersProductList usersProducts={this.state.usersProducts} />
+        <UsersProductList authenticityToken={this.props.authenticityToken} usersProducts={this.state.usersProducts} />
       </div>
     );
   }
