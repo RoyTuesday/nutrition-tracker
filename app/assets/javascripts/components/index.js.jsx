@@ -8,6 +8,12 @@ var Index = React.createClass({
     }
   },
 
+  addProduct: function(product) {
+    this.setState({
+      products: this.state.products.concat(product);
+    });
+  },
+
   changeToPage: function(pageName) {
     this.setState({currentPage: pageName});
   },
