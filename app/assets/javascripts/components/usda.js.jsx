@@ -137,7 +137,9 @@ var UsdaSearchForm = React.createClass({
   },
 
   removeFoodItem: function(itemIndex) {
-    this.setState({foodItems: this.state.foodItems.splice(itemIndex)})
+    var items = this.state.foodItems;
+    items.splice(itemIndex, 1);
+    this.setState({foodItems: items});
   },
 
   render: function() {
