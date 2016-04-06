@@ -15,7 +15,7 @@ var UsersProduct = React.createClass({
     var details, editForm;
     if(this.state.areDetailsShown) {
       details = (
-        <div class="users-product-details">
+        <div htmlClass="users-product-details">
           <p>
             Category: {this.props.usersProduct.product.category}
           </p>
@@ -42,7 +42,7 @@ var UsersProduct = React.createClass({
     return(
       <div>
         <h3>
-          <a href="#">{this.props.usersProduct.product.name}</a>
+          <a href="#" onClick={this.handleNameClick}>{this.props.usersProduct.product.name}</a>
         </h3>
         {details}
         <a href="#">Edit</a> | <a href="#">Delete</a>
@@ -54,9 +54,9 @@ var UsersProduct = React.createClass({
 
 var UsersProductList = React.createClass({
   render: function() {
-    var usersProductNodes = this.props.usersProducts.map(function(usersProduct) {
+    var usersProductNodes = this.props.usersProducts.map(function(usersProduct, index) {
       return (
-        <li>
+        <li key={"users-products-" + index}>
           <UsersProduct usersProduct={usersProduct} />
         </li>
       );
