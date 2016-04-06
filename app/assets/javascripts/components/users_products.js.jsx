@@ -60,7 +60,7 @@ var UsersProduct = React.createClass({
     }
     if(this.state.isEditFormShown) {
       editForm = (
-        <UsersProductForm authenticityToken={this.props.authenticityToken} hideDetails={this.hideDetails} method="PUT" url={"/products/" + this.props.usersProduct.product.id + "/users_products/" + this.props.usersProduct.id} usersProduct={this.props.usersProduct} />
+        <UsersProductForm authenticityToken={this.props.authenticityToken} hideDetails={this.hideDetails} method="PUT" submitName="Update food record" url={"/products/" + this.props.usersProduct.product.id + "/users_products/" + this.props.usersProduct.id} usersProduct={this.props.usersProduct} />
       );
     }
 
@@ -160,7 +160,7 @@ var UsersProductForm = React.createClass({
           </label>
           <input defaultValue={this.state.price} id="price" name="price" onChange={this.handlePriceChange} placeholder="$1.00" type="text"/>
 
-          <input type="submit" value="Add food record"/>
+          <input type="submit" value={this.props.submitName}/>
         </fieldset>
       </form>
     );
