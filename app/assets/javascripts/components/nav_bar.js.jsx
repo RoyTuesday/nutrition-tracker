@@ -39,6 +39,7 @@ var LoginRegisterForm = React.createClass({
 
   render: function() {
     var usernameField;
+    var submitName = "Log in";
     if(this.props.isRegisterForm) {
       usernameField = (
         <span>
@@ -46,6 +47,7 @@ var LoginRegisterForm = React.createClass({
           <input id="username" onChange={this.handleUsernameChange} placeholder="my_name" type="text" value={this.state.username}/>
         </span>
       );
+      submitName = "Register";
     }
 
     return (
@@ -60,7 +62,7 @@ var LoginRegisterForm = React.createClass({
           <label htmlFor="password">Password</label>
           <input id="password" onChange={this.handlePasswordChange} placeholder="password123" type="password" value={this.state.password}/>
 
-          <input type="submit" value="Log in"/>
+          <input type="submit" value={submitName}/>
         </fieldset>
       </form>
     );
