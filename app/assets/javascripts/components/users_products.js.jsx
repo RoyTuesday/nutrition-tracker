@@ -6,6 +6,11 @@ var UsersProduct = React.createClass({
     }
   },
 
+  handleNameClick: function(event) {
+    event.preventDefault();
+    this.setState({areDetailsShown: !this.state.areDetailsShown});
+  },
+
   render: function() {
     var details, editForm;
     if(this.state.areDetailsShown) {
@@ -40,8 +45,7 @@ var UsersProduct = React.createClass({
           <a href="#">{this.props.usersProduct.product.name}</a>
         </h3>
         {details}
-        <a href="#">Edit</a>
-        <a href="#">Delete</a>
+        <a href="#">Edit</a> | <a href="#">Delete</a>
         {editForm}
       </div>
     );
