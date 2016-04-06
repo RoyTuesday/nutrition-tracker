@@ -56,6 +56,18 @@ var ProductSearch = React.createClass({
     }
   },
 
+  filterProducts: function(terms) {
+    var products = this.props.products.filter(function(product) {
+      var isAMatch = false;
+      terms.forEach(function(term) {
+        if(!!term.exec(product.name)) {
+          isAMatch = true;
+        }
+      });
+      return isAMatch;
+    });
+  },
+
   handleQueryChange: function(event) {
     this.setState({searchInput: event.target.value});
 
