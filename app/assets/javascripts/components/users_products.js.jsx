@@ -2,7 +2,8 @@ var UsersProduct = React.createClass({
   getInitialState: function() {
     return {
       areDetailsShown: false,
-      isEditFormShown: false
+      isEditFormShown: false,
+      usersProduct: this.props.usersProduct
     }
   },
 
@@ -11,9 +12,9 @@ var UsersProduct = React.createClass({
     $.ajax({
       dataType: "json",
       method: "DELETE",
-      url: "/users_products/" + this.props.usersProduct.id,
+      url: "/users_products/" + this.state.usersProduct.id,
       success: function(data) {
-        this.props.removeUsersProduct(this.props.usersProduct.id);
+        this.props.removeUsersProduct(this.state.usersProduct.id);
       }.bind(this),
       fail: function(xhr, status, err) {
         console.log("Users products delete failure?", status, err);
@@ -44,30 +45,30 @@ var UsersProduct = React.createClass({
       details = (
         <div className="users-product-details">
           <p>
-            Category: {this.props.usersProduct.product.category}
+            Category: {this.state.usersProduct.product.category}
           </p>
           <p>
-            Serving size: {this.props.usersProduct.product.serving_size + this.props.usersProduct.product.serving_unit}
+            Serving size: {this.state.usersProduct.product.serving_size + this.state.usersProduct.product.serving_unit}
           </p>
           <p>
-            Date eaten: {this.props.usersProduct.date_eaten}
+            Date eaten: {this.state.usersProduct.date_eaten}
           </p>
           <p>
-            Price: {this.props.usersProduct.price}
+            Price: {this.state.usersProduct.price}
           </p>
         </div>
       );
     }
     if(this.state.isEditFormShown) {
       editForm = (
-        <UsersProductForm authenticityToken={this.props.authenticityToken} hideDetails={this.hideDetails} method="PUT" submitName="Update food record" url={"/products/" + this.props.usersProduct.product.id + "/users_products/" + this.props.usersProduct.id} usersProduct={this.props.usersProduct} />
+        <UsersProductForm authenticityToken={this.props.authenticityToken} hideDetails={this.hideDetails} method="PUT" submitName="Update food record" url={"/products/" + this.state.usersProduct.product.id + "/users_products/" + this.state.usersProduct.id} usersProduct={this.state.usersProduct} />
       );
     }
 
     return(
       <div>
         <h3>
-          <a href="#" onClick={this.handleNameClick}>{this.props.usersProduct.product.name}</a>
+          <a href="#" onClick={this.handleNameClick}>{this.state.usersProduct.product.name}</a>
         </h3>
         {details}
         <a href="#" onClick={this.handleEditClick}>Edit</a> | <a href="#" onClick={this.handleDeleteClick}>Delete</a>
