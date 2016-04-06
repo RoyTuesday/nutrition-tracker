@@ -6,6 +6,11 @@ var UsersProduct = React.createClass({
     }
   },
 
+  handleEditClick: function(event) {
+    event.preventDefault();
+    this.setState({isEditFormShown: !this.state.isEditFormShown});
+  },
+
   handleNameClick: function(event) {
     event.preventDefault();
     this.setState({areDetailsShown: !this.state.areDetailsShown});
