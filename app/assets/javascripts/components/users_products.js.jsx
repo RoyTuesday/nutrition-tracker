@@ -20,7 +20,7 @@ var UsersProduct = React.createClass({
     var details, editForm;
     if(this.state.areDetailsShown) {
       details = (
-        <div htmlClass="users-product-details">
+        <div className="users-product-details">
           <p>
             Category: {this.props.usersProduct.product.category}
           </p>
