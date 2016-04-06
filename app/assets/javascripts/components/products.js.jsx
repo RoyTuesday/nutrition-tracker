@@ -53,44 +53,23 @@ var ProductSearch = React.createClass({
   getInitialState: function() {
     return {
       searchInput: null,
-      search_terms: new Array
     }
   },
 
   handleQueryChange: function(event) {
-    this.setState({
-      searchInput: event.target.value,
-      search_terms: event.target.value.split(" "),
-    });
+    this.setState({searchInput: event.target.value});
+
     var terms = event.target.value.split(" ").map(function(term) {
       return new RegExp(term);
     });
   },
 
-  handleSubmit: function(event) {
-    event.preventDefault();
-    $.ajax({
-      data: {search_terms: this.state.search_terms},
-      dataType: "json",
-      method: "POST",
-      url: this.props.url,
-      success: function(data) {
-        this.props.updateProducts(data.products);
-      }.bind(this),
-      fail: function(xhr, status, err) {
-        console.log("Products search failure?", this.props.url, status, err.toString());
-      }.bind(this)
-    });
-  },
-
   render: function() {
     return (
-      <form acceptCharset="UTF-8" id="products-search" onSubmit={this.handleSubmit}>
+      <form acceptCharset="UTF-8" id="products-search">
         <fieldset>
           <label htmlFor="search_terms">Search terms:</label>
-          <input id="product-search-terms" name="search_terms" onChange={this.handleQueryChange} placeholder="food" type="text" value={this.state.searchInput}/>
-
-          <input type="submit" value="Search"/>
+          <input id="product-search-terms" onChange={this.handleQueryChange} placeholder="food" type="text" value={this.state.searchInput}/>
         </fieldset>
       </form>
     );
