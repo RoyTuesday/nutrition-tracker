@@ -39,6 +39,10 @@ var UsersProduct = React.createClass({
     });
   },
 
+  updateUsersProduct: function(usersProduct) {
+    this.setState({usersProduct: usersProduct});
+  },
+
   render: function() {
     var details, editForm;
     if(this.state.areDetailsShown) {
@@ -61,7 +65,7 @@ var UsersProduct = React.createClass({
     }
     if(this.state.isEditFormShown) {
       editForm = (
-        <UsersProductForm authenticityToken={this.props.authenticityToken} hideDetails={this.hideDetails} method="PUT" submitName="Update food record" url={"/products/" + this.state.usersProduct.product.id + "/users_products/" + this.state.usersProduct.id} usersProduct={this.state.usersProduct} />
+        <UsersProductForm authenticityToken={this.props.authenticityToken} hideDetails={this.hideDetails} method="PUT" submitName="Update food record" updateUsersProduct={this.updateUsersProduct} url={"/products/" + this.state.usersProduct.product.id + "/users_products/" + this.state.usersProduct.id} usersProduct={this.state.usersProduct} />
       );
     }
 
