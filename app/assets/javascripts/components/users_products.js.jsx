@@ -31,6 +31,13 @@ var UsersProduct = React.createClass({
     this.setState({areDetailsShown: !this.state.areDetailsShown});
   },
 
+  hideDetails: function() {
+    this.setState({
+      areDetailsShown: false,
+      isEditFormShown: false
+    });
+  },
+
   render: function() {
     var details, editForm;
     if(this.state.areDetailsShown) {
@@ -53,7 +60,7 @@ var UsersProduct = React.createClass({
     }
     if(this.state.isEditFormShown) {
       editForm = (
-        <UsersProductForm authenticityToken={this.props.authenticityToken} method="PUT" usersProduct={this.props.usersProduct} />
+        <UsersProductForm authenticityToken={this.props.authenticityToken} hideDetails={this.hideDetails} method="PUT" url={"/products/" + this.props.usersProduct.product.id + "/users_products/" + this.props.usersProduct.id} usersProduct={this.props.usersProduct} />
       );
     }
 
