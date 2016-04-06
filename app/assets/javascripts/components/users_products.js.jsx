@@ -65,7 +65,7 @@ var UsersProduct = React.createClass({
     }
     if(this.state.isEditFormShown) {
       editForm = (
-        <UsersProductForm authenticityToken={this.props.authenticityToken} hideDetails={this.hideDetails} method="PUT" submitName="Update food record" updateUsersProduct={this.updateUsersProduct} url={"/products/" + this.state.usersProduct.product.id + "/users_products/" + this.state.usersProduct.id} usersProduct={this.state.usersProduct} />
+        <UsersProductForm authenticityToken={this.props.authenticityToken} hideDetails={this.hideDetails} method="PUT" submitName="Update food record" updateUsersProduct={this.updateUsersProduct} url={"/users_products/" + this.state.usersProduct.id} usersProduct={this.state.usersProduct} />
       );
     }
 
