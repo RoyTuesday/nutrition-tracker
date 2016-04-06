@@ -1,3 +1,53 @@
+var UsersProduct = React.createClass({
+  getInitialState: function() {
+    return {
+      areDetailsShown: false,
+      isEditFormShown: false
+    }
+  },
+
+  render: function() {
+    var details, editForm;
+    if(this.areDetailsShown) {
+      details = (
+        <div class="users-product-details">
+          <p>
+            Category: {this.props.usersProduct.category}
+          </p>
+          <p>
+            Serving size: {this.props.usersProduct.serving_size + this.props.usersProduct.serving_unit}
+          </p>
+          <p>
+            Date eaten: {this.props.usersProduct.date_eaten}
+          </p>
+          <p>
+            Price: {this.props.usersProduct.price}
+          </p>
+        </div>
+      );
+    }
+    if(this.isEditFormShown) {
+      editForm = (
+        <div>
+          Edit form coming soon.
+        </div>
+      );
+    }
+
+    return(
+      <div>
+        <h3>
+          <a href="#">{this.props.usersProduct.name}</a>
+        </h3>
+        {details}
+        <a href="#">Edit</a>
+        <a href="#">Delete</a>
+        {editForm}
+      </div>
+    );
+  }
+});
+
 var UsersProductForm = React.createClass({
   getInitialState: function() {
     return {
