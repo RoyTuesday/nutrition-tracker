@@ -22,7 +22,7 @@ body {
   background-color: #161;
   color: #333;
   font-weight: bold;
-  padding: 1em 0;
+  padding: 0;
 }
 form.new_users_product {
   margin-top: 1em;
@@ -35,14 +35,12 @@ fieldset {
 footer {
   background: linear-gradient(to top left, #8F2, #AF4);
   background-color: greenyellow;
-  border-radius: 10px;
-  bottom: 2px;
+  bottom: 0;
   box-shadow: 0px 0px 8px #330;
-  margin: 1em auto;
   padding: 1em;
   position: sticky;
   text-align: center;
-  width: 85%;
+  width: 100%;
 }
 footer .fa {
   font-size: 1.5em;
@@ -77,13 +75,12 @@ main {
 nav {
   background: linear-gradient(to top left, #8F2, #CF6);
   background-color: greenyellow;
-  border-radius: 10px;
   box-shadow: 0px 0px 8px #330;
   margin: 0 auto;
   padding: 0.25em 1em;
   position: sticky;
   top: 0;
-  width: 85%;
+  width: 100%;
 }
 ul {
   list-style: none;
