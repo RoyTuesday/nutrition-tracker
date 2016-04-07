@@ -17,7 +17,6 @@ var NewProductForm = React.createClass({
 
   handleSubmit: function(event) {
     event.preventDefault();
-    this.props.hideForm();
 
     var form = {product: {
       name: this.props.foodItem.name,
@@ -37,6 +36,7 @@ var NewProductForm = React.createClass({
           this.setState({errors: data.errors});
         }
         else {
+          this.props.hideForm();
           this.props.removeFoodItem(this.props.itemIndex);
           this.props.addProduct(data.product);
         }
@@ -48,6 +48,14 @@ var NewProductForm = React.createClass({
   },
 
   render: function() {
+    var errorMessages = this.state.errors.map(function(message, index) {
+      return (
+        <li key={"new-product-error-" + index}>
+          {message}
+        </li>
+      );
+    });
+
     return (
       <form onSubmit={this.handleSubmit}>
         <input name="authenticity_token" type="hidden" value={this.props.authenticityToken}/>
@@ -60,6 +68,9 @@ var NewProductForm = React.createClass({
 
           <input type="submit" value="Add new food item"/>
         </fieldset>
+        <ul className="ndb-search-errors">
+          {errorMessages}
+        </ul>
       </form>
     );
   }
