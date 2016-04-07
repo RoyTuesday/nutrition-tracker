@@ -189,14 +189,14 @@ var NavBar = React.createClass({
 
     return (
       <nav>
-        <p>
-          <a href="/" onClick={this.handleHomeClick}>
-            Home
-          </a> | {sessionLinks}
-        </p>
         <h1>
           Welcome to Nutrition Tracker
         </h1>
+        <div id="nav-links-container">
+          <a href="/" onClick={this.handleHomeClick}>
+            Home
+          </a> | {sessionLinks}
+        </div>
         {sessionForm}
       </nav>
     );
