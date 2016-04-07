@@ -29,6 +29,12 @@ fieldset {
   display: flex;
   flex-direction: row;
 }
+fieldset div {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
 footer {
   background: linear-gradient(to top left, #8F2, #AF4);
   background-color: greenyellow;
@@ -49,7 +55,9 @@ form {
   display: inline-flex;
 }
 h1, h2, h3, h4, h5, h6 {
-  text-shadow: 2px 2px #6D1;
+  color: #141;
+  text-decoration: none;
+  text-shadow: 0px 0px 2px #6D1;
 }
 input {
   font-weight: initial;
@@ -60,6 +68,9 @@ input[type="submit"] {
   border-radius: 4px;
   margin-top: 0.5em;
   padding: 0.125em 0.25em;
+}
+label {
+  margin-right: 1em;
 }
 main {
   background: linear-gradient(to top left, #8F2, #AF4);
@@ -85,11 +96,36 @@ nav a {
 nav h1 {
   margin: 0.375em 1em;
 }
-
 ul {
   list-style: none;
   margin: 0;
   padding: 0.5em;
+}
+
+div.product {
+  background: linear-gradient(to top left, #CF6, #EF9);
+  background-color: #AF4;
+  border: none;
+  border-radius: 10px;
+  justify-content: space-around;
+  margin: 0.25em 1%;
+  padding: 0.0625em;
+  text-align: center;
+  width: 98%;
+}
+div.product h3 {
+  margin: 0.5em 0;
+}
+
+.product-title {
+  border: 3px solid #CF6;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 0.5em;
+}
+.product-title:hover {
+  background: linear-gradient(to top left, #EF9, #EFA);
+  background-color: #EFE;
 }
 
 .form-errors {
@@ -102,6 +138,11 @@ ul {
   border: 2px solid #333;
   padding: 1em;
 }
+.product-details-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 0.875em;
+}
 .users-product-details-container {
   display: none;
 }
@@ -109,14 +150,20 @@ ul {
   margin: auto;
 }
 .product-details {
-  columns: 2 auto;
-  -webkit-columns: 2 auto;
-  -moz-columns: 2 auto;
+  text-align: left;
 }
+.product-details li {
+  margin: 0.5em 0;
+}
+.product-links-container {
+  margin: 0.375em 0;
+}
+
 .users-product-details {
   columns: 4 auto;
   -webkit-columns: 4 auto;
   -moz-columns: 4 auto;
+  margin: 0 1em;
 }
 
 .mb-none { margin-bottom: 0; }
@@ -132,4 +179,18 @@ ul {
 #ndb-search-errors {
   color: #633;
   font-weight: initial;
+}
+
+#product-search-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#usda-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }

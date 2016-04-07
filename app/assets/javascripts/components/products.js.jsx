@@ -23,27 +23,27 @@ var Product = React.createClass({
     var details = "";
     if(this.state.detailsShown) {
       details = (
-        <div>
-          <div className="product-details" id={"product-details-" + this.props.product.id}>
-            <p>
+        <div className="product-details-container">
+          <ul className="product-details" id={"product-details-" + this.props.product.id}>
+            <li>
               Category: {this.props.product.category}
-            </p>
-            <p>
+            </li>
+            <li>
               Serving size: {this.props.product.serving_size + this.props.product.serving_unit}
-            </p>
-          </div>
+            </li>
+          </ul>
           {usersProductForm}
         </div>
       );
     }
 
     return (
-      <div id={"product-" + this.props.product.id}>
-        <h3 key={this.props.key}>
-          <a className="product" href="#" onClick={this.handleClick}>
+      <div className="product" id={"product-" + this.props.product.id}>
+        <article className="product-title" onClick={this.handleClick}>
+          <h3 key={this.props.key}>
             {this.props.product.name}
-          </a>
-        </h3>
+          </h3>
+        </article>
         {details}
       </div>
     );
@@ -83,8 +83,10 @@ var ProductSearch = React.createClass({
     return (
       <form acceptCharset="UTF-8" id="products-search">
         <fieldset>
-          <label htmlFor="search_terms">Search terms:</label>
-          <input id="product-search-terms" onChange={this.handleQueryChange} placeholder="food" type="text" value={this.state.searchInput}/>
+          <div>
+            <label htmlFor="search_terms">Search terms:</label>
+            <input id="product-search-terms" onChange={this.handleQueryChange} placeholder="food" type="text" value={this.state.searchInput}/>
+            </div>
         </fieldset>
       </form>
     );
@@ -101,7 +103,7 @@ var ProductList = React.createClass({
     if(this.props.products.length > 0) {
       productNodes = this.props.products.map(function(product, index) {
         return (
-          <li key={"product" + index}>
+          <li className="product" key={"product" + index}>
             <Product authenticityToken={this.props.authenticityToken} isLoggedIn={this.props.isLoggedIn} product={product} />
           </li>
         );
@@ -145,10 +147,12 @@ var ProductsIndex = React.createClass({
 
     return (
       <div>
-        <h2 className="mb-none">
-          Products in Database
-        </h2>
-        <ProductSearch products={this.props.products} updateProducts={this.updateProducts} url={this.props.urls.productsSearch} />
+        <div id="product-search-container">
+          <h2>
+            Products in Database
+          </h2>
+          <ProductSearch products={this.props.products} updateProducts={this.updateProducts} url={this.props.urls.productsSearch} />
+        </div>
         <ProductList authenticityToken={this.props.authenticityToken} isLoggedIn={this.props.isLoggedIn} products={this.state.products} />
         {usdaSearchForm}
       </div>

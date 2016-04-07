@@ -70,12 +70,16 @@ var UsersProduct = React.createClass({
     }
 
     return(
-      <div>
-        <h3>
-          <a href="#" onClick={this.handleNameClick}>{this.state.usersProduct.product.name}</a>
-        </h3>
+      <div className="product">
+        <article className="product-title" onClick={this.handleNameClick}>
+          <h3>
+            {this.state.usersProduct.product.name}
+          </h3>
+        </article>
         {details}
-        <a href="#" onClick={this.handleEditClick}>Edit</a> | <a href="#" onClick={this.handleDeleteClick}>Delete</a>
+        <article className="product-links-container">
+          <a href="#" onClick={this.handleEditClick}>Edit</a> | <a href="#" onClick={this.handleDeleteClick}>Delete</a>
+        </article>
         <div className="users-product-errors-container">
           {editForm}
         </div>
@@ -166,21 +170,24 @@ var UsersProductForm = React.createClass({
       <form className="new_users_product" onSubmit={this.handleSubmit}>
         <input name="authenticity_token" type="hidden" value={this.props.authenticityToken}/>
         <fieldset>
-          <label htmlFor="servings">
-            Servings
-          </label>
-          <input defaultValue={this.state.servings} id="servings" min="0" name="servings" onChange={this.handleServingsChange} placeholder="1" step="any" type="number"/>
-
-          <label htmlFor="date-eaten">
-            Date Eaten
-          </label>
-          <input defaultValue={this.state.date_eaten} id="date-eaten" name="date_eaten" onChange={this.handleDateEatenChange} placeholder="yyyy-mm-dd" type="date"/>
-
-          <label htmlFor="price">
-            Price
-          </label>
-          <input defaultValue={this.state.price} id="price" name="price" onChange={this.handlePriceChange} placeholder="$1.00" type="text"/>
-
+          <div>
+            <label htmlFor="servings">
+              Servings
+            </label>
+            <input defaultValue={this.state.servings} id="servings" min="0" name="servings" onChange={this.handleServingsChange} placeholder="1" step="any" type="number"/>
+          </div>
+          <div>
+            <label htmlFor="date-eaten">
+              Date Eaten
+            </label>
+            <input defaultValue={this.state.date_eaten} id="date-eaten" name="date_eaten" onChange={this.handleDateEatenChange} placeholder="yyyy-mm-dd" type="date"/>
+          </div>
+          <div>
+            <label htmlFor="price">
+              Price
+            </label>
+            <input defaultValue={this.state.price} id="price" name="price" onChange={this.handlePriceChange} placeholder="$1.00" type="text"/>
+          </div>
           <input type="submit" value={this.props.submitName}/>
         </fieldset>
         <ul className="form-errors">
