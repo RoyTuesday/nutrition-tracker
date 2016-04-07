@@ -78,7 +78,7 @@ var UsdaProduct = React.createClass({
     var productForm;
     if(this.state.isFormShown) {
       productForm = (
-        <NewProductForm addProduct={this.props.addProduct} authenticityToken={this.props.authenticityToken} foodItem={this.props.foodItem} hideForm={this.hideForm} itemIndex={this.props.itemIndex} removeFoodItem={this.props.removeFoodItem} url={this.props.newProductUrl} />
+        <NewProductForm addProduct={this.props.addProduct} authenticityToken={this.props.authenticityToken} foodItem={this.props.foodItem} hideForm={this.hideForm} itemIndex={this.props.itemIndex} removeFoodItem={this.props.removeFoodItem} url={this.props.urls.newProduct} />
       );
     }
 
@@ -92,43 +92,26 @@ var UsdaProduct = React.createClass({
     );
   }
 });
-var UsdaProductList = React.createClass({
-  render: function() {
-    var productNodes = this.props.foodItems.map(function(foodItem, index) {
-      return (
-        <li key={"usda-product-" + index}>
-          <UsdaProduct addProduct={this.props.addProduct} authenticityToken={this.props.authenticityToken} foodItem={foodItem} itemIndex={index} newProductUrl={this.props.newProductUrl} removeFoodItem={this.props.removeFoodItem} />
-        </li>
-      );
-    }.bind(this));
 
-    return (
-      <ul>
-        {productNodes}
-      </ul>
-    );
-  }
-});
 var UsdaSearchForm = React.createClass({
   getInitialState: function() {
-    return {foodItems: [], search_terms: ""}
+    return {searchTerms: new String}
   },
 
   handleQueryChange: function(event) {
-    this.setState({search_terms: event.target.value});
+    this.setState({searchTerms: event.target.value});
   },
 
   handleSubmit: function(event) {
     event.preventDefault();
-    var form = {search_terms: this.state.search_terms.trim()};
+    var form = {search_terms: this.state.searchTerms.trim()};
     $.ajax({
       data: form,
       dataType: "json",
       method: "POST",
       url: this.props.url,
       success: function(data) {
-        this.setState({foodItems: data.food_items});
-        console.log(data, this.state.foodItems);
+        this.props.updateFoodItems(data.food_items);
       }.bind(this),
       error: function(xhr, status, err) {
         console.log("UDSA search failure?", this.props.url, status, err.toString());
@@ -136,20 +119,9 @@ var UsdaSearchForm = React.createClass({
     });
   },
 
-  removeFoodItem: function(itemIndex) {
-    var items = this.state.foodItems;
-    items.splice(itemIndex, 1);
-    this.setState({foodItems: items});
-  },
-
   render: function() {
     return (
       <div className="usda-search-form">
-        <h3>
-          Didn't find what you were looking for?
-          <br/>
-          Search the UDSA's database to add to the list!
-        </h3>
         <form acceptCharset="UTF-8" id="usda-nbd-search" onSubmit={this.handleSubmit}>
           <input name="authenticity_token" type="hidden" value={this.props.authenticityToken}/>
           <fieldset>
@@ -159,7 +131,46 @@ var UsdaSearchForm = React.createClass({
             <input type="submit" value="Search"/>
           </fieldset>
         </form>
-        <UsdaProductList addProduct={this.props.addProduct} authenticityToken={this.props.authenticityToken} foodItems={this.state.foodItems} newProductUrl={this.props.newProductUrl} removeFoodItem={this.removeFoodItem} />
+      </div>
+    );
+  }
+});
+
+var UsdaProductList = React.createClass({
+  getInitialState: function() {
+    return {foodItems: new Array}
+  },
+
+  removeFoodItem: function(itemIndex) {
+    var items = this.state.foodItems;
+    items.splice(itemIndex, 1);
+    this.setState({foodItems: items});
+  },
+
+  updateFoodItems: function(foodItems) {
+    this.setState({foodItems: foodItems});
+  },
+
+  render: function() {
+    var productNodes = this.state.foodItems.map(function(foodItem, index) {
+      return (
+        <li key={"usda-product-" + index}>
+          <UsdaProduct addProduct={this.props.addProduct} authenticityToken={this.props.authenticityToken} foodItem={foodItem} itemIndex={index} urls={this.props.urls} removeFoodItem={this.removeFoodItem} />
+        </li>
+      );
+    }.bind(this));
+
+    return (
+      <div>
+        <h3>
+          Didn't find what you were looking for?
+          <br/>
+          Search the UDSA's database to add to the list!
+        </h3>
+        <UsdaSearchForm authenticityToken={this.props.authenticityToken} updateFoodItems={this.updateFoodItems} url={this.props.urls.ndbSearch} />
+        <ul>
+          {productNodes}
+        </ul>
       </div>
     );
   }
