@@ -65,9 +65,8 @@ main {
   background: linear-gradient(to top left, #8F2, #AF4);
   background-color: greenyellow;
   border-radius: 10px;
-  margin: 1em auto;
+  margin: 1em;
   padding: 0.25em 1em;
-  width: 80%;
 }
 nav {
   background: linear-gradient(to top left, #8F2, #CF6);
