@@ -23,11 +23,11 @@ The latest stable version of the <a href="https://quiet-falls-55777.herokuapp.co
 
 ## Technologies
 
-This application uses Ruby on Rails 4 as the backend, jQuery, HTML5, and CSS 3 for the front end, and AJAX to handle server requests.
+This application uses Ruby on Rails 4 as the backend, ReactJS, jQuery, HTML5, and CSS 3 for the front end, and AJAX to handle server requests.
 
 The Rails database stores product and nutrient records to reduce the number of requests made to the USDA's NDB
 
-I used AJAX and jQuery to create a single-page app: altering parts of the web page as necessary, rather than loading a new page with every request. The only request not handled by AJAX is the logout. I decided that the logout link should redirect to the home page to ensure any pages that require a user would not be accessible after logging out. The alternative would be potentially more time-consuming and more difficult to maintain: a logout AJAX request would need to be able to alter every sensitive page appropriately, and such a system would be prone to errors.
+As of 06 April 2015, the app uses ReactJS to render a single-page, responsive, performant user experience. The products list now updates as the user types in the search box; rather than making a request to the server, the app uses React to filter the list client-side.
 
 ## Features
 
@@ -45,7 +45,7 @@ Unchecked boxes are not yet implemented
 
 :white_check_mark: A user can delete any food eaten record they created
 
-:white_medium_small_square: Filter records of food eaten
+:white_check_mark: Filter records of food eaten
 
 ## Schemas
 
