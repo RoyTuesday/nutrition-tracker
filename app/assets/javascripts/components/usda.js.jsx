@@ -1,6 +1,7 @@
 var NewProductForm = React.createClass({
   getInitialState: function() {
     return {
+      errors: new Array,
       servingSize: 0,
       servingUnit: ""
     }
@@ -32,9 +33,13 @@ var NewProductForm = React.createClass({
       method: "POST",
       url: this.props.url,
       success: function(data) {
-        console.log("New product success!", data);
-        this.props.removeFoodItem(this.props.itemIndex);
-        this.props.addProduct(data.product);
+        if(data.errors) {
+          this.setState({errors: data.errors});
+        }
+        else {
+          this.props.removeFoodItem(this.props.itemIndex);
+          this.props.addProduct(data.product);
+        }
       }.bind(this),
       error: function(xhr, status, err) {
         console.log("New product failure?", this.props.url, status, err.toString());
