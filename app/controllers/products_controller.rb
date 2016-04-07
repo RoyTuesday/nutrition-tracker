@@ -54,7 +54,7 @@ class ProductsController < ApplicationController
         end
         render json: {product: product}
       else
-        render json: {response: product.errors.full_messages}, status: 500
+        render json: {errors: product.errors.full_messages}
       end
     end
   end

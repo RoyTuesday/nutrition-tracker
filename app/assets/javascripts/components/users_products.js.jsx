@@ -106,6 +106,7 @@ var UsersProductForm = React.createClass({
   getInitialState: function() {
     return {
       date_eaten: this.props.usersProduct.date_eaten,
+      errors: new Array,
       price: this.props.usersProduct.price,
       servings: this.props.usersProduct.servings
     };
@@ -136,10 +137,14 @@ var UsersProductForm = React.createClass({
       method: this.props.method,
       url: this.props.url,
       success: function(data) {
-        console.log("New users product success!", data);
-        this.props.hideDetails();
-        if(this.props.updateUsersProduct) {
-          this.props.updateUsersProduct(data);
+        if(data.errors) {
+          this.setState({errors: data.errors});
+        }
+        else {
+          this.props.hideDetails();
+          if(this.props.updateUsersProduct) {
+            this.props.updateUsersProduct(data);
+          }
         }
       }.bind(this),
       error: function(xhr, status, err) {
@@ -149,6 +154,14 @@ var UsersProductForm = React.createClass({
   },
 
   render: function() {
+    var errorMessages = this.state.errors.map(function(message, index) {
+      return(
+        <li key={"new-users-product-error-" + index}>
+          {message}
+        </li>
+      );
+    });
+
     return (
       <form className="new_users_product" onSubmit={this.handleSubmit}>
         <input name="authenticity_token" type="hidden" value={this.props.authenticityToken}/>
@@ -170,6 +183,9 @@ var UsersProductForm = React.createClass({
 
           <input type="submit" value={this.props.submitName}/>
         </fieldset>
+        <ul className="form-errors">
+          {errorMessages}
+        </ul>
       </form>
     );
   }
