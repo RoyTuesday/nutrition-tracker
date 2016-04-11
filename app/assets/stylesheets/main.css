@@ -54,6 +54,9 @@ form {
   color: #333;
   display: inline-flex;
 }
+form#login-register {
+  position: absolute;
+}
 h1, h2, h3, h4, h5, h6 {
   color: #141;
   text-decoration: none;
@@ -128,6 +131,9 @@ div.product h3 {
   background-color: #EFE;
 }
 
+.form-container {
+  overflow: hidden;
+}
 .form-errors {
   color: #C20;
   font-weight: bold;
@@ -168,8 +174,9 @@ div.product h3 {
 
 .mb-none { margin-bottom: 0; }
 
-#login-container, #register-container {
-  display: none;
+#login-register {
+  position: absolute;
+  top: 50px;
 }
 
 #nav-links-container {

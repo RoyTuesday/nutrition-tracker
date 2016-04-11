@@ -66,7 +66,7 @@ var LoginRegisterForm = React.createClass({
     }
 
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form id="login-register" onSubmit={this.handleSubmit} style={this.props.style}>
         <input name="authenticity_token" required type="hidden" value={this.props.authenticityToken}/>
         <fieldset>
           {usernameField}
@@ -160,7 +160,6 @@ var NavBar = React.createClass({
   },
 
   render: function() {
-    var sessionForm = "";
     var sessionLinks = (
       <span>
         <a href="#" onClick={this.handleLoginClick}>
@@ -181,23 +180,20 @@ var NavBar = React.createClass({
         </span>
       );
     }
-    else if(this.state.isLoginFormShown) {
-      sessionForm = (
-        <LoginRegisterForm authenticityToken={this.props.authenticityToken} handleLoginSuccess={this.handleLoginSuccess} isRegisterForm={this.state.isRegisterForm} urls={this.props.urls} />
-      );
-    }
 
     return (
       <nav>
         <h1>
           Welcome to Nutrition Tracker
         </h1>
+        <div className="form-container">
+          <LoginRegisterForm authenticityToken={this.props.authenticityToken} handleLoginSuccess={this.handleLoginSuccess} isRegisterForm={this.state.isRegisterForm} style={{display: this.state.isLoginFormShown ? "initial" : "none"}} urls={this.props.urls} />
+        </div>
         <div id="nav-links-container">
           <a href="/" onClick={this.handleHomeClick}>
             Home
           </a> | {sessionLinks}
         </div>
-        {sessionForm}
       </nav>
     );
   }
