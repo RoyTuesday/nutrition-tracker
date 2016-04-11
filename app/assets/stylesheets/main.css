@@ -1,3 +1,14 @@
+@keyframes dropdown {
+  from {
+    top: -400%;
+  }
+}
+@keyframes dropup {
+  to {
+    top: -400%;
+  }
+}
+
 a {
   color: #141;
   text-shadow: 2px 2px #6D1;
@@ -55,6 +66,7 @@ form {
   display: inline-flex;
 }
 form#login-register {
+  display: none;
   position: absolute;
 }
 h1, h2, h3, h4, h5, h6 {

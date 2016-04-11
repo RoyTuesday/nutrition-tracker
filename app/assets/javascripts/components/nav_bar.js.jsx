@@ -49,7 +49,7 @@ var LoginRegisterForm = React.createClass({
     if(this.props.isRegisterForm) {
       usernameField = (
         <span>
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username" style={{display: "block"}}>Username</label>
           <input id="username" onChange={this.handleUsernameChange} placeholder="my_name" type="text" value={this.state.username}/>
         </span>
       );
@@ -88,8 +88,17 @@ var LoginRegisterForm = React.createClass({
 });
 
 var NavBar = React.createClass({
+  componentDidMount: function() {
+    addEventListener("animationend", function(event) {
+      if(event.animationName == "dropup") {
+        this.setState({isLoginFormShown: false});
+      }
+    }.bind(this));
+  },
+
   getInitialState: function() {
     return {
+      formAnimation: "",
       isLoginFormShown: false,
       isRegisterForm: true
     }
@@ -103,16 +112,17 @@ var NavBar = React.createClass({
   handleLoginClick: function(event) {
     event.preventDefault();
 
-    var loginFormState;
-    if(this.state.isRegisterForm) {
-      loginFormState = true;
+    var animation;
+    if(this.state.isLoginFormShown && !this.state.isRegisterForm) {
+      animation = "dropup 600ms running";
     }
     else {
-      loginFormState = !this.state.isLoginFormShown;
+      animation = "dropdown 600ms running";
     }
 
     this.setState({
-      isLoginFormShown: loginFormState,
+      formAnimation: animation,
+      isLoginFormShown: true,
       isRegisterForm: false
     });
   },
@@ -120,16 +130,17 @@ var NavBar = React.createClass({
   handleRegisterClick: function(event) {
     event.preventDefault();
 
-    var loginFormState;
-    if(this.state.isRegisterForm) {
-      loginFormState = !this.state.isLoginFormShown;
+    var animation, display;
+    if(this.state.isLoginFormShown && this.state.isRegisterForm) {
+      animation = "dropup 600ms running";
     }
     else {
-      loginFormState = true;
+      animation = "dropdown 600ms running";
     }
 
     this.setState({
-      isLoginFormShown: loginFormState,
+      formAnimation: animation,
+      isLoginFormShown: true,
       isRegisterForm: true
     });
   },
@@ -187,7 +198,7 @@ var NavBar = React.createClass({
           Welcome to Nutrition Tracker
         </h1>
         <div className="form-container">
-          <LoginRegisterForm authenticityToken={this.props.authenticityToken} handleLoginSuccess={this.handleLoginSuccess} isRegisterForm={this.state.isRegisterForm} style={{display: this.state.isLoginFormShown ? "initial" : "none"}} urls={this.props.urls} />
+          <LoginRegisterForm authenticityToken={this.props.authenticityToken} handleLoginSuccess={this.handleLoginSuccess} isRegisterForm={this.state.isRegisterForm} style={{display: this.state.isLoginFormShown ? "initial" : "none", animation: this.state.formAnimation}} urls={this.props.urls} />
         </div>
         <div id="nav-links-container">
           <a href="/" onClick={this.handleHomeClick}>
