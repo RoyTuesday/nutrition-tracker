@@ -198,7 +198,7 @@ var NavBar = React.createClass({
           Welcome to Nutrition Tracker
         </h1>
         <div className="form-container">
-          <LoginRegisterForm authenticityToken={this.props.authenticityToken} handleLoginSuccess={this.handleLoginSuccess} isRegisterForm={this.state.isRegisterForm} style={{display: this.state.isLoginFormShown ? "initial" : "none", animation: this.state.formAnimation}} urls={this.props.urls} />
+          <LoginRegisterForm authenticityToken={this.props.authenticityToken} handleLoginSuccess={this.handleLoginSuccess} isRegisterForm={this.state.isRegisterForm} style={{top: this.state.isLoginFormShown ? "0" : "-100%", animation: this.state.formAnimation}} urls={this.props.urls} />
         </div>
         <div id="nav-links-container">
           <a href="/" onClick={this.handleHomeClick}>

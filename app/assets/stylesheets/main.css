@@ -1,11 +1,11 @@
 @keyframes dropdown {
   from {
-    top: -400%;
+    top: -100%;
   }
 }
 @keyframes dropup {
   to {
-    top: -400%;
+    top: -100%;
   }
 }
 
@@ -66,8 +66,8 @@ form {
   display: inline-flex;
 }
 form#login-register {
-  display: none;
   position: absolute;
+  top: -100%;
 }
 h1, h2, h3, h4, h5, h6 {
   color: #141;
@@ -117,26 +117,28 @@ ul {
   padding: 0.5em;
 }
 
-div.product {
+li.product {
   background: linear-gradient(to top left, #CF6, #EF9);
   background-color: #AF4;
-  border: none;
-  border-radius: 10px;
+  border-color: #444;
+  border-style: solid;
+  border-width: 1px 1px 0 1px;
   justify-content: space-around;
-  margin: 0.25em 1%;
   padding: 0.0625em;
   text-align: center;
   width: 98%;
 }
-div.product h3 {
+ul li.product:last-child {
+  border-width: 1px;
+}
+li.product h3 {
   margin: 0.5em 0;
 }
 
 .product-title {
-  border: 3px solid #CF6;
-  border-radius: 10px;
   cursor: pointer;
   margin: 0.5em;
+  padding: 0.0625em;
 }
 .product-title:hover {
   background: linear-gradient(to top left, #EF9, #EFA);
@@ -144,7 +146,11 @@ div.product h3 {
 }
 
 .form-container {
+  height: 13em;
   overflow: hidden;
+  position: absolute;
+  top: 4em;
+  width: 18em;
 }
 .form-errors {
   color: #C20;
@@ -188,7 +194,7 @@ div.product h3 {
 
 #login-register {
   position: absolute;
-  top: 50px;
+  top: 0px;
 }
 
 #nav-links-container {
