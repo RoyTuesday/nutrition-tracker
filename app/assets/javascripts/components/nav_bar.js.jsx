@@ -203,17 +203,17 @@ var NavBar = React.createClass({
 
     return (
       <nav>
-        <h1>
-          Welcome to Nutrition Tracker
-        </h1>
-        <div className="form-container">
-          <LoginRegisterForm authenticityToken={this.props.authenticityToken} handleLoginSuccess={this.handleLoginSuccess} isRegisterForm={this.state.isRegisterForm} style={{top: this.state.isLoginFormShown ? "0" : "-100%", animation: this.state.formAnimation}} urls={this.props.urls} />
-        </div>
-        <div id="nav-links-container">
-          <a href="/" onClick={this.handleHomeClick}>
-            Home
-          </a> | {sessionLinks}
-        </div>
+        <header>
+          <h1>
+            Welcome to Nutrition Tracker
+          </h1>
+          <div id="nav-links-container">
+            <a href="/" onClick={this.handleHomeClick}>
+              Home
+            </a> | {sessionLinks}
+          </div>
+        </header>
+        <LoginRegisterForm authenticityToken={this.props.authenticityToken} handleLoginSuccess={this.handleLoginSuccess} isRegisterForm={this.state.isRegisterForm} style={{top: this.state.isLoginFormShown ? "4em" : "-10em", animation: this.state.formAnimation}} urls={this.props.urls} />
       </nav>
     );
   }
