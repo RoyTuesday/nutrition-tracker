@@ -8,6 +8,7 @@ class UsersProduct < ActiveRecord::Base
   belongs_to :user
   belongs_to :product
 
+  has_many :products_nutrients, through: :product
   has_many :nutrients, through: :product
 
   delegate :name, to: :product
