@@ -135,12 +135,15 @@ li.product h3 {
   margin: 0.5em 0;
 }
 
-.product-title {
-  cursor: pointer;
-  margin: 0.5em;
-  padding: 0.0625em;
+button.product-title {
+  background-color: transparent;
+  border: none;
+  border-radius: 0px;
+  height: 100%;
+  padding: 0.5em;
+  width: 100%;
 }
-.product-title:hover {
+button.product-title:hover {
   background: linear-gradient(to top left, #EF9, #EFA);
   background-color: #EFE;
 }
