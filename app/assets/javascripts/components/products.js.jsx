@@ -132,7 +132,7 @@ var ProductsIndex = React.createClass({
 
   render: function() {
     var usdaSearchForm = (
-      <p>
+      <p style={{margin: "1em"}}>
         Please log in to add products to the database
       </p>
     );
