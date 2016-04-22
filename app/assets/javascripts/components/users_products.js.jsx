@@ -70,12 +70,10 @@ var UsersProduct = React.createClass({
     }
 
     return(
-      <div className="product">
-        <article className="product-title" onClick={this.handleNameClick}>
-          <h3>
-            {this.state.usersProduct.product.name}
-          </h3>
-        </article>
+      <div>
+        <button className="product-title" onClick={this.handleNameClick}>
+          {this.state.usersProduct.product.name}
+        </button>
         {details}
         <article className="product-links-container">
           <a href="#" onClick={this.handleEditClick}>Edit</a> | <a href="#" onClick={this.handleDeleteClick}>Delete</a>
@@ -92,7 +90,7 @@ var UsersProductList = React.createClass({
   render: function() {
     var usersProductNodes = this.props.usersProducts.map(function(usersProduct, index) {
       return (
-        <li key={"users-products-" + index}>
+        <li className="product" key={"users-products-" + index}>
           <UsersProduct authenticityToken={this.props.authenticityToken} removeUsersProduct={this.props.removeUsersProduct} usersProduct={usersProduct} />
         </li>
       );
