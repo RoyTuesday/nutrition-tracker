@@ -39,11 +39,9 @@ var Product = React.createClass({
 
     return (
       <div className="product" id={"product-" + this.props.product.id}>
-        <article className="product-title" onClick={this.handleClick}>
-          <h3 key={this.props.key}>
-            {this.props.product.name}
-          </h3>
-        </article>
+        <button className="product-title" onClick={this.handleClick}>
+          {this.props.product.name}
+        </button>
         {details}
       </div>
     );
