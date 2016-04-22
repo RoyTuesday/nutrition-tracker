@@ -1,11 +1,14 @@
 @keyframes dropdown {
   from {
-    top: -100%;
+    top: -10em;
+  }
+  to {
+    top: 4em;
   }
 }
 @keyframes dropup {
   to {
-    top: -100%;
+    top: -10em;
   }
 }
 
@@ -67,12 +70,28 @@ form {
 }
 form#login-register {
   position: absolute;
-  top: -100%;
+  right: 0px;
+  top: -10em;
+  z-index: -1;
 }
 h1, h2, h3, h4, h5, h6 {
   color: #141;
   text-decoration: none;
   text-shadow: 0px 0px 2px #6D1;
+}
+header {
+  align-items: center;
+  background: linear-gradient(to top left, #8F2, #CF6);
+  background-color: greenyellow;
+  box-shadow: 0px 0px 8px #330;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  padding: 0 2em;
+  width: 100%;
+  z-index: 0;
 }
 input {
   font-weight: initial;
@@ -95,21 +114,20 @@ main {
   padding: 0.25em 1em;
 }
 nav {
-  background: linear-gradient(to top left, #8F2, #CF6);
-  background-color: greenyellow;
-  box-shadow: 0px 0px 8px #330;
   display: flex;
+  height: 4em;
   margin: 0 auto;
   padding: 0;
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 0;
 }
 nav a {
   font-weight: initial;
 }
 nav h1 {
-  margin: 0.375em 1em;
+  margin: 0;
 }
 ul {
   list-style: none;
@@ -201,7 +219,8 @@ button.product-title:hover {
 }
 
 #nav-links-container {
-  margin: auto 0;
+  float: right;
+  margin: 0;
 }
 
 #ndb-search-errors {
