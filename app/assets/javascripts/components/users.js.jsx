@@ -29,8 +29,8 @@ var UserShow = React.createClass({
 
   render: function() {
     return(
-      <div>
-        <h2>
+      <div style={{padding: "0.0625em 0"}}>
+        <h2 style={{margin: "1em"}}>
           Welcome, {this.props.currentUser.username}!
         </h2>
         <UsersProductList authenticityToken={this.props.authenticityToken} removeUsersProduct={this.removeUsersProduct} usersProducts={this.state.usersProducts} />
