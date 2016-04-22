@@ -3,7 +3,7 @@ class UsersProductsController < ApplicationController
     user = User.find_by(id: session[:user_id])
     users_products = UsersProduct.includes(:product).where(user: user)
     if request.xhr?
-      render json: users_products.as_json(include: [:product])
+      render json: users_products.as_json(include: [:product, :nutrients])
     end
   end
 
