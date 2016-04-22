@@ -109,9 +109,8 @@ label {
 main {
   background: linear-gradient(to top left, #8F2, #AF4);
   background-color: greenyellow;
-  border-radius: 10px;
-  margin: 5em 1em;
-  padding: 0.25em 1em;
+  margin: 5em 0;
+  padding: 0 0 0.5em 0;
 }
 nav {
   display: flex;
@@ -132,7 +131,7 @@ nav h1 {
 ul {
   list-style: none;
   margin: 0;
-  padding: 0.5em;
+  padding: 0;
 }
 
 li.product {
@@ -140,14 +139,14 @@ li.product {
   background-color: #AF4;
   border-color: #444;
   border-style: solid;
-  border-width: 1px 1px 0 1px;
+  border-width: 1px 0 0 0;
   justify-content: space-around;
   padding: 0.0625em;
   text-align: center;
-  width: 98%;
+  width: 100%;
 }
 ul li.product:last-child {
-  border-width: 1px;
+  border-width: 1px 0 1px 0;
 }
 li.product h3 {
   margin: 0.5em 0;
@@ -233,6 +232,7 @@ button.product-title:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 0 1em;
 }
 
 #usda-container {
