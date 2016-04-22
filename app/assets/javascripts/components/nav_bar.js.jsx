@@ -174,7 +174,7 @@ var NavBar = React.createClass({
   handleLoginSuccess: function(user) {
     this.setState({
       formAnimation: "dropup 600ms running",
-      isLoginFormShown: false
+      isLoginFormShown: true
     });
     this.props.loginUser(user);
   },
