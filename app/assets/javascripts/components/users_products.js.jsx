@@ -1,3 +1,33 @@
+var ProductsChart = React.createClass({
+  getInitialState: function() {
+    return {
+      canvas: null,
+      context: null
+    }
+  },
+
+  componentDidMount: function() {
+    var canvas = document.getElementById("chart");
+    var context = canvas.getContext("2d");
+
+    this.setState({
+      canvas: canvas,
+      context: context
+    });
+  },
+
+  render: function() {
+    return (
+      <canvas
+        height="400px"
+        id="chart"
+        style={{backgroundColor: "#EEE", border: "1px solid black"}}
+        width="800px">
+      </canvas>
+    );
+  }
+});
+
 var UsersProduct = React.createClass({
   getInitialState: function() {
     return {
