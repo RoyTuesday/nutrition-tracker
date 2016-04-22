@@ -34,6 +34,12 @@ var LoginRegisterForm = React.createClass({
           this.setState({errors: data.errors});
         }
         else {
+          this.setState({
+            username: null,
+            email: null,
+            password: null,
+            errors: new Array
+          });
           this.props.handleLoginSuccess(data.user);
         }
       }.bind(this),
