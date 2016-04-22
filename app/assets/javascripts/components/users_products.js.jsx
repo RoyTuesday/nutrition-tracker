@@ -16,6 +16,47 @@ var ProductsChart = React.createClass({
     });
   },
 
+  drawNutrientGraph: function(nutrientName) {
+    var nutrientPoints = new Object;
+    this.props.usersProducts.forEach(function(usersProduct) {
+      var nutrient = usersProduct.products_nutrients.find(function(products_nutrient) {
+        return products_nutrient.nutrient.name == nutrientName;
+      });
+      console.log("found nutrient", nutrient, "nutrientPoints", nutrientPoints);
+      if(nutrient) {
+        if(nutrientPoints[usersProduct.date_eaten]) {
+          nutrientPoints[usersProduct.date_eaten] += nutrient.quantity;
+        }
+        else {
+          nutrientPoints[usersProduct.date_eaten] = nutrient.quantity;
+        }
+      }
+    });
+
+    var xCoord = 0;
+    for(var prop in nutrientPoints) {
+      if(nutrientPoints.hasOwnProperty(prop)) {
+        xCoord += 20;
+        var height = this.state.canvas.height - nutrientPoints[prop];
+        this.state.context.lineTo(xCoord, height);
+      }
+    }
+    this.state.context.stroke();
+
+    this.state.context.closePath();
+    this.state.context.beginPath();
+    var xCoord = 0;
+    for(var prop in nutrientPoints) {
+      if(nutrientPoints.hasOwnProperty(prop)) {
+        xCoord += 20;
+        var height = this.state.canvas.height - nutrientPoints[prop];
+        this.state.context.moveTo(xCoord, height);
+        this.state.context.arc(xCoord, height, 3, 0, 2 * Math.PI, false);
+      }
+    }
+    this.state.context.fill();
+  },
+
   render: function() {
     return (
       <canvas
