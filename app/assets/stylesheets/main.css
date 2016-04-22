@@ -156,9 +156,11 @@ button.product-title {
   background-color: transparent;
   border: none;
   border-radius: 0px;
+  color: #141;
   height: 100%;
   padding: 0.5em;
   width: 100%;
+  text-shadow: 0px 0px 2px #6D1;
 }
 button.product-title:hover {
   background: linear-gradient(to top left, #EF9, #EFA);
