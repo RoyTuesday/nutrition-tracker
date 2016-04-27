@@ -14,4 +14,17 @@ class UsersProduct < ActiveRecord::Base
   delegate :name, to: :product
   delegate :category, to: :product
   delegate :serving_size, to: :product
+
+  def get_nutrients_totals
+    totals = Hash.new(0)
+    self.products_nutrients.each do |nutrient|
+      totals[nutrient.name] += nutrient.quantity
+    end
+
+    totals.each do |key, value|
+      totals[key] = value.round(2)
+    end
+
+    return totals
+  end
 end
