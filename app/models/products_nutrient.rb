@@ -5,4 +5,6 @@ class ProductsNutrient < ActiveRecord::Base
 
   belongs_to :product
   belongs_to :nutrient
+
+  delegate :name, :category, :unit_of_measure, to: :nutrient
 end
