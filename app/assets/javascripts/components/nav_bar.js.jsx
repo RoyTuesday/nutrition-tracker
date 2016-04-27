@@ -34,6 +34,12 @@ var LoginRegisterForm = React.createClass({
           this.setState({errors: data.errors});
         }
         else {
+          this.setState({
+            username: null,
+            email: null,
+            password: null,
+            errors: new Array
+          });
           this.props.handleLoginSuccess(data.user);
         }
       }.bind(this),
@@ -49,7 +55,7 @@ var LoginRegisterForm = React.createClass({
     if(this.props.isRegisterForm) {
       usernameField = (
         <span>
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username" style={{display: "block"}}>Username</label>
           <input id="username" onChange={this.handleUsernameChange} placeholder="my_name" type="text" value={this.state.username}/>
         </span>
       );
@@ -66,7 +72,7 @@ var LoginRegisterForm = React.createClass({
     }
 
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form id="login-register" onSubmit={this.handleSubmit} style={this.props.style}>
         <input name="authenticity_token" required type="hidden" value={this.props.authenticityToken}/>
         <fieldset>
           {usernameField}
@@ -88,8 +94,17 @@ var LoginRegisterForm = React.createClass({
 });
 
 var NavBar = React.createClass({
+  componentDidMount: function() {
+    addEventListener("animationend", function(event) {
+      if(event.animationName == "dropup") {
+        this.setState({isLoginFormShown: false});
+      }
+    }.bind(this));
+  },
+
   getInitialState: function() {
     return {
+      formAnimation: "",
       isLoginFormShown: false,
       isRegisterForm: true
     }
@@ -103,16 +118,17 @@ var NavBar = React.createClass({
   handleLoginClick: function(event) {
     event.preventDefault();
 
-    var loginFormState;
-    if(this.state.isRegisterForm) {
-      loginFormState = true;
+    var animation;
+    if(this.state.isLoginFormShown && !this.state.isRegisterForm) {
+      animation = "dropup 600ms running";
     }
     else {
-      loginFormState = !this.state.isLoginFormShown;
+      animation = "dropdown 600ms running";
     }
 
     this.setState({
-      isLoginFormShown: loginFormState,
+      formAnimation: animation,
+      isLoginFormShown: true,
       isRegisterForm: false
     });
   },
@@ -120,16 +136,17 @@ var NavBar = React.createClass({
   handleRegisterClick: function(event) {
     event.preventDefault();
 
-    var loginFormState;
-    if(this.state.isRegisterForm) {
-      loginFormState = !this.state.isLoginFormShown;
+    var animation, display;
+    if(this.state.isLoginFormShown && this.state.isRegisterForm) {
+      animation = "dropup 600ms running";
     }
     else {
-      loginFormState = true;
+      animation = "dropdown 600ms running";
     }
 
     this.setState({
-      isLoginFormShown: loginFormState,
+      formAnimation: animation,
+      isLoginFormShown: true,
       isRegisterForm: true
     });
   },
@@ -155,12 +172,14 @@ var NavBar = React.createClass({
   },
 
   handleLoginSuccess: function(user) {
-    this.setState({isLoginFormShown: false});
+    this.setState({
+      formAnimation: "dropup 600ms running",
+      isLoginFormShown: true
+    });
     this.props.loginUser(user);
   },
 
   render: function() {
-    var sessionForm = "";
     var sessionLinks = (
       <span>
         <a href="#" onClick={this.handleLoginClick}>
@@ -181,23 +200,20 @@ var NavBar = React.createClass({
         </span>
       );
     }
-    else if(this.state.isLoginFormShown) {
-      sessionForm = (
-        <LoginRegisterForm authenticityToken={this.props.authenticityToken} handleLoginSuccess={this.handleLoginSuccess} isRegisterForm={this.state.isRegisterForm} urls={this.props.urls} />
-      );
-    }
 
     return (
       <nav>
-        <p>
-          <a href="/" onClick={this.handleHomeClick}>
-            Home
-          </a> | {sessionLinks}
-        </p>
-        <h1>
-          Welcome to Nutrition Tracker
-        </h1>
-        {sessionForm}
+        <header>
+          <h1>
+            Welcome to Nutrition Tracker
+          </h1>
+          <div id="nav-links-container">
+            <a href="/" onClick={this.handleHomeClick}>
+              Home
+            </a> | {sessionLinks}
+          </div>
+        </header>
+        <LoginRegisterForm authenticityToken={this.props.authenticityToken} handleLoginSuccess={this.handleLoginSuccess} isRegisterForm={this.state.isRegisterForm} style={{top: this.state.isLoginFormShown ? "4em" : "-10em", animation: this.state.formAnimation}} urls={this.props.urls} />
       </nav>
     );
   }

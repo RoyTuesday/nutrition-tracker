@@ -60,12 +60,14 @@ var NewProductForm = React.createClass({
       <form onSubmit={this.handleSubmit}>
         <input name="authenticity_token" type="hidden" value={this.props.authenticityToken}/>
         <fieldset>
-          <label htmlFor="serving_size">Serving Size</label>
-          <input id="serving_size" onChange={this.handleServingSizeChange} placeholder="0" type="number"/>
-
-          <label htmlFor="serving_unit">Serving Unit</label>
-          <input id="serving_unit" onChange={this.handleServingUnitChange} placeholder="g" type="text"/>
-
+          <div>
+            <label htmlFor="serving_size">Serving Size</label>
+            <input id="serving_size" onChange={this.handleServingSizeChange} placeholder="0" type="number"/>
+          </div>
+          <div>
+            <label htmlFor="serving_unit">Serving Unit</label>
+            <input id="serving_unit" onChange={this.handleServingUnitChange} placeholder="g" type="text"/>
+          </div>
           <input type="submit" value="Add new food item"/>
         </fieldset>
         <ul className="ndb-search-errors">
@@ -141,9 +143,10 @@ var UsdaSearchForm = React.createClass({
         <form acceptCharset="UTF-8" id="usda-nbd-search" onSubmit={this.handleSubmit}>
           <input name="authenticity_token" type="hidden" value={this.props.authenticityToken}/>
           <fieldset>
-            <label htmlFor="search-terms">Search for:</label>
-            <input id="search-terms" name="search_terms" onChange={this.handleQueryChange} placeholder="food" type="text"/>
-
+            <div>
+              <label htmlFor="search-terms">Search for:</label>
+              <input id="search-terms" name="search_terms" onChange={this.handleQueryChange} placeholder="food" type="text"/>
+            </div>
             <input type="submit" value="Search"/>
           </fieldset>
         </form>
@@ -170,14 +173,14 @@ var UsdaProductList = React.createClass({
   render: function() {
     var productNodes = this.state.foodItems.map(function(foodItem, index) {
       return (
-        <li key={"usda-product-" + index}>
+        <li className="product" key={"usda-product-" + index}>
           <UsdaProduct addProduct={this.props.addProduct} authenticityToken={this.props.authenticityToken} foodItem={foodItem} itemIndex={index} urls={this.props.urls} removeFoodItem={this.removeFoodItem} />
         </li>
       );
     }.bind(this));
 
     return (
-      <div>
+      <div id="usda-container">
         <h3>
           Didn't find what you were looking for?
           <br/>

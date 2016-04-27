@@ -1,3 +1,17 @@
+@keyframes dropdown {
+  from {
+    top: -10em;
+  }
+  to {
+    top: 4em;
+  }
+}
+@keyframes dropup {
+  to {
+    top: -10em;
+  }
+}
+
 a {
   color: #141;
   text-shadow: 2px 2px #6D1;
@@ -14,15 +28,12 @@ a:visited:hover {
   color: #363;
   text-shadow: none;
 }
-nav a {
-  font-weight: initial;
-}
 
 body {
   background-color: #161;
   color: #333;
   font-weight: bold;
-  padding: 1em 0;
+  padding: 0;
 }
 form.new_users_product {
   margin-top: 1em;
@@ -30,19 +41,23 @@ form.new_users_product {
 fieldset {
   border: none;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
+fieldset div {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
 footer {
   background: linear-gradient(to top left, #8F2, #AF4);
   background-color: greenyellow;
-  border-radius: 10px;
-  bottom: 2px;
+  bottom: 0;
   box-shadow: 0px 0px 8px #330;
-  margin: 1em auto;
-  padding: 1em;
-  position: sticky;
+  padding: 0.5em 0;
+  position: fixed;
   text-align: center;
-  width: 85%;
+  width: 100%;
 }
 footer .fa {
   font-size: 1.5em;
@@ -53,8 +68,30 @@ form {
   color: #333;
   display: inline-flex;
 }
+form#login-register {
+  position: absolute;
+  right: 0px;
+  top: -10em;
+  z-index: -1;
+}
 h1, h2, h3, h4, h5, h6 {
-  text-shadow: 2px 2px #6D1;
+  color: #141;
+  text-decoration: none;
+  text-shadow: 0px 0px 2px #6D1;
+}
+header {
+  align-items: center;
+  background: linear-gradient(to top left, #8F2, #CF6);
+  background-color: greenyellow;
+  box-shadow: 0px 0px 8px #330;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  padding: 0 2em;
+  width: 100%;
+  z-index: 0;
 }
 input {
   font-weight: initial;
@@ -66,31 +103,77 @@ input[type="submit"] {
   margin-top: 0.5em;
   padding: 0.125em 0.25em;
 }
+label {
+  margin-right: 1em;
+}
 main {
   background: linear-gradient(to top left, #8F2, #AF4);
   background-color: greenyellow;
-  border-radius: 10px;
-  margin: 1em auto;
-  padding: 0.25em 1em;
-  width: 80%;
+  margin: 5em 0;
+  padding: 0 0 0.5em 0;
 }
 nav {
-  background: linear-gradient(to top left, #8F2, #CF6);
-  background-color: greenyellow;
-  border-radius: 10px;
-  box-shadow: 0px 0px 8px #330;
+  display: flex;
+  height: 4em;
   margin: 0 auto;
-  padding: 0.25em 1em;
-  position: sticky;
+  padding: 0;
+  position: fixed;
   top: 0;
-  width: 85%;
+  width: 100%;
+  z-index: 0;
+}
+nav a {
+  font-weight: initial;
+}
+nav h1 {
+  margin: 0;
 }
 ul {
   list-style: none;
   margin: 0;
-  padding: 0.5em;
+  padding: 0;
 }
 
+li.product {
+  background: linear-gradient(to top left, #CF6, #EF9);
+  background-color: #AF4;
+  border-color: #444;
+  border-style: solid;
+  border-width: 1px 0 0 0;
+  justify-content: space-around;
+  padding: 0.0625em;
+  text-align: center;
+  width: 100%;
+}
+ul li.product:last-child {
+  border-width: 1px 0 1px 0;
+}
+li.product h3 {
+  margin: 0.5em 0;
+}
+
+button.product-title {
+  background-color: transparent;
+  border: none;
+  border-radius: 0px;
+  color: #141;
+  height: 100%;
+  padding: 0.5em;
+  width: 100%;
+  text-shadow: 0px 0px 2px #6D1;
+}
+button.product-title:hover {
+  background: linear-gradient(to top left, #EF9, #EFA);
+  background-color: #EFE;
+}
+
+.form-container {
+  height: 13em;
+  overflow: hidden;
+  position: absolute;
+  top: 4em;
+  width: 18em;
+}
 .form-errors {
   color: #C20;
   font-weight: bold;
@@ -101,6 +184,11 @@ ul {
   border: 2px solid #333;
   padding: 1em;
 }
+.product-details-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 0.875em;
+}
 .users-product-details-container {
   display: none;
 }
@@ -108,23 +196,50 @@ ul {
   margin: auto;
 }
 .product-details {
-  columns: 2 auto;
-  -webkit-columns: 2 auto;
-  -moz-columns: 2 auto;
+  text-align: left;
 }
+.product-details li {
+  margin: 0.5em 0;
+}
+.product-links-container {
+  margin: 0.375em 0;
+}
+
 .users-product-details {
   columns: 4 auto;
   -webkit-columns: 4 auto;
   -moz-columns: 4 auto;
+  margin: 0 1em;
 }
 
 .mb-none { margin-bottom: 0; }
 
-#login-container, #register-container {
-  display: none;
+#login-register {
+  position: absolute;
+  top: 0px;
+}
+
+#nav-links-container {
+  float: right;
+  margin: 0;
 }
 
 #ndb-search-errors {
   color: #633;
   font-weight: initial;
+}
+
+#product-search-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 1em;
+}
+
+#usda-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }

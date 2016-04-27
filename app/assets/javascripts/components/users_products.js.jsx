@@ -1,3 +1,74 @@
+var ProductsChart = React.createClass({
+  getInitialState: function() {
+    return {
+      canvas: null,
+      context: null
+    }
+  },
+
+  componentDidMount: function() {
+    var canvas = document.getElementById("chart");
+    var context = canvas.getContext("2d");
+
+    this.setState({
+      canvas: canvas,
+      context: context
+    });
+  },
+
+  drawNutrientGraph: function(nutrientName) {
+    var nutrientPoints = new Object;
+    this.props.usersProducts.forEach(function(usersProduct) {
+      var nutrient = usersProduct.products_nutrients.find(function(products_nutrient) {
+        return products_nutrient.nutrient.name == nutrientName;
+      });
+      console.log("found nutrient", nutrient, "nutrientPoints", nutrientPoints);
+      if(nutrient) {
+        if(nutrientPoints[usersProduct.date_eaten]) {
+          nutrientPoints[usersProduct.date_eaten] += nutrient.quantity;
+        }
+        else {
+          nutrientPoints[usersProduct.date_eaten] = nutrient.quantity;
+        }
+      }
+    });
+
+    var xCoord = 0;
+    for(var prop in nutrientPoints) {
+      if(nutrientPoints.hasOwnProperty(prop)) {
+        xCoord += 20;
+        var height = this.state.canvas.height - nutrientPoints[prop];
+        this.state.context.lineTo(xCoord, height);
+      }
+    }
+    this.state.context.stroke();
+
+    this.state.context.closePath();
+    this.state.context.beginPath();
+    var xCoord = 0;
+    for(var prop in nutrientPoints) {
+      if(nutrientPoints.hasOwnProperty(prop)) {
+        xCoord += 20;
+        var height = this.state.canvas.height - nutrientPoints[prop];
+        this.state.context.moveTo(xCoord, height);
+        this.state.context.arc(xCoord, height, 3, 0, 2 * Math.PI, false);
+      }
+    }
+    this.state.context.fill();
+  },
+
+  render: function() {
+    return (
+      <canvas
+        height="400px"
+        id="chart"
+        style={{backgroundColor: "#EEE", border: "1px solid black"}}
+        width="800px">
+      </canvas>
+    );
+  }
+});
+
 var UsersProduct = React.createClass({
   getInitialState: function() {
     return {
@@ -71,11 +142,13 @@ var UsersProduct = React.createClass({
 
     return(
       <div>
-        <h3>
-          <a href="#" onClick={this.handleNameClick}>{this.state.usersProduct.product.name}</a>
-        </h3>
+        <button className="product-title" onClick={this.handleNameClick}>
+          {this.state.usersProduct.product.name}
+        </button>
         {details}
-        <a href="#" onClick={this.handleEditClick}>Edit</a> | <a href="#" onClick={this.handleDeleteClick}>Delete</a>
+        <article className="product-links-container">
+          <a href="#" onClick={this.handleEditClick}>Edit</a> | <a href="#" onClick={this.handleDeleteClick}>Delete</a>
+        </article>
         <div className="users-product-errors-container">
           {editForm}
         </div>
@@ -88,7 +161,7 @@ var UsersProductList = React.createClass({
   render: function() {
     var usersProductNodes = this.props.usersProducts.map(function(usersProduct, index) {
       return (
-        <li key={"users-products-" + index}>
+        <li className="product" key={"users-products-" + index}>
           <UsersProduct authenticityToken={this.props.authenticityToken} removeUsersProduct={this.props.removeUsersProduct} usersProduct={usersProduct} />
         </li>
       );
@@ -166,21 +239,24 @@ var UsersProductForm = React.createClass({
       <form className="new_users_product" onSubmit={this.handleSubmit}>
         <input name="authenticity_token" type="hidden" value={this.props.authenticityToken}/>
         <fieldset>
-          <label htmlFor="servings">
-            Servings
-          </label>
-          <input defaultValue={this.state.servings} id="servings" min="0" name="servings" onChange={this.handleServingsChange} placeholder="1" step="any" type="number"/>
-
-          <label htmlFor="date-eaten">
-            Date Eaten
-          </label>
-          <input defaultValue={this.state.date_eaten} id="date-eaten" name="date_eaten" onChange={this.handleDateEatenChange} placeholder="yyyy-mm-dd" type="date"/>
-
-          <label htmlFor="price">
-            Price
-          </label>
-          <input defaultValue={this.state.price} id="price" name="price" onChange={this.handlePriceChange} placeholder="$1.00" type="text"/>
-
+          <div>
+            <label htmlFor="servings">
+              Servings
+            </label>
+            <input defaultValue={this.state.servings} id="servings" min="0" name="servings" onChange={this.handleServingsChange} placeholder="1" step="any" type="number"/>
+          </div>
+          <div>
+            <label htmlFor="date-eaten">
+              Date Eaten
+            </label>
+            <input defaultValue={this.state.date_eaten} id="date-eaten" name="date_eaten" onChange={this.handleDateEatenChange} placeholder="yyyy-mm-dd" type="date"/>
+          </div>
+          <div>
+            <label htmlFor="price">
+              Price
+            </label>
+            <input defaultValue={this.state.price} id="price" name="price" onChange={this.handlePriceChange} placeholder="$1.00" type="text"/>
+          </div>
           <input type="submit" value={this.props.submitName}/>
         </fieldset>
         <ul className="form-errors">

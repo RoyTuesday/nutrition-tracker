@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     if request.xhr?
       if user and user.authenticate params[:user][:password]
         session[:user_id] = user.id
-        render json: {result: "success!"}
+        render json: {result: "success!", user: user}
       else
         errors = ["Email, password, or both are incorrect"]
         render json: {errors: errors}
