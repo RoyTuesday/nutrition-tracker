@@ -41,7 +41,7 @@ form.new_users_product {
 fieldset {
   border: none;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 fieldset div {
   align-items: center;
