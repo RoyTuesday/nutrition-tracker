@@ -7,4 +7,19 @@ class User < ActiveRecord::Base
 
   has_many :users_products
   has_many :products, through: :users_products
+
+  def get_nutrients_totals
+    totals = Hash.new
+    self.users_products.each do |users_product|
+      totals.merge! users_product.get_nutrients_totals do |key, oldval, newval|
+        oldval + newval
+      end
+    end
+
+    totals.each do |key, value|
+      totals[key] = value.round(2).to_s + Nutrient.find_by(name: key).unit_of_measure
+    end
+
+    return totals
+  end
 end
