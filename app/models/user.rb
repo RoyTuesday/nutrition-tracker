@@ -8,11 +8,11 @@ class User < ActiveRecord::Base
   has_many :users_products
   has_many :products, through: :users_products
 
-  def get_nutrients_totals date = nil
+  def get_nutrients_totals date_range = nil
     users_products = self.users_products.to_a
-    if date
+    if date_range
       users_products.select! do |users_product|
-        users_product.date_eaten == date
+        date_range.include? users_product.date_eaten
       end
     end
     totals = Hash.new
