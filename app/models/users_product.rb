@@ -16,13 +16,23 @@ class UsersProduct < ActiveRecord::Base
   delegate :serving_size, to: :product
 
   def get_nutrients_totals
-    totals = Hash.new(0)
+    totals = Hash.new
     self.products_nutrients.each do |nutrient|
-      totals[nutrient.name] += nutrient.quantity
+      if totals[nutrient.name]
+        totals[nutrient.name][:value] += nutrient.quantity
+      else
+        totals[nutrient.name] = {
+          value: nutrient.quantity,
+          unit: nutrient.unit_of_measure
+        }
+      end
     end
 
     totals.each do |key, value|
-      totals[key] = value.round(2)
+      totals[key] = {
+        value: value[:value].round(2),
+        unit: value[:unit]
+      }
     end
 
     return totals

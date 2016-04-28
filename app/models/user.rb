@@ -12,12 +12,15 @@ class User < ActiveRecord::Base
     totals = Hash.new
     self.users_products.each do |users_product|
       totals.merge! users_product.get_nutrients_totals do |key, oldval, newval|
-        oldval + newval
+        {
+          value: oldval[:value] + newval[:value],
+          unit: oldval[:unit]
+        }
       end
     end
 
     totals.each do |key, value|
-      totals[key] = value.round(2).to_s + Nutrient.find_by(name: key).unit_of_measure
+      totals[key] = value[:value].round(2).to_s + value[:unit]
     end
 
     return totals
