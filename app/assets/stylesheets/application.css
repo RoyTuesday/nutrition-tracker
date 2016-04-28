@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require "normalize.css"
+ *= require jquery.ui.datepicker
  *= require_tree .
  *= require_self
  */
