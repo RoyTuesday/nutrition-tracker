@@ -23,6 +23,13 @@ class UsersController < ApplicationController
     @user = User.includes(:users_products, :products).find_by(id: session[:user_id])
   end
 
+  def nutrients_totals
+    user = User.includes(:users_products).find_by id: session[:user_id]
+    if request.xhr?
+      render json: user.get_nutrients_totals(params[:date_range]).as_json
+    end
+  end
+
   private
 
   def user_params
