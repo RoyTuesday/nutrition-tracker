@@ -8,9 +8,15 @@ class User < ActiveRecord::Base
   has_many :users_products
   has_many :products, through: :users_products
 
-  def get_nutrients_totals
+  def get_nutrients_totals date = nil
+    users_products = self.users_products.to_a
+    if date
+      users_products.select! do |users_product|
+        users_product.date_eaten == date
+      end
+    end
     totals = Hash.new
-    self.users_products.each do |users_product|
+    users_products.each do |users_product|
       totals.merge! users_product.get_nutrients_totals do |key, oldval, newval|
         {
           value: oldval[:value] + newval[:value],
