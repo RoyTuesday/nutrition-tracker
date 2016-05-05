@@ -11,13 +11,20 @@ var NutrientsTotalsForm = React.createClass({
       showOn: "focus"
     });
     $("#start-date").on("change", this.handleStartDateChange);
+    $("#end-date").on("change", this.handleEndDateChange);
   },
 
   handleStartDateChange: function(event) {
     event.preventDefault();
-    console.log("input event", event);
     this.setState({
       startDate: $.datepicker.formatDate("dd/mm/yy", new Date(event.target.value))
+    });
+  },
+
+  handleEndDateChange: function(event) {
+    event.preventDefault();
+    this.setState({
+      endDate: $.datepicker.formatDate("dd/mm/yy", new Date(event.target.value))
     });
   },
 
@@ -52,10 +59,14 @@ var NutrientsTotalsForm = React.createClass({
     return (
       <form onSubmit={this.onSubmit}>
         <fieldset>
-          <label>
+          <label for="start-date">
             Start date
           </label>
-          <input className="datepicker" id="start-date" type="text" value={this.state.startDate}/>
+          <input className="datepicker" id="start-date" placeholder="dd/mm/yyyy" type="date" value={this.state.startDate}/>
+          <label for="end-date">
+            End date
+          </label>
+          <input className="datepicker" id="end-date" placeholder="dd/mm/yyyy" type="date" value={this.state.endDate}/>
           <input type="submit" value="Search"/>
         </fieldset>
       </form>
