@@ -128,6 +128,19 @@ nav a {
 nav h1 {
   margin: 0;
 }
+table {
+  margin: 1em;
+}
+td {
+  background-color: #EEE;
+  border: 5px double #333;
+  cursor: pointer;
+  padding: 0.5em;
+}
+td:hover {
+  background-color: #EFE;
+  color: #363;
+}
 ul {
   list-style: none;
   margin: 0;
