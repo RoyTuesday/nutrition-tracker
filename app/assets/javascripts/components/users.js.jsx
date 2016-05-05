@@ -41,6 +41,7 @@ var UserShow = React.createClass({
           Welcome, {this.props.currentUser.username}!
         </h2>
         <NutrientsTotalsForm setNutrients={this.setNutrients} />
+        <NutrientList nutrients={this.state.nutrients}/>
         <UsersProductList authenticityToken={this.props.authenticityToken} removeUsersProduct={this.removeUsersProduct} usersProducts={this.state.usersProducts} />
       </div>
     );
