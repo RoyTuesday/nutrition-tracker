@@ -14,7 +14,14 @@ var UserShow = React.createClass({
   },
 
   getInitialState: function() {
-    return {usersProducts: new Array}
+    return {
+      nutrients: new Array,
+      usersProducts: new Array
+    }
+  },
+
+  setNutrients: function(nutrients) {
+    this.setState({nutrients: nutrients})
   },
 
   removeUsersProduct: function(id) {
@@ -33,7 +40,7 @@ var UserShow = React.createClass({
         <h2 style={{margin: "1em"}}>
           Welcome, {this.props.currentUser.username}!
         </h2>
-        <NutrientsTotalsForm />
+        <NutrientsTotalsForm setNutrients={this.setNutrients} />
         <UsersProductList authenticityToken={this.props.authenticityToken} removeUsersProduct={this.removeUsersProduct} usersProducts={this.state.usersProducts} />
       </div>
     );
