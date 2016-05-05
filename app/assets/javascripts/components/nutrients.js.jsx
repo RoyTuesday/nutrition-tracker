@@ -73,6 +73,14 @@ var NutrientsTotalsForm = React.createClass({
     );
   }
 });
+var NutrientsChart = React.createClass({
+  render: function() {
+    return (
+      <canvas height={this.props.height} width={this.props.width}>
+      </canvas>
+    );
+  }
+});
 var Nutrient = React.createClass({
   render: function() {
     return (
