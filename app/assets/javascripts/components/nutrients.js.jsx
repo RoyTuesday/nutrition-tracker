@@ -62,3 +62,32 @@ var NutrientsTotalsForm = React.createClass({
     );
   }
 });
+var Nutrient = React.createClass({
+  render: function() {
+    return (
+      <article className="nutrient">
+        <div>
+          {this.props.name}
+        </div>
+        <div>
+          {this.props.value}
+        </div>
+      </article>
+    );
+  }
+});
+var NutrientList = React.createClass({
+  render: function() {
+    var nutrients = this.props.nutrients.map(function(nutrient, index) {
+      return (
+        <Nutrient key={index} name={nutrient.name} value={nutrient.value} />
+      );
+    });
+
+    return (
+      <section>
+        {nutrients}
+      </section>
+    );
+  }
+})
