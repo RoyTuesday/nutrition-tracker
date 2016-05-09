@@ -30,6 +30,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def nutrients_over_time
+    user = User.includes(:users_products).find_by id: session[:user_id]
+    if user && request.xhr?
+      render json: user.get_nutrients_over_time(params[:nutrient_name], params[:date_range]).as_json
+    end
+  end
+
   private
 
   def user_params
