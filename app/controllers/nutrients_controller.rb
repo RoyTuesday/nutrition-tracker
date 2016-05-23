@@ -1,5 +1,13 @@
 class NutrientsController < ApplicationController
   def totals
+    nutrient_totals = Nutrient.joins(products_nutrients: {product: :users_products})
+      .where("users_products.user_id" => session[:user_id], "users_products.date_eaten" => date_range)
+      .group("nutrients.name, nutrients.unit_of_measure")
+      .pluck("nutrients.name, sum(products_nutrients.quantity), nutrients.unit_of_measure")
+
+    if request.xhr?
+      render json: nutrient_totals
+    end
   end
 
   private
