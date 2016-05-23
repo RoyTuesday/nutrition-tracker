@@ -21,7 +21,7 @@ var UserShow = React.createClass({
   },
 
   setNutrients: function(nutrients) {
-    this.setState({nutrients: nutrients})
+    this.setState({nutrients: nutrients});
   },
 
   removeUsersProduct: function(id) {
