@@ -59,11 +59,11 @@ var NutrientsTotalsForm = React.createClass({
     return (
       <form onSubmit={this.handleSubmit}>
         <fieldset>
-          <label for="start-date">
+          <label htmlFor="start-date">
             Start date
           </label>
           <input className="datepicker" id="start-date" placeholder="dd/mm/yyyy" type="date" value={this.state.startDate}/>
-          <label for="end-date">
+          <label htmlFor="end-date">
             End date
           </label>
           <input className="datepicker" id="end-date" placeholder="dd/mm/yyyy" type="date" value={this.state.endDate}/>
