@@ -49,6 +49,12 @@ var NutrientsTotalsForm = React.createClass({
           }
         }
         this.props.setNutrients(nutrients);
+        if(nutrients.length === 0) {
+          this.setState({foundNoNutrients: true});
+        }
+        else {
+          this.setState({foundNoNutrients: false});
+        }
       }.bind(this),
       fail: function(response) {
         console.log("Nutrients totals failure?", response);
