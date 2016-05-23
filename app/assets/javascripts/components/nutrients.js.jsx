@@ -28,7 +28,7 @@ var NutrientsTotalsForm = React.createClass({
     });
   },
 
-  onSubmit: function(event) {
+  handleSubmit: function(event) {
     event.preventDefault();
     $.ajax({
       data: {
@@ -57,7 +57,7 @@ var NutrientsTotalsForm = React.createClass({
 
   render: function() {
     return (
-      <form onSubmit={this.onSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <fieldset>
           <label for="start-date">
             Start date
