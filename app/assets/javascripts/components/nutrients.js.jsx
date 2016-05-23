@@ -63,6 +63,15 @@ var NutrientsTotalsForm = React.createClass({
   },
 
   render: function() {
+    var noNutrientsMsg;
+    if(this.state.foundNoNutrients) {
+      noNutrientsMsg = (
+        <p style={{color: "#B22"}}>
+          No nutrients found in this date range
+        </p>
+      );
+    }
+
     return (
       <form onSubmit={this.handleSubmit}>
         <fieldset>
@@ -75,6 +84,7 @@ var NutrientsTotalsForm = React.createClass({
           </label>
           <input className="datepicker" id="end-date" placeholder="dd/mm/yyyy" type="date" value={this.state.endDate}/>
           <input type="submit" value="Search"/>
+          {noNutrientsMsg}
         </fieldset>
       </form>
     );
