@@ -23,17 +23,6 @@ class UsersController < ApplicationController
     @user = User.includes(:users_products, :products).find_by(id: session[:user_id])
   end
 
-  def nutrients_totals
-    nutrient_totals = Nutrient.joins(products_nutrients: {product: :users_products})
-      .where("users_products.user_id" => session[:user_id], "users_products.date_eaten" => date_range)
-      .group(["nutrients.name", "nutrients.unit_of_measure"])
-      .sum("products_nutrients.quantity")
-
-    if request.xhr?
-      render json: nutrient_totals
-    end
-  end
-
   private
 
   def user_params
