@@ -2,7 +2,8 @@ var NutrientsTotalsForm = React.createClass({
   getInitialState: function() {
     return {
       startDate: null,
-      endDate: null
+      endDate: null,
+      foundNoNutrients: false
     }
   },
 
