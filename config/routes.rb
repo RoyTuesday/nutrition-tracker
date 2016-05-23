@@ -13,7 +13,6 @@ Rails.application.routes.draw do
 
   post 'products/ndb_search' => 'products#ndb_search'
   post 'users/nutrients_totals' => 'users#nutrients_totals'
-  post 'users/nutrients_over_time' => 'users#nutrients_over_time'
   post 'nutrients/totals' => 'nutrients#totals'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

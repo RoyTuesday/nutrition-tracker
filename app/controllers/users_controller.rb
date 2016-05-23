@@ -24,16 +24,13 @@ class UsersController < ApplicationController
   end
 
   def nutrients_totals
-    user = User.includes(:users_products).find_by id: session[:user_id]
-    if request.xhr?
-      render json: user.get_nutrients_totals(date_range).as_json
-    end
-  end
+    nutrient_totals = Nutrient.joins(products_nutrients: {product: :users_products})
+      .where("users_products.user_id" => session[:user_id], "users_products.date_eaten" => date_range)
+      .group(["nutrients.name", "nutrients.unit_of_measure"])
+      .sum("products_nutrients.quantity")
 
-  def nutrients_over_time
-    user = User.includes(:users_products).find_by id: session[:user_id]
-    if user && request.xhr?
-      render json: user.get_nutrients_over_time(params[:nutrient_name], params[:date_range]).as_json
+    if request.xhr?
+      render json: nutrient_totals
     end
   end
 
@@ -53,7 +50,7 @@ class UsersController < ApplicationController
         return start_date..start_date
       end
     else
-      return false
+      return Date.new(0)..Date.today
     end
   end
 end
