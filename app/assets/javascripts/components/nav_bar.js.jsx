@@ -1,26 +1,32 @@
-var LoginRegisterForm = React.createClass({
-  getInitialState: function() {
-    return {
+class LoginRegisterForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       username: null,
       email: null,
       password: null,
       errors: new Array
-    }
-  },
+    };
 
-  handleUsernameChange: function(event) {
-    this.setState({username: event.target.value});
-  },
+    this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+  }
 
-  handleEmailChange: function(event) {
-    this.setState({email: event.target.value});
-  },
+  handleUsernameChange(event) {
+    this.setState({ username: event.target.value });
+  }
 
-  handlePasswordChange: function(event) {
-    this.setState({password: event.target.value});
-  },
+  handleEmailChange(event) {
+    this.setState({ email: event.target.value });
+  }
 
-  handleSubmit: function(event) {
+  handlePasswordChange(event) {
+    this.setState({ password: event.target.value });
+  }
+
+  handleSubmit(event) {
     event.preventDefault();
     var formUrl = this.props.isRegisterForm ? this.props.urls.register : this.props.urls.login;
 
@@ -47,9 +53,9 @@ var LoginRegisterForm = React.createClass({
         console.log("LoginRegisterForm failure?", status, err);
       }.bind(this)
     });
-  },
+  }
 
-  render: function() {
+  render() {
     var usernameField, errorList;
     var submitName = "Log in";
     if(this.props.isRegisterForm) {
@@ -91,35 +97,44 @@ var LoginRegisterForm = React.createClass({
       </form>
     );
   }
-});
+}
 
-var NavBar = React.createClass({
-  componentDidMount: function() {
+class NavBar extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      formAnimation: "",
+      isLoginFormShown: false,
+      isRegisterForm: true
+    };
+
+    this.handleHomeClick = this.handleHomeClick.bind(this);
+    this.handleLoginClick = this.handleLoginClick.bind(this);
+    this.handleRegisterClick = this.handleRegisterClick.bind(this);
+    this.handleUserClick = this.handleUserClick.bind(this);
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    this.handleLoginSuccess = this.handleLoginSuccess.bind(this);
+  }
+
+  componentDidMount() {
     addEventListener("animationend", function(event) {
       if(event.animationName == "dropup") {
         this.setState({isLoginFormShown: false});
       }
     }.bind(this));
-  },
+  }
 
-  getInitialState: function() {
-    return {
-      formAnimation: "",
-      isLoginFormShown: false,
-      isRegisterForm: true
-    }
-  },
-
-  handleHomeClick: function(event) {
+  handleHomeClick(event) {
     event.preventDefault();
     this.props.changeToPage();
-  },
+  }
 
-  handleLoginClick: function(event) {
+  handleLoginClick(event) {
     event.preventDefault();
 
     var animation;
-    if(this.state.isLoginFormShown && !this.state.isRegisterForm) {
+    if (this.state.isLoginFormShown && !this.state.isRegisterForm) {
       animation = "dropup 600ms running";
     }
     else {
@@ -131,13 +146,13 @@ var NavBar = React.createClass({
       isLoginFormShown: true,
       isRegisterForm: false
     });
-  },
+  }
 
-  handleRegisterClick: function(event) {
+  handleRegisterClick(event) {
     event.preventDefault();
 
     var animation, display;
-    if(this.state.isLoginFormShown && this.state.isRegisterForm) {
+    if (this.state.isLoginFormShown && this.state.isRegisterForm) {
       animation = "dropup 600ms running";
     }
     else {
@@ -149,14 +164,14 @@ var NavBar = React.createClass({
       isLoginFormShown: true,
       isRegisterForm: true
     });
-  },
+  }
 
-  handleUserClick: function(event) {
+  handleUserClick(event) {
     event.preventDefault();
     this.props.changeToPage("user");
-  },
+  }
 
-  handleLogoutClick: function(event) {
+  handleLogoutClick(event) {
     event.preventDefault();
     $.ajax({
       contentType: "html",
@@ -169,17 +184,17 @@ var NavBar = React.createClass({
         console.log(status, err);
       }.bind(this)
     });
-  },
+  }
 
-  handleLoginSuccess: function(user) {
+  handleLoginSuccess(user) {
     this.setState({
       formAnimation: "dropup 600ms running",
       isLoginFormShown: true
     });
     this.props.loginUser(user);
-  },
+  }
 
-  render: function() {
+  render() {
     var sessionLinks = (
       <span>
         <a href="#" onClick={this.handleLoginClick}>
@@ -189,7 +204,8 @@ var NavBar = React.createClass({
         </a>
       </span>
     );
-    if(this.props.isLoggedIn) {
+
+    if (this.props.isLoggedIn) {
       sessionLinks = (
         <span>
           <a href="#" onClick={this.handleUserClick}>
@@ -222,4 +238,4 @@ var NavBar = React.createClass({
       </nav>
     );
   }
-});
+}

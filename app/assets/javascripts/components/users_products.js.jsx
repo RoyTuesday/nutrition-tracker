@@ -1,12 +1,16 @@
-var ProductsChart = React.createClass({
-  getInitialState: function() {
-    return {
+class ProductsChart extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       canvas: null,
       context: null
-    }
-  },
+    };
 
-  componentDidMount: function() {
+    this.drawNutrientGraph = this.drawNutrientGraph.bind(this);
+  }
+
+  componentDidMount() {
     var canvas = document.getElementById("chart");
     var context = canvas.getContext("2d");
 
@@ -14,9 +18,9 @@ var ProductsChart = React.createClass({
       canvas: canvas,
       context: context
     });
-  },
+  }
 
-  drawNutrientGraph: function(nutrientName) {
+  drawNutrientGraph(nutrientName) {
     var nutrientPoints = new Object;
     this.props.usersProducts.forEach(function(usersProduct) {
       var nutrient = usersProduct.products_nutrients.find(function(products_nutrient) {
@@ -55,9 +59,9 @@ var ProductsChart = React.createClass({
       }
     }
     this.state.context.fill();
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <canvas
         height="400px"
@@ -67,18 +71,26 @@ var ProductsChart = React.createClass({
       </canvas>
     );
   }
-});
+}
 
-var UsersProduct = React.createClass({
-  getInitialState: function() {
-    return {
+class UsersProduct extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       areDetailsShown: false,
       isEditFormShown: false,
-      usersProduct: this.props.usersProduct
-    }
-  },
+      usersProduct: props.usersProduct
+    };
 
-  handleDeleteClick: function(event) {
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
+    this.handleNameClick = this.handleNameClick.bind(this);
+    this.hideDetails = this.hideDetails.bind(this);
+    this.updateUsersProduct = this.updateUsersProduct.bind(this);
+  }
+
+  handleDeleteClick(event) {
     event.preventDefault();
     $.ajax({
       dataType: "json",
@@ -91,32 +103,33 @@ var UsersProduct = React.createClass({
         console.log("Users products delete failure?", status, err);
       }
     })
-  },
+  }
 
-  handleEditClick: function(event) {
+  handleEditClick(event) {
     event.preventDefault();
     this.setState({isEditFormShown: !this.state.isEditFormShown});
-  },
+  }
 
-  handleNameClick: function(event) {
+  handleNameClick(event) {
     event.preventDefault();
     this.setState({areDetailsShown: !this.state.areDetailsShown});
-  },
+  }
 
-  hideDetails: function() {
+  hideDetails() {
     this.setState({
       areDetailsShown: false,
       isEditFormShown: false
     });
-  },
+  }
 
-  updateUsersProduct: function(usersProduct) {
+  updateUsersProduct(usersProduct) {
     this.setState({usersProduct: usersProduct});
-  },
+  }
 
-  render: function() {
+  render() {
     var details, editForm;
-    if(this.state.areDetailsShown) {
+
+    if (this.state.areDetailsShown) {
       details = (
         <div className="users-product-details">
           <p>
@@ -134,7 +147,7 @@ var UsersProduct = React.createClass({
         </div>
       );
     }
-    if(this.state.isEditFormShown) {
+    if (this.state.isEditFormShown) {
       editForm = (
         <UsersProductForm authenticityToken={this.props.authenticityToken} hideDetails={this.hideDetails} method="PUT" submitName="Update food record" updateUsersProduct={this.updateUsersProduct} url={"/users_products/" + this.state.usersProduct.id} usersProduct={this.state.usersProduct} />
       );
@@ -142,30 +155,30 @@ var UsersProduct = React.createClass({
 
     return(
       <div>
-        <button className="product-title" onClick={this.handleNameClick}>
-          {this.state.usersProduct.product.name}
+        <button className="product-title" onClick={ this.handleNameClick }>
+          { this.state.usersProduct.product.name }
         </button>
-        {details}
+        { details }
         <article className="product-links-container">
-          <a href="#" onClick={this.handleEditClick}>Edit</a> | <a href="#" onClick={this.handleDeleteClick}>Delete</a>
+          <a href="#" onClick={ this.handleEditClick }>Edit</a> | <a href="#" onClick={ this.handleDeleteClick }>Delete</a>
         </article>
         <div className="users-product-errors-container">
-          {editForm}
+          { editForm }
         </div>
       </div>
     );
   }
-});
+}
 
-var UsersProductList = React.createClass({
-  render: function() {
+class UsersProductList extends React.Component {
+  render() {
     var usersProductNodes = this.props.usersProducts.map(function(usersProduct, index) {
       return (
-        <li className="product" key={"users-products-" + index}>
-          <UsersProduct authenticityToken={this.props.authenticityToken} removeUsersProduct={this.props.removeUsersProduct} usersProduct={usersProduct} />
+        <li className="product" key={ "users-products-" + index }>
+          <UsersProduct authenticityToken={ this.props.authenticityToken } removeUsersProduct={ this.props.removeUsersProduct } usersProduct={ usersProduct } />
         </li>
       );
-    }.bind(this));
+    }, this);
 
     return (
       <ul>
@@ -173,37 +186,46 @@ var UsersProductList = React.createClass({
       </ul>
     );
   }
-});
+}
 
-var UsersProductForm = React.createClass({
-  getInitialState: function() {
-    return {
-      date_eaten: this.props.usersProduct.date_eaten,
+class UsersProductForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      date_eaten: props.usersProduct.date_eaten,
       errors: new Array,
-      price: this.props.usersProduct.price,
-      servings: this.props.usersProduct.servings
+      price: props.usersProduct.price,
+      servings: props.usersProduct.servings
     };
-  },
 
-  handleDateEatenChange: function(event) {
+    this.handleDateEatenChange = this.handleDateEatenChange.bind(this);
+    this.handlePriceChange = this.handlePriceChange.bind(this);
+    this.handleServingsChange = this.handleServingsChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleDateEatenChange(event) {
     this.setState({date_eaten: event.target.value});
-  },
+  }
 
-  handlePriceChange: function(event) {
+  handlePriceChange(event) {
     this.setState({price: event.target.value});
-  },
+  }
 
-  handleServingsChange: function(event) {
+  handleServingsChange(event) {
     this.setState({servings: event.target.value});
-  },
+  }
 
-  handleSubmit: function(event) {
+  handleSubmit(event) {
     event.preventDefault();
+
     var form = {users_product: {
       date_eaten: this.state.date_eaten,
       price: this.state.price,
       servings: this.state.servings
     }};
+
     $.ajax({
       data: form,
       dataType: "json",
@@ -224,9 +246,9 @@ var UsersProductForm = React.createClass({
         console.log("New users product failure?", this.props.url, status, err.toString());
       }.bind(this)
     });
-  },
+  }
 
-  render: function() {
+  render() {
     var errorMessages = this.state.errors.map(function(message, index) {
       return(
         <li key={"new-users-product-error-" + index}>
@@ -265,4 +287,4 @@ var UsersProductForm = React.createClass({
       </form>
     );
   }
-});
+}

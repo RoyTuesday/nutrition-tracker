@@ -1,21 +1,27 @@
-var NewProductForm = React.createClass({
-  getInitialState: function() {
-    return {
+class NewProductForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       errors: new Array,
       servingSize: 0,
       servingUnit: ""
-    }
-  },
+    };
 
-  handleServingSizeChange: function(event) {
+    this.handleServingSizeChange = this.handleServingSizeChange.bind(this);
+    this.handleServingUnitChange = this.handleServingUnitChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleServingSizeChange(event) {
     this.setState({servingSize: event.target.value});
-  },
+  }
 
-  handleServingUnitChange: function(event) {
+  handleServingUnitChange(event) {
     this.setState({servingUnit: event.target.value});
-  },
+  }
 
-  handleSubmit: function(event) {
+  handleSubmit(event) {
     event.preventDefault();
 
     var form = {product: {
@@ -45,9 +51,9 @@ var NewProductForm = React.createClass({
         console.log("New product failure?", this.props.url, status, err.toString());
       }.bind(this)
     });
-  },
+  }
 
-  render: function() {
+  render() {
     var errorMessages = this.state.errors.map(function(message, index) {
       return (
         <li key={"new-product-error-" + index}>
@@ -76,24 +82,30 @@ var NewProductForm = React.createClass({
       </form>
     );
   }
-});
+}
 
-var UsdaProduct = React.createClass({
-  getInitialState: function() {
-    return {isFormShown: false}
-  },
+class UsdaProduct extends React.Component {
+  constructor(props) {
+    super(props);
 
-  handleClick: function(event) {
+    this.state = { isFormShown: false };
+
+    this.handleClick = this.handleClick.bind(this);
+    this.hideForm = this.hideForm.bind(this);
+  }
+
+  handleClick(event) {
     event.preventDefault();
-    this.setState({isFormShown: !this.state.isFormShown});
-  },
+    this.setState({ isFormShown: !this.state.isFormShown });
+  }
 
-  hideForm: function() {
-    this.setState({isFormShown: false});
-  },
+  hideForm() {
+    this.setState({ isFormShown: false });
+  }
 
-  render: function() {
+  render() {
     var productForm;
+
     if(this.state.isFormShown) {
       productForm = (
         <NewProductForm addProduct={this.props.addProduct} authenticityToken={this.props.authenticityToken} foodItem={this.props.foodItem} hideForm={this.hideForm} itemIndex={this.props.itemIndex} removeFoodItem={this.props.removeFoodItem} url={this.props.urls.newProduct} />
@@ -109,20 +121,27 @@ var UsdaProduct = React.createClass({
       </div>
     );
   }
-});
+}
 
-var UsdaSearchForm = React.createClass({
-  getInitialState: function() {
-    return {searchTerms: new String}
-  },
+class UsdaSearchForm extends React.Component {
+  constructor(props) {
+    super(props);
 
-  handleQueryChange: function(event) {
-    this.setState({searchTerms: event.target.value});
-  },
+    this.state = { searchTerms: new String };
 
-  handleSubmit: function(event) {
+    this.handleQueryChange = this.handleQueryChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleQueryChange(event) {
+    this.setState({ searchTerms: event.target.value });
+  }
+
+  handleSubmit(event) {
     event.preventDefault();
-    var form = {search_terms: this.state.searchTerms.trim()};
+
+    var form = { search_terms: this.state.searchTerms.trim() };
+
     $.ajax({
       data: form,
       dataType: "json",
@@ -135,9 +154,9 @@ var UsdaSearchForm = React.createClass({
         console.log("UDSA search failure?", this.props.url, status, err.toString());
       }.bind(this)
     });
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div className="usda-search-form">
         <form acceptCharset="UTF-8" id="usda-nbd-search" onSubmit={this.handleSubmit}>
@@ -153,31 +172,36 @@ var UsdaSearchForm = React.createClass({
       </div>
     );
   }
-});
+}
 
-var UsdaProductList = React.createClass({
-  getInitialState: function() {
-    return {foodItems: new Array}
-  },
+class UsdaProductList extends React.Component {
+  constructor(props) {
+    super(props);
 
-  removeFoodItem: function(itemIndex) {
+    this.state = { foodItems: new Array };
+
+    this.removeFoodItem = this.removeFoodItem.bind(this);
+    this.updateFoodItems = this.updateFoodItems.bind(this);
+  }
+
+  removeFoodItem(itemIndex) {
     var items = this.state.foodItems;
     items.splice(itemIndex, 1);
     this.setState({foodItems: items});
-  },
+  }
 
-  updateFoodItems: function(foodItems) {
+  updateFoodItems(foodItems) {
     this.setState({foodItems: foodItems});
-  },
+  }
 
-  render: function() {
+  render() {
     var productNodes = this.state.foodItems.map(function(foodItem, index) {
       return (
         <li className="product" key={"usda-product-" + index}>
           <UsdaProduct addProduct={this.props.addProduct} authenticityToken={this.props.authenticityToken} foodItem={foodItem} itemIndex={index} urls={this.props.urls} removeFoodItem={this.removeFoodItem} />
         </li>
       );
-    }.bind(this));
+    }, this);
 
     return (
       <div id="usda-container">
@@ -193,4 +217,4 @@ var UsdaProductList = React.createClass({
       </div>
     );
   }
-});
+}

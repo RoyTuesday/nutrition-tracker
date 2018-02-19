@@ -1,31 +1,38 @@
-var NutrientsTotalsForm = React.createClass({
-  getInitialState: function() {
-    return {
+class NutrientsTotalsForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       startDate: null,
       endDate: null,
       foundNoNutrients: false
-    }
-  },
+    };
 
-  componentDidMount: function() {
+    this.handleStartDateChange = this.handleStartDateChange.bind(this);
+    this.handleEndDateChange = this.handleEndDateChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
     $("#start-date").on("change", this.handleStartDateChange);
     $("#end-date").on("change", this.handleEndDateChange);
-  },
+  }
 
-  handleStartDateChange: function(event) {
+  handleStartDateChange(event) {
     this.setState({
       startDate: event.target.value
     });
-  },
+  }
 
-  handleEndDateChange: function(event) {
+  handleEndDateChange(event) {
     this.setState({
       endDate: event.target.value
     });
-  },
+  }
 
-  handleSubmit: function(event) {
+  handleSubmit(event) {
     event.preventDefault();
+
     $.ajax({
       data: {
         start_date: this.state.startDate,
@@ -51,10 +58,11 @@ var NutrientsTotalsForm = React.createClass({
         console.log("Nutrients totals failure?", response);
       }
     });
-  },
+  }
 
-  render: function() {
+  render() {
     var noNutrientsMsg;
+
     if(this.state.foundNoNutrients) {
       noNutrientsMsg = (
         <p style={{color: "#B22"}}>
@@ -80,35 +88,39 @@ var NutrientsTotalsForm = React.createClass({
       </form>
     );
   }
-});
-var NutrientsChart = React.createClass({
-  render: function() {
+}
+
+class NutrientsChart extends React.Component {
+  render() {
     return (
       <canvas height={this.props.height} width={this.props.width}>
       </canvas>
     );
   }
-});
-var Nutrient = React.createClass({
-  render: function() {
+}
+
+class Nutrient extends React.Component {
+  render() {
     return (
       <td>
-        {this.props.name}
-        <br/>
+        {this.props.name}<br/>
         {this.props.value}
       </td>
     );
   }
-});
-var NutrientList = React.createClass({
-  render: function() {
+}
+
+class NutrientList extends React.Component {
+  render() {
     var nutrients = this.props.nutrients.map(function(nutrient, index) {
       return (
         <Nutrient key={index} name={nutrient.name} value={nutrient.value} />
       );
     });
+
     var rows = new Array;
     var numberOfRows = Math.ceil(nutrients.length / 5);
+    
     for(var i = 0; i < numberOfRows; i++) {
       rows.push(
         <tr key={i}>
@@ -125,4 +137,4 @@ var NutrientList = React.createClass({
       </table>
     );
   }
-})
+}

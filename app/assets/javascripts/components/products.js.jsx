@@ -1,27 +1,32 @@
-var Product = React.createClass({
-  getInitialState: function() {
-    return {detailsShown: false};
-  },
+class Product extends React.Component {
+  constructor(props) {
+    super(props);
 
-  handleClick: function(event) {
+    this.state = { detailsShown: false };
+
+    this.handleClick = this.handleClick.bind(this);
+    this.hideDetails = this.hideDetails.bind(this);
+  }
+
+  handleClick(event) {
     event.preventDefault();
     this.setState({detailsShown: !this.state.detailsShown});
-  },
+  }
 
-  hideDetails: function() {
+  hideDetails() {
     this.setState({detailsShown: false})
-  },
+  }
 
-  render: function() {
+  render() {
     var usersProductForm;
-    if(this.props.isLoggedIn) {
+    if (this.props.isLoggedIn) {
       usersProductForm = (
         <UsersProductForm authenticityToken={this.props.authenticityToken} hideDetails={this.hideDetails} method="POST" submitName="Add food record" url={"/products/" + this.props.product.id + "/users_products"} usersProduct={{servings: "", date_eaten: "", price: ""}} />
       );
     }
 
     var details = "";
-    if(this.state.detailsShown) {
+    if (this.state.detailsShown) {
       details = (
         <div className="product-details-container">
           <ul className="product-details" id={"product-details-" + this.props.product.id}>
@@ -46,15 +51,19 @@ var Product = React.createClass({
       </div>
     );
   }
-});
-var ProductSearch = React.createClass({
-  getInitialState: function() {
-    return {
-      searchInput: null,
-    }
-  },
+}
 
-  filterProducts: function(terms) {
+class ProductSearch extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { searchInput: null };
+
+    this.filterProducts = this.filterProducts.bind(this);
+    this.handleQueryChange = this.handleQueryChange.bind(this);
+  }
+
+  filterProducts(terms) {
     var products = this.props.products.filter(function(product) {
       var isAMatch = false;
       terms.forEach(function(term) {
@@ -65,9 +74,9 @@ var ProductSearch = React.createClass({
       return isAMatch;
     });
     this.props.updateProducts(products);
-  },
+  }
 
-  handleQueryChange: function(event) {
+  handleQueryChange(event) {
     this.setState({searchInput: event.target.value});
 
     var terms = event.target.value.split(" ").map(function(term) {
@@ -75,9 +84,9 @@ var ProductSearch = React.createClass({
     });
 
     this.filterProducts(terms);
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <form acceptCharset="UTF-8" id="products-search">
         <fieldset>
@@ -89,9 +98,10 @@ var ProductSearch = React.createClass({
       </form>
     );
   }
-});
-var ProductList = React.createClass({
-  render: function() {
+}
+
+class ProductList extends React.Component {
+  render() {
     var productNodes = (
       <li>
         No products found!
@@ -114,23 +124,29 @@ var ProductList = React.createClass({
       </ul>
     );
   }
-});
-var ProductsIndex = React.createClass({
-  getInitialState: function() {
-    return {products: this.props.products};
-  },
+}
 
-  addProduct: function(product) {
+class ProductsIndex extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { products: props.products };
+
+    this.addProduct = this.addProduct.bind(this);
+    this.updateProducts = this.updateProducts.bind(this);
+  }
+
+  addProduct(product) {
     this.setState({
       products: this.state.products.concat(product)
     });
-  },
+  }
 
-  updateProducts: function(products) {
-    this.setState({products: products});
-  },
+  updateProducts(products) {
+    this.setState({ products: products });
+  }
 
-  render: function() {
+  render() {
     var usdaSearchForm = (
       <p style={{margin: "1em"}}>
         Please log in to add products to the database
@@ -156,4 +172,4 @@ var ProductsIndex = React.createClass({
       </div>
     );
   }
-});
+}

@@ -1,5 +1,17 @@
-var UserShow = React.createClass({
-  componentDidMount: function() {
+class UserShow extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      nutrients: new Array,
+      usersProducts: new Array
+    };
+
+    this.setNutrients = this.setNutrients.bind(this);
+    this.removeUsersProduct = this.removeUsersProduct.bind(this);
+  }
+
+  componentDidMount() {
     $.ajax({
       dataType: "json",
       method: "GET",
@@ -11,39 +23,30 @@ var UserShow = React.createClass({
         console.log("Users products index failure?", status, err);
       }
     });
-  },
+  }
 
-  getInitialState: function() {
-    return {
-      nutrients: new Array,
-      usersProducts: new Array
-    }
-  },
+  setNutrients(nutrients) {
+    this.setState({ nutrients: nutrients });
+  }
 
-  setNutrients: function(nutrients) {
-    this.setState({nutrients: nutrients});
-  },
-
-  removeUsersProduct: function(id) {
+  removeUsersProduct(id) {
     var usersProducts = this.state.usersProducts.filter(function(currentUsersProduct) {
       return currentUsersProduct.id !== id
     });
 
-    this.setState({
-      usersProducts: usersProducts
-    });
-  },
+    this.setState({ usersProducts: usersProducts });
+  }
 
-  render: function() {
+  render() {
     return(
-      <div style={{padding: "0.0625em 0"}}>
-        <h2 style={{margin: "1em"}}>
-          Welcome, {this.props.currentUser.username}!
+      <div style={{ padding: "0.0625em 0" }}>
+        <h2 style={{ margin: "1em" }}>
+          Welcome, { this.props.currentUser.username }!
         </h2>
-        <NutrientsTotalsForm setNutrients={this.setNutrients} />
-        <NutrientList nutrients={this.state.nutrients}/>
-        <UsersProductList authenticityToken={this.props.authenticityToken} removeUsersProduct={this.removeUsersProduct} usersProducts={this.state.usersProducts} />
+        <NutrientsTotalsForm setNutrients={ this.setNutrients } />
+        <NutrientList nutrients={ this.state.nutrients }/>
+        <UsersProductList authenticityToken={ this.props.authenticityToken } removeUsersProduct={ this.removeUsersProduct } usersProducts={ this.state.usersProducts } />
       </div>
     );
   }
-});
+}

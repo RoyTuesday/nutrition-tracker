@@ -1,34 +1,41 @@
-var NutritionTracker = React.createClass({
-  getInitialState: function() {
-    return {
-      currentUser: this.props.currentUser,
-      isLoggedIn: !!this.props.currentUser,
+class NutritionTracker extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentUser: props.currentUser,
+      isLoggedIn: !!props.currentUser,
       currentPage: "products",
-      products: this.props.products
-    }
-  },
+      products: props.products
+    };
 
-  changeToPage: function(pageName) {
+    this.changeToPage = this.changeToPage.bind(this);
+    this.loginUser = this.loginUser.bind(this);
+    this.logoutUser = this.logoutUser.bind(this);
+  }
+
+  changeToPage(pageName) {
     this.setState({currentPage: pageName});
-  },
+  }
 
-  loginUser: function(user) {
+  loginUser(user) {
     this.setState({
       currentUser: user,
       isLoggedIn: true
     });
-  },
+  }
 
-  logoutUser: function() {
+  logoutUser() {
     this.setState({
       currentUser: null,
       isLoggedIn: false,
       currentPage: "products"
     });
-  },
+  }
 
-  render: function() {
+  render() {
     var page;
+
     switch(this.state.currentPage) {
       case "products": page = <ProductsIndex authenticityToken={this.props.authenticityToken} isLoggedIn={this.state.isLoggedIn} products={this.state.products} urls={this.props.urls} />;
       break;
@@ -48,4 +55,4 @@ var NutritionTracker = React.createClass({
       </div>
     );
   }
-});
+}
