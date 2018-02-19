@@ -37,19 +37,15 @@ var NutrientsTotalsForm = React.createClass({
         end_date: this.state.endDate
       },
       method: "POST",
-      url: "/users/nutrients_totals",
+      url: "/nutrients/totals",
       success: function(response) {
-        var nutrients = new Array;
-        for(var prop in response) {
-          if(response.hasOwnProperty(prop)) {
-            nutrients.push({
-              name: prop,
-              value: response[prop]
-            });
+        this.props.setNutrients(response.map(function(nutrient) {
+          return {
+            name: nutrient[0],
+            value: nutrient[1] + nutrient[2]
           }
-        }
-        this.props.setNutrients(nutrients);
-        if(nutrients.length === 0) {
+        }));
+        if(response.length === 0) {
           this.setState({foundNoNutrients: true});
         }
         else {

@@ -213,7 +213,12 @@ var NavBar = React.createClass({
             </a> | {sessionLinks}
           </div>
         </header>
-        <LoginRegisterForm authenticityToken={this.props.authenticityToken} handleLoginSuccess={this.handleLoginSuccess} isRegisterForm={this.state.isRegisterForm} style={{top: this.state.isLoginFormShown ? "4em" : "-10em", animation: this.state.formAnimation}} urls={this.props.urls} />
+        <LoginRegisterForm
+          authenticityToken={this.props.authenticityToken}
+          handleLoginSuccess={this.handleLoginSuccess}
+          isRegisterForm={this.state.isRegisterForm}
+          style={{top: this.state.isLoginFormShown ? "4em" : "-10em", animation: this.state.formAnimation}}
+          urls={this.props.urls} />
       </nav>
     );
   }
