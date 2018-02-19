@@ -3,31 +3,20 @@ class NutrientsTotalsForm extends React.Component {
     super(props);
 
     this.state = {
-      startDate: null,
-      endDate: null,
+      startDate       : '',
+      endDate         : '',
       foundNoNutrients: false
     };
 
-    this.handleStartDateChange = this.handleStartDateChange.bind(this);
-    this.handleEndDateChange = this.handleEndDateChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    $("#start-date").on("change", this.handleStartDateChange);
-    $("#end-date").on("change", this.handleEndDateChange);
-  }
+  handleChange(event) {
+    var newState = {};
+    newState[event.target.name] = event.target.value;
 
-  handleStartDateChange(event) {
-    this.setState({
-      startDate: event.target.value
-    });
-  }
-
-  handleEndDateChange(event) {
-    this.setState({
-      endDate: event.target.value
-    });
+    this.setState(newState);
   }
 
   handleSubmit(event) {
@@ -35,24 +24,20 @@ class NutrientsTotalsForm extends React.Component {
 
     $.ajax({
       data: {
-        start_date: this.state.startDate,
-        end_date: this.state.endDate
+        start_date  : this.state.startDate,
+        end_date    : this.state.endDate
       },
       method: "POST",
       url: "/nutrients/totals",
       success: function(response) {
         this.props.setNutrients(response.map(function(nutrient) {
           return {
-            name: nutrient[0],
-            value: nutrient[1] + nutrient[2]
+            name  : nutrient[0],
+            value : nutrient[1] + nutrient[2]
           }
         }));
-        if(response.length === 0) {
-          this.setState({foundNoNutrients: true});
-        }
-        else {
-          this.setState({foundNoNutrients: false});
-        }
+
+        this.setState({ foundNoNutrients: response.length === 0 });
       }.bind(this),
       fail: function(response) {
         console.log("Nutrients totals failure?", response);
@@ -63,27 +48,33 @@ class NutrientsTotalsForm extends React.Component {
   render() {
     var noNutrientsMsg;
 
-    if(this.state.foundNoNutrients) {
+    if (this.state.foundNoNutrients) {
       noNutrientsMsg = (
-        <p style={{color: "#B22"}}>
+        <p style={{ color: "#B22" }}>
           No nutrients found in this date range
         </p>
       );
     }
 
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={ this.handleSubmit }>
         <fieldset>
           <label htmlFor="start-date">
             Start date
           </label>
-          <input id="start-date" placeholder="dd/mm/yyyy" type="date" value={this.state.startDate}/>
+          <input
+            id="start-date" name="startDate" placeholder="dd/mm/yyyy" type="date"
+            value={ this.state.startDate } onChange={ this.handleChange } />
+
           <label htmlFor="end-date">
             End date
           </label>
-          <input id="end-date" placeholder="dd/mm/yyyy" type="date" value={this.state.endDate}/>
+          <input
+            id="end-date" name="endDate" placeholder="dd/mm/yyyy" type="date"
+            value={ this.state.endDate } onChange={ this.handleChange } />
+
           <input type="submit" value="Search"/>
-          {noNutrientsMsg}
+          { noNutrientsMsg }
         </fieldset>
       </form>
     );
@@ -93,8 +84,7 @@ class NutrientsTotalsForm extends React.Component {
 class NutrientsChart extends React.Component {
   render() {
     return (
-      <canvas height={this.props.height} width={this.props.width}>
-      </canvas>
+      <canvas height={ this.props.height } width={ this.props.width }></canvas>
     );
   }
 }
@@ -103,8 +93,8 @@ class Nutrient extends React.Component {
   render() {
     return (
       <td>
-        {this.props.name}<br/>
-        {this.props.value}
+        { this.props.name }<br/>
+        { this.props.value }
       </td>
     );
   }
@@ -114,7 +104,7 @@ class NutrientList extends React.Component {
   render() {
     var nutrients = this.props.nutrients.map(function(nutrient, index) {
       return (
-        <Nutrient key={index} name={nutrient.name} value={nutrient.value} />
+        <Nutrient key={ index } name={ nutrient.name } value={ nutrient.value } />
       );
     });
 
@@ -123,8 +113,8 @@ class NutrientList extends React.Component {
     
     for(var i = 0; i < numberOfRows; i++) {
       rows.push(
-        <tr key={i}>
-          {nutrients.splice(0, 5)}
+        <tr key={ i }>
+          { nutrients.splice(0, 5) }
         </tr>
       );
     }
@@ -132,7 +122,7 @@ class NutrientList extends React.Component {
     return (
       <table>
         <tbody>
-          {rows}
+          { rows }
         </tbody>
       </table>
     );

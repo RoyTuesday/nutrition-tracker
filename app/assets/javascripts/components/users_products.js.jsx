@@ -3,8 +3,8 @@ class ProductsChart extends React.Component {
     super(props);
 
     this.state = {
-      canvas: null,
-      context: null
+      canvas  : {},
+      context : {}
     };
 
     this.drawNutrientGraph = this.drawNutrientGraph.bind(this);
@@ -26,9 +26,9 @@ class ProductsChart extends React.Component {
       var nutrient = usersProduct.products_nutrients.find(function(products_nutrient) {
         return products_nutrient.nutrient.name == nutrientName;
       });
-      console.log("found nutrient", nutrient, "nutrientPoints", nutrientPoints);
-      if(nutrient) {
-        if(nutrientPoints[usersProduct.date_eaten]) {
+      // console.log("found nutrient", nutrient, "nutrientPoints", nutrientPoints);
+      if (nutrient) {
+        if (nutrientPoints[usersProduct.date_eaten]) {
           nutrientPoints[usersProduct.date_eaten] += nutrient.quantity;
         }
         else {
@@ -38,8 +38,8 @@ class ProductsChart extends React.Component {
     });
 
     var xCoord = 0;
-    for(var prop in nutrientPoints) {
-      if(nutrientPoints.hasOwnProperty(prop)) {
+    for (var prop in nutrientPoints) {
+      if (nutrientPoints.hasOwnProperty(prop)) {
         xCoord += 20;
         var height = this.state.canvas.height - nutrientPoints[prop];
         this.state.context.lineTo(xCoord, height);
@@ -50,8 +50,8 @@ class ProductsChart extends React.Component {
     this.state.context.closePath();
     this.state.context.beginPath();
     var xCoord = 0;
-    for(var prop in nutrientPoints) {
-      if(nutrientPoints.hasOwnProperty(prop)) {
+    for (var prop in nutrientPoints) {
+      if (nutrientPoints.hasOwnProperty(prop)) {
         xCoord += 20;
         var height = this.state.canvas.height - nutrientPoints[prop];
         this.state.context.moveTo(xCoord, height);
@@ -62,13 +62,13 @@ class ProductsChart extends React.Component {
   }
 
   render() {
+    var styles = {
+      backgroundColor: "#EEE",
+      border: "1px solid black"
+    };
+
     return (
-      <canvas
-        height="400px"
-        id="chart"
-        style={{backgroundColor: "#EEE", border: "1px solid black"}}
-        width="800px">
-      </canvas>
+      <canvas id="chart" style={ styles } height="400px" width="800px"></canvas>
     );
   }
 }
@@ -83,10 +83,10 @@ class UsersProduct extends React.Component {
       usersProduct: props.usersProduct
     };
 
-    this.handleDeleteClick = this.handleDeleteClick.bind(this);
-    this.handleEditClick = this.handleEditClick.bind(this);
-    this.handleNameClick = this.handleNameClick.bind(this);
-    this.hideDetails = this.hideDetails.bind(this);
+    this.handleDeleteClick  = this.handleDeleteClick.bind(this);
+    this.handleEditClick    = this.handleEditClick.bind(this);
+    this.handleNameClick    = this.handleNameClick.bind(this);
+    this.hideDetails        = this.hideDetails.bind(this);
     this.updateUsersProduct = this.updateUsersProduct.bind(this);
   }
 
@@ -107,12 +107,12 @@ class UsersProduct extends React.Component {
 
   handleEditClick(event) {
     event.preventDefault();
-    this.setState({isEditFormShown: !this.state.isEditFormShown});
+    this.setState({ isEditFormShown: !this.state.isEditFormShown });
   }
 
   handleNameClick(event) {
     event.preventDefault();
-    this.setState({areDetailsShown: !this.state.areDetailsShown});
+    this.setState({ areDetailsShown: !this.state.areDetailsShown });
   }
 
   hideDetails() {
@@ -123,7 +123,7 @@ class UsersProduct extends React.Component {
   }
 
   updateUsersProduct(usersProduct) {
-    this.setState({usersProduct: usersProduct});
+    this.setState({ usersProduct: usersProduct });
   }
 
   render() {
@@ -133,23 +133,31 @@ class UsersProduct extends React.Component {
       details = (
         <div className="users-product-details">
           <p>
-            Category: {this.state.usersProduct.product.category}
+            Category: { this.state.usersProduct.product.category }
           </p>
           <p>
-            Serving size: {this.state.usersProduct.product.serving_size + this.state.usersProduct.product.serving_unit}
+            Serving size: { this.state.usersProduct.product.serving_size + this.state.usersProduct.product.serving_unit }
           </p>
           <p>
-            Date eaten: {this.state.usersProduct.date_eaten}
+            Date eaten: { this.state.usersProduct.date_eaten }
           </p>
           <p>
-            Price: {this.state.usersProduct.price}
+            Price: { this.state.usersProduct.price }
           </p>
         </div>
       );
     }
+
     if (this.state.isEditFormShown) {
       editForm = (
-        <UsersProductForm authenticityToken={this.props.authenticityToken} hideDetails={this.hideDetails} method="PUT" submitName="Update food record" updateUsersProduct={this.updateUsersProduct} url={"/users_products/" + this.state.usersProduct.id} usersProduct={this.state.usersProduct} />
+        <UsersProductForm
+          authenticityToken={ this.props.authenticityToken }
+          hideDetails={ this.hideDetails }
+          method="PUT"
+          submitName="Update food record"
+          updateUsersProduct={ this.updateUsersProduct }
+          url={ "/users_products/" + this.state.usersProduct.id }
+          usersProduct={ this.state.usersProduct } />
       );
     }
 
@@ -158,10 +166,13 @@ class UsersProduct extends React.Component {
         <button className="product-title" onClick={ this.handleNameClick }>
           { this.state.usersProduct.product.name }
         </button>
+
         { details }
+
         <article className="product-links-container">
           <a href="#" onClick={ this.handleEditClick }>Edit</a> | <a href="#" onClick={ this.handleDeleteClick }>Delete</a>
         </article>
+
         <div className="users-product-errors-container">
           { editForm }
         </div>
@@ -175,14 +186,17 @@ class UsersProductList extends React.Component {
     var usersProductNodes = this.props.usersProducts.map(function(usersProduct, index) {
       return (
         <li className="product" key={ "users-products-" + index }>
-          <UsersProduct authenticityToken={ this.props.authenticityToken } removeUsersProduct={ this.props.removeUsersProduct } usersProduct={ usersProduct } />
+          <UsersProduct
+            authenticityToken={ this.props.authenticityToken }
+            removeUsersProduct={ this.props.removeUsersProduct }
+            usersProduct={ usersProduct } />
         </li>
       );
     }, this);
 
     return (
       <ul>
-        {usersProductNodes}
+        { usersProductNodes }
       </ul>
     );
   }
@@ -193,37 +207,33 @@ class UsersProductForm extends React.Component {
     super(props);
 
     this.state = {
-      date_eaten: props.usersProduct.date_eaten,
-      errors: new Array,
-      price: props.usersProduct.price,
-      servings: props.usersProduct.servings
+      date_eaten  : props.usersProduct.date_eaten,
+      errors      : new Array,
+      price       : props.usersProduct.price,
+      servings    : props.usersProduct.servings
     };
 
-    this.handleDateEatenChange = this.handleDateEatenChange.bind(this);
-    this.handlePriceChange = this.handlePriceChange.bind(this);
-    this.handleServingsChange = this.handleServingsChange.bind(this);
+    // this.handleDateEatenChange  = this.handleDateEatenChange.bind(this);
+    // this.handlePriceChange      = this.handlePriceChange.bind(this);
+    // this.handleServingsChange   = this.handleServingsChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleDateEatenChange(event) {
-    this.setState({date_eaten: event.target.value});
-  }
+  handleChange(event) {
+    var newState = {};
+    newState[event.target.name] = event.target.value;
 
-  handlePriceChange(event) {
-    this.setState({price: event.target.value});
-  }
-
-  handleServingsChange(event) {
-    this.setState({servings: event.target.value});
+    this.setState(newState);
   }
 
   handleSubmit(event) {
     event.preventDefault();
 
     var form = {users_product: {
-      date_eaten: this.state.date_eaten,
-      price: this.state.price,
-      servings: this.state.servings
+      date_eaten  : this.state.date_eaten,
+      price       : this.state.price,
+      servings    : this.state.servings
     }};
 
     $.ajax({
@@ -232,8 +242,8 @@ class UsersProductForm extends React.Component {
       method: this.props.method,
       url: this.props.url,
       success: function(data) {
-        if(data.errors) {
-          this.setState({errors: data.errors});
+        if (data.errors) {
+          this.setState({ errors: data.errors });
         }
         else {
           this.props.hideDetails();
@@ -262,27 +272,32 @@ class UsersProductForm extends React.Component {
         <input name="authenticity_token" type="hidden" value={this.props.authenticityToken}/>
         <fieldset>
           <div>
-            <label htmlFor="servings">
-              Servings
-            </label>
-            <input defaultValue={this.state.servings} id="servings" min="0" name="servings" onChange={this.handleServingsChange} placeholder="1" step="any" type="number"/>
+            <label htmlFor="servings">Servings</label>
+            <input
+              defaultValue={ this.state.servings }
+              id="servings" min="0" name="servings" placeholder="1" step="any" type="number"
+              value={ this.state.servings } onChange={ this.handleChange }/>
           </div>
+
           <div>
-            <label htmlFor="date-eaten">
-              Date Eaten
-            </label>
-            <input defaultValue={this.state.date_eaten} id="date-eaten" name="date_eaten" onChange={this.handleDateEatenChange} placeholder="yyyy-mm-dd" type="date"/>
+            <label htmlFor="date-eaten">Date Eaten</label>
+            <input
+              id="date-eaten" name="date_eaten" placeholder="yyyy-mm-dd" type="date"
+              value={ this.state.date_eaten } onChange={ this.handleChange } />
           </div>
+
           <div>
-            <label htmlFor="price">
-              Price
-            </label>
-            <input defaultValue={this.state.price} id="price" name="price" onChange={this.handlePriceChange} placeholder="$1.00" type="text"/>
+            <label htmlFor="price">Price</label>
+            <input
+              id="price" name="price" placeholder="$1.00" type="text"
+              value={ this.state.price } onChange={ this.handleChange } />
           </div>
-          <input type="submit" value={this.props.submitName}/>
+
+          <input type="submit" value={ this.props.submitName }/>
         </fieldset>
+
         <ul className="form-errors">
-          {errorMessages}
+          { errorMessages }
         </ul>
       </form>
     );

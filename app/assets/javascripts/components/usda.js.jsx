@@ -8,28 +8,26 @@ class NewProductForm extends React.Component {
       servingUnit: ""
     };
 
-    this.handleServingSizeChange = this.handleServingSizeChange.bind(this);
-    this.handleServingUnitChange = this.handleServingUnitChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleServingSizeChange(event) {
-    this.setState({servingSize: event.target.value});
-  }
+  handleChange(event) {
+    var newState = {};
+    newState[event.target.name] = event.target.value;
 
-  handleServingUnitChange(event) {
-    this.setState({servingUnit: event.target.value});
+    this.setState(newState);
   }
 
   handleSubmit(event) {
     event.preventDefault();
 
     var form = {product: {
-      name: this.props.foodItem.name,
-      category: this.props.foodItem.group,
-      ndb_no: this.props.foodItem.ndbno,
-      serving_size: this.state.servingSize,
-      serving_unit: this.state.servingUnit
+      name          : this.props.foodItem.name,
+      category      : this.props.foodItem.group,
+      ndb_no        : this.props.foodItem.ndbno,
+      serving_size  : this.state.servingSize,
+      serving_unit  : this.state.servingUnit
     }}
 
     $.ajax({
@@ -39,7 +37,7 @@ class NewProductForm extends React.Component {
       url: this.props.url,
       success: function(data) {
         if(data.errors) {
-          this.setState({errors: data.errors});
+          this.setState({ errors: data.errors });
         }
         else {
           this.props.hideForm();
@@ -56,28 +54,34 @@ class NewProductForm extends React.Component {
   render() {
     var errorMessages = this.state.errors.map(function(message, index) {
       return (
-        <li key={"new-product-error-" + index}>
-          {message}
-        </li>
+        <li key={ "new-product-error-" + index }>{ message }</li>
       );
     });
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input name="authenticity_token" type="hidden" value={this.props.authenticityToken}/>
+      <form onSubmit={ this.handleSubmit }>
+        <input name="authenticity_token" type="hidden" value={ this.props.authenticityToken }/>
+
         <fieldset>
           <div>
             <label htmlFor="serving_size">Serving Size</label>
-            <input id="serving_size" onChange={this.handleServingSizeChange} placeholder="0" type="number"/>
+            <input
+              id="serving_size" name="servingSize" placeholder="0" type="number"
+              value={ this.state.servingSize } onChange={ this.handleChange } />
           </div>
+
           <div>
             <label htmlFor="serving_unit">Serving Unit</label>
-            <input id="serving_unit" onChange={this.handleServingUnitChange} placeholder="g" type="text"/>
+            <input
+              id="serving_unit" name="servingUnit" placeholder="g" type="text"
+              value={ this.state.servingUnit } onChange={ this.handleChange } />
           </div>
+
           <input type="submit" value="Add new food item"/>
         </fieldset>
+
         <ul className="ndb-search-errors">
-          {errorMessages}
+          { errorMessages }
         </ul>
       </form>
     );
@@ -90,8 +94,8 @@ class UsdaProduct extends React.Component {
 
     this.state = { isFormShown: false };
 
-    this.handleClick = this.handleClick.bind(this);
-    this.hideForm = this.hideForm.bind(this);
+    this.handleClick  = this.handleClick.bind(this);
+    this.hideForm     = this.hideForm.bind(this);
   }
 
   handleClick(event) {
@@ -106,18 +110,26 @@ class UsdaProduct extends React.Component {
   render() {
     var productForm;
 
-    if(this.state.isFormShown) {
+    if (this.state.isFormShown) {
       productForm = (
-        <NewProductForm addProduct={this.props.addProduct} authenticityToken={this.props.authenticityToken} foodItem={this.props.foodItem} hideForm={this.hideForm} itemIndex={this.props.itemIndex} removeFoodItem={this.props.removeFoodItem} url={this.props.urls.newProduct} />
+        <NewProductForm
+          addProduct={ this.props.addProduct }
+          authenticityToken={ this.props.authenticityToken }
+          foodItem={ this.props.foodItem }
+          hideForm={ this.hideForm }
+          itemIndex={ this.props.itemIndex }
+          removeFoodItem={ this.props.removeFoodItem }
+          url={ this.props.urls.newProduct } />
       );
     }
 
     return (
       <div>
-        <a className="food-item" href="#" onClick={this.handleClick}>
-          {this.props.foodItem.name}
+        <a className="food-item" href="#" onClick={ this.handleClick }>
+          { this.props.foodItem.name }
         </a>
-        {productForm}
+
+        { productForm }
       </div>
     );
   }
@@ -129,8 +141,8 @@ class UsdaSearchForm extends React.Component {
 
     this.state = { searchTerms: new String };
 
-    this.handleQueryChange = this.handleQueryChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleQueryChange  = this.handleQueryChange.bind(this);
+    this.handleSubmit       = this.handleSubmit.bind(this);
   }
 
   handleQueryChange(event) {
@@ -159,13 +171,17 @@ class UsdaSearchForm extends React.Component {
   render() {
     return (
       <div className="usda-search-form">
-        <form acceptCharset="UTF-8" id="usda-nbd-search" onSubmit={this.handleSubmit}>
-          <input name="authenticity_token" type="hidden" value={this.props.authenticityToken}/>
+        <form acceptCharset="UTF-8" id="usda-nbd-search" onSubmit={ this.handleSubmit }>
+          <input name="authenticity_token" type="hidden" value={ this.props.authenticityToken }/>
+
           <fieldset>
             <div>
               <label htmlFor="search-terms">Search for:</label>
-              <input id="search-terms" name="search_terms" onChange={this.handleQueryChange} placeholder="food" type="text"/>
+              <input
+                id="search-terms" name="search_terms" placeholder="food" type="text"
+                value={ this.state.searchTerms } onChange={ this.handleQueryChange } />
             </div>
+
             <input type="submit" value="Search"/>
           </fieldset>
         </form>
@@ -180,25 +196,32 @@ class UsdaProductList extends React.Component {
 
     this.state = { foodItems: new Array };
 
-    this.removeFoodItem = this.removeFoodItem.bind(this);
-    this.updateFoodItems = this.updateFoodItems.bind(this);
+    this.removeFoodItem   = this.removeFoodItem.bind(this);
+    this.updateFoodItems  = this.updateFoodItems.bind(this);
   }
 
   removeFoodItem(itemIndex) {
     var items = this.state.foodItems;
     items.splice(itemIndex, 1);
-    this.setState({foodItems: items});
+
+    this.setState({ foodItems: items });
   }
 
   updateFoodItems(foodItems) {
-    this.setState({foodItems: foodItems});
+    this.setState({ foodItems: foodItems });
   }
 
   render() {
     var productNodes = this.state.foodItems.map(function(foodItem, index) {
       return (
-        <li className="product" key={"usda-product-" + index}>
-          <UsdaProduct addProduct={this.props.addProduct} authenticityToken={this.props.authenticityToken} foodItem={foodItem} itemIndex={index} urls={this.props.urls} removeFoodItem={this.removeFoodItem} />
+        <li className="product" key={ "usda-product-" + index }>
+          <UsdaProduct
+            addProduct={ this.props.addProduct }
+            authenticityToken={ this.props.authenticityToken }
+            foodItem={ foodItem }
+            itemIndex={ index }
+            urls={ this.props.urls }
+            removeFoodItem={ this.removeFoodItem } />
         </li>
       );
     }, this);
@@ -206,13 +229,16 @@ class UsdaProductList extends React.Component {
     return (
       <div id="usda-container">
         <h3>
-          Didn't find what you were looking for?
-          <br/>
+          Didn't find what you were looking for?<br/>
           Search the UDSA's database to add to the list!
         </h3>
-        <UsdaSearchForm authenticityToken={this.props.authenticityToken} updateFoodItems={this.updateFoodItems} url={this.props.urls.ndbSearch} />
+        <UsdaSearchForm
+          authenticityToken={ this.props.authenticityToken }
+          updateFoodItems={ this.updateFoodItems }
+          url={ this.props.urls.ndbSearch } />
+
         <ul>
-          {productNodes}
+          { productNodes }
         </ul>
       </div>
     );
