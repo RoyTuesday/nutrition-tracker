@@ -213,9 +213,6 @@ class UsersProductForm extends React.Component {
       servings    : props.usersProduct.servings
     };
 
-    // this.handleDateEatenChange  = this.handleDateEatenChange.bind(this);
-    // this.handlePriceChange      = this.handlePriceChange.bind(this);
-    // this.handleServingsChange   = this.handleServingsChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -274,7 +271,6 @@ class UsersProductForm extends React.Component {
           <div>
             <label htmlFor="servings">Servings</label>
             <input
-              defaultValue={ this.state.servings }
               id="servings" min="0" name="servings" placeholder="1" step="any" type="number"
               value={ this.state.servings } onChange={ this.handleChange }/>
           </div>
