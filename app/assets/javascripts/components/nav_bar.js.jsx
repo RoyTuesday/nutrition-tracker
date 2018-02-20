@@ -57,7 +57,9 @@ class LoginRegisterForm extends React.Component {
       usernameField = (
         <span>
           <label htmlFor="username" style={{ display: "block" }}>Username</label>
-          <input id="username" name="username" placeholder="my_name" type="text" value={ this.state.username } onChange={ this.handleUsernameChange } />
+          <input
+            id="username" name="username" placeholder="my_name" type="text"
+            value={ this.state.username } onChange={ this.handleChange } />
         </span>
       );
       submitName = "Register";

@@ -15,7 +15,7 @@ class NutritionTracker extends React.Component {
   }
 
   changeToPage(pageName) {
-    this.setState({currentPage: pageName});
+    this.setState({ currentPage: pageName });
   }
 
   loginUser(user) {

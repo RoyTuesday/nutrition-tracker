@@ -95,16 +95,20 @@ class ProductSearch extends React.Component {
     this.filterProducts(terms);
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+  }
+
   render() {
     return (
-      <form acceptCharset="UTF-8" id="products-search">
+      <form acceptCharset="UTF-8" id="products-search" onSubmit={ this.handleSubmit }>
         <fieldset>
           <div>
             <label htmlFor="search_terms">Search terms:</label>
             <input
               id="product-search-terms" placeholder="food" type="text"
               value={ this.state.searchInput } onChange={ this.handleQueryChange } />
-            </div>
+          </div>
         </fieldset>
       </form>
     );
