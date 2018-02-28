@@ -76,7 +76,7 @@ class ProductSearch extends React.Component {
     var products = this.props.products.filter(function(product) {
       var length = terms.length;
       for (var i = 0; i < length; i++) {
-        if (term[i].test(product.name)) {
+        if (terms[i].test(product.name)) {
           return true;
         }
       }
